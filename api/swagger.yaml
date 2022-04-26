@@ -19,12 +19,36 @@ paths:
     get:
       tags:
       - DocAPI
-      description: GetDocFullText 接口用于获取 Doc 文档内容
+      description: Three required req headers
       operationId: DocAPI_GetDocFullText
       parameters:
       - name: fileID
         in: path
         description: 文档 ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: Access-Token
+        in: header
+        description: 访问令牌，用于标识用户和接口鉴权
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: Client-Id
+        in: header
+        description: 应用 ID，用于标识应用和接口鉴权
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: Open-Id
+        in: header
+        description: 开放平台用户 ID，用于标识用户和接口鉴权
         required: true
         style: simple
         explode: false
@@ -47,11 +71,35 @@ paths:
     post:
       tags:
       - DocAPI
-      description: BatchUpdateDocData 接口用于更新 Doc 文档内容，支持批量更新
+      description: Three required req headers
       operationId: DocAPI_BatchUpdateDocData
       parameters:
       - name: fileID
         in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: Access-Token
+        in: header
+        description: 访问令牌，用于标识用户和接口鉴权
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: Client-Id
+        in: header
+        description: 应用 ID，用于标识应用和接口鉴权
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: Open-Id
+        in: header
+        description: 开放平台用户 ID，用于标识用户和接口鉴权
         required: true
         style: simple
         explode: false
@@ -230,6 +278,8 @@ components:
           type: boolean
           description: "锁定宽高比, Default: true"
     Location:
+      required:
+      - index
       type: object
       properties:
         index:
@@ -310,25 +360,3 @@ components:
       example:
         ret: 0
         msg: msg
-  headers:
-    Access-Token:
-      description: 访问令牌，用于标识用户和接口鉴权
-      required: true
-      style: simple
-      explode: false
-      schema:
-        type: string
-    Client-Id:
-      description: 应用 ID，用于标识应用和接口鉴权
-      required: true
-      style: simple
-      explode: false
-      schema:
-        type: string
-    Open-Id:
-      description: 开放平台用户 ID，用于标识用户和接口鉴权
-      required: true
-      style: simple
-      explode: false
-      schema:
-        type: string

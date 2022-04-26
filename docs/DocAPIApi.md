@@ -8,10 +8,10 @@ Method | HTTP request | Description
 [**DocAPIGetDocFullText**](DocAPIApi.md#DocAPIGetDocFullText) | **Get** /openapi/doc/v3/{fileID} | 
 
 # **DocAPIBatchUpdateDocData**
-> UpdateDocResponse DocAPIBatchUpdateDocData(ctx, body, fileID)
+> UpdateDocResponse DocAPIBatchUpdateDocData(ctx, body, fileID, accessToken, clientId, openId)
 
 
-BatchUpdateDocData 接口用于更新 Doc 文档内容，支持批量更新
+Three required req headers
 
 ### Required Parameters
 
@@ -20,6 +20,9 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**BatchUpdateDocDataReq**](BatchUpdateDocDataReq.md)|  | 
   **fileID** | **string**|  | 
+  **accessToken** | **string**| 访问令牌，用于标识用户和接口鉴权 | 
+  **clientId** | **string**| 应用 ID，用于标识应用和接口鉴权 | 
+  **openId** | **string**| 开放平台用户 ID，用于标识用户和接口鉴权 | 
 
 ### Return type
 
@@ -37,10 +40,10 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DocAPIGetDocFullText**
-> GetDocResponse DocAPIGetDocFullText(ctx, fileID)
+> GetDocResponse DocAPIGetDocFullText(ctx, fileID, accessToken, clientId, openId)
 
 
-GetDocFullText 接口用于获取 Doc 文档内容
+Three required req headers
 
 ### Required Parameters
 
@@ -48,6 +51,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **fileID** | **string**| 文档 ID | 
+  **accessToken** | **string**| 访问令牌，用于标识用户和接口鉴权 | 
+  **clientId** | **string**| 应用 ID，用于标识应用和接口鉴权 | 
+  **openId** | **string**| 开放平台用户 ID，用于标识用户和接口鉴权 | 
 
 ### Return type
 
