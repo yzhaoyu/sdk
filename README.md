@@ -36,9 +36,11 @@ Class | Method | HTTP request | Description
  - [Location](docs/Location.md)
  - [Node](docs/Node.md)
  - [Request](docs/Request.md)
- - [Response](docs/Response.md)
+ - [Response1](docs/Response1.md)
+ - [Response2](docs/Response2.md)
  - [Status](docs/Status.md)
- - [UserResponse](docs/UserResponse.md)
+ - [UserResponse1](docs/UserResponse1.md)
+ - [UserResponse2](docs/UserResponse2.md)
 
 ## Documentation For Authorization
  Endpoints do not require authorization.

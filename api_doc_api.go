@@ -34,15 +34,15 @@ Three required req headers
  * @param clientId 应用 ID，用于标识应用和接口鉴权
  * @param openId 开放平台用户 ID，用于标识用户和接口鉴权
  * @param fileID
-@return UserResponse
+@return UserResponse2
 */
-func (a *DocAPIApiService) DocAPIBatchUpdateDocData(ctx context.Context, body BatchUpdateDocDataReq, accessToken string, clientId string, openId string, fileID string) (UserResponse, *http.Response, error) {
+func (a *DocAPIApiService) DocAPIBatchUpdateDocData(ctx context.Context, body BatchUpdateDocDataReq, accessToken string, clientId string, openId string, fileID string) (UserResponse2, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue UserResponse
+		localVarReturnValue UserResponse2
 	)
 
 	// create path and map variables
@@ -105,7 +105,7 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocData(ctx context.Context, body Ba
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v UserResponse
+			var v UserResponse2
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -137,15 +137,15 @@ Three required req headers
  * @param accessToken 访问令牌，用于标识用户和接口鉴权
  * @param clientId 应用 ID，用于标识应用和接口鉴权
  * @param openId 开放平台用户 ID，用于标识用户和接口鉴权
-@return UserResponse
+@return UserResponse1
 */
-func (a *DocAPIApiService) DocAPIGetDocFullText(ctx context.Context, fileID string, accessToken string, clientId string, openId string) (UserResponse, *http.Response, error) {
+func (a *DocAPIApiService) DocAPIGetDocFullText(ctx context.Context, fileID string, accessToken string, clientId string, openId string) (UserResponse1, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue UserResponse
+		localVarReturnValue UserResponse1
 	)
 
 	// create path and map variables
@@ -206,7 +206,7 @@ func (a *DocAPIApiService) DocAPIGetDocFullText(ctx context.Context, fileID stri
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v UserResponse
+			var v UserResponse1
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

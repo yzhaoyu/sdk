@@ -9,7 +9,6 @@
  */
 package swagger
 
-type Response struct {
+type Response1 struct {
 	GetDocFullTextRsp *GetDocFullTextRsp `json:"getDocFullTextRsp,omitempty"`
-	BatchUpdateDocDataRsp *BatchUpdateDocDataRsp `json:"batchUpdateDocDataRsp,omitempty"`
 }

@@ -9,8 +9,8 @@
  */
 package swagger
 
-type UserResponse struct {
+type UserResponse2 struct {
 	Ret int32 `json:"ret,omitempty"`
 	Msg string `json:"msg,omitempty"`
-	Data *Response `json:"data,omitempty"`
+	Data *Response2 `json:"data,omitempty"`
 }

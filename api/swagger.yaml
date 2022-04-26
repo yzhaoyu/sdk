@@ -60,7 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                $ref: '#/components/schemas/UserResponse1'
         default:
           description: Default error response
           content:
@@ -117,7 +117,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                $ref: '#/components/schemas/UserResponse2'
         default:
           description: Default error response
           content:
@@ -305,15 +305,12 @@ components:
           $ref: '#/components/schemas/InsertImageRequest'
         insertWebBlock:
           $ref: '#/components/schemas/InsertWebBlockRequest'
-    Response:
+    Response1:
       type: object
       properties:
         getDocFullTextRsp:
           $ref: '#/components/schemas/GetDocFullTextRsp'
-        batchUpdateDocDataRsp:
-          $ref: '#/components/schemas/BatchUpdateDocDataRsp'
       example:
-        batchUpdateDocDataRsp: {}
         getDocFullTextRsp:
           document:
             children:
@@ -325,6 +322,13 @@ components:
             text: text
             type: type
             begin: 6
+    Response2:
+      type: object
+      properties:
+        batchUpdateDocDataRsp:
+          $ref: '#/components/schemas/BatchUpdateDocDataRsp'
+      example:
+        batchUpdateDocDataRsp: {}
     Status:
       type: object
       properties:
@@ -349,7 +353,7 @@ components:
         \ three pieces of data: error code, error message, and error details. You\
         \ can find out more about this error model and how to work with it in the\
         \ [API Design Guide](https://cloud.google.com/apis/design/errors)."
-    UserResponse:
+    UserResponse1:
       type: object
       properties:
         ret:
@@ -358,12 +362,11 @@ components:
         msg:
           type: string
         data:
-          $ref: '#/components/schemas/Response'
+          $ref: '#/components/schemas/Response1'
       example:
         ret: 0
         msg: msg
         data:
-          batchUpdateDocDataRsp: {}
           getDocFullTextRsp:
             document:
               children:
@@ -375,3 +378,18 @@ components:
               text: text
               type: type
               begin: 6
+    UserResponse2:
+      type: object
+      properties:
+        ret:
+          type: integer
+          format: int32
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/Response2'
+      example:
+        ret: 0
+        msg: msg
+        data:
+          batchUpdateDocDataRsp: {}

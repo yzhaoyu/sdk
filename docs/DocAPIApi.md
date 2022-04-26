@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**DocAPIGetDocFullText**](DocAPIApi.md#DocAPIGetDocFullText) | **Get** /openapi/doc/v3/{fileID} | 
 
 # **DocAPIBatchUpdateDocData**
-> UserResponse DocAPIBatchUpdateDocData(ctx, body, fileID, accessToken, clientId, openId)
+> UserResponse2 DocAPIBatchUpdateDocData(ctx, body, fileID, accessToken, clientId, openId)
 
 
 Three required req headers
@@ -26,7 +26,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**UserResponse2**](UserResponse2.md)
 
 ### Authorization
 
@@ -40,7 +40,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DocAPIGetDocFullText**
-> UserResponse DocAPIGetDocFullText(ctx, fileID, accessToken, clientId, openId)
+> UserResponse1 DocAPIGetDocFullText(ctx, fileID, accessToken, clientId, openId)
 
 
 Three required req headers
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**UserResponse1**](UserResponse1.md)
 
 ### Authorization
 
