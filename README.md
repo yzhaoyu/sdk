@@ -28,16 +28,17 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [BatchUpdateDocDataReq](docs/BatchUpdateDocDataReq.md)
+ - [BatchUpdateDocDataRsp](docs/BatchUpdateDocDataRsp.md)
  - [GetDocFullTextRsp](docs/GetDocFullTextRsp.md)
- - [GetDocResponse](docs/GetDocResponse.md)
  - [InsertImageRequest](docs/InsertImageRequest.md)
  - [InsertTextRequest](docs/InsertTextRequest.md)
  - [InsertWebBlockRequest](docs/InsertWebBlockRequest.md)
  - [Location](docs/Location.md)
  - [Node](docs/Node.md)
  - [Request](docs/Request.md)
+ - [Response](docs/Response.md)
  - [Status](docs/Status.md)
- - [UpdateDocResponse](docs/UpdateDocResponse.md)
+ - [UserResponse](docs/UserResponse.md)
 
 ## Documentation For Authorization
  Endpoints do not require authorization.

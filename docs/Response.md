@@ -1,11 +1,10 @@
-# GetDocResponse
+# Response
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ret** | **int32** |  | [optional] [default to null]
-**Msg** | **string** |  | [optional] [default to null]
-**Data** | [***GetDocFullTextRsp**](GetDocFullTextRsp.md) |  | [optional] [default to null]
+**GetDocFullTextRsp** | [***GetDocFullTextRsp**](GetDocFullTextRsp.md) |  | [optional] [default to null]
+**BatchUpdateDocDataRsp** | [***BatchUpdateDocDataRsp**](BatchUpdateDocDataRsp.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

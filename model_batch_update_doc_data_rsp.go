@@ -9,8 +9,5 @@
  */
 package swagger
 
-type Request struct {
-	InsertText *InsertTextRequest `json:"insertText,omitempty"`
-	InsertImage *InsertImageRequest `json:"insertImage,omitempty"`
-	InsertWebBlock *InsertWebBlockRequest `json:"insertWebBlock,omitempty"`
+type BatchUpdateDocDataRsp struct {
 }

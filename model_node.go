@@ -10,10 +10,10 @@
 package swagger
 
 type Node struct {
-	Begin    int32                  `json:"begin,omitempty"`
-	End      int32                  `json:"end,omitempty"`
-	Type_    string                 `json:"type,omitempty"`
-	Children []Node                 `json:"children,omitempty"`
-	Text     string                 `json:"text,omitempty"`
-	Property map[string]interface{} `json:"property,omitempty"`
+	Begin int32 `json:"begin,omitempty"`
+	End int32 `json:"end,omitempty"`
+	Type_ string `json:"type,omitempty"`
+	Children []Node `json:"children,omitempty"`
+	Text string `json:"text,omitempty"`
+	Property map[string]Object `json:"property,omitempty"`
 }

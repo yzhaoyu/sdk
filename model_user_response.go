@@ -9,7 +9,8 @@
  */
 package swagger
 
-type UpdateDocResponse struct {
+type UserResponse struct {
 	Ret int32 `json:"ret,omitempty"`
 	Msg string `json:"msg,omitempty"`
+	Data *Response `json:"data,omitempty"`
 }
