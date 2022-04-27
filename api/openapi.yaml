@@ -1,0 +1,505 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: tencentdocs@tencent.com
+    name: Tencent Docs
+    url: https://git.woa.com/tencentdocs/sdk
+  description: Tencent docs sdk contains DocAPI, SmartsheetAPI, SheetAPI, DriveAPI
+    and OAuthAPI
+  license:
+    name: Apache License
+    url: https://git.woa.com/tencentdocs/sdk/blob/master/LICENSE
+  title: Tencent Docs SDK
+  version: 0.0.1
+servers:
+- url: https://docs.qq.com
+tags:
+- name: DocAPI
+paths:
+  /openapi/doc/v3/{fileID}:
+    get:
+      description: Three required req headers
+      operationId: DocAPI_GetDocFullText
+      parameters:
+      - description: 文档 ID
+        explode: false
+        in: path
+        name: fileID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 访问令牌，用于标识用户和接口鉴权
+        explode: false
+        in: header
+        name: Access-Token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 应用 ID，用于标识应用和接口鉴权
+        explode: false
+        in: header
+        name: Client-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 开放平台用户 ID，用于标识用户和接口鉴权
+        explode: false
+        in: header
+        name: Open-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserResponse1'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Default error response
+      tags:
+      - DocAPI
+  /openapi/doc/v3/{fileID}/batchUpdate:
+    post:
+      description: Three required req headers
+      operationId: DocAPI_BatchUpdateDocData
+      parameters:
+      - explode: false
+        in: path
+        name: fileID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 访问令牌，用于标识用户和接口鉴权
+        explode: false
+        in: header
+        name: Access-Token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 应用 ID，用于标识应用和接口鉴权
+        explode: false
+        in: header
+        name: Client-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 开放平台用户 ID，用于标识用户和接口鉴权
+        explode: false
+        in: header
+        name: Open-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchUpdateDocDataReq'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserResponse2'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Default error response
+      tags:
+      - DocAPI
+components:
+  schemas:
+    BatchUpdateDocDataReq:
+      example:
+        requests:
+        - insertText:
+            location:
+              index: 0
+            text: text
+          insertImage:
+            imageID: imageID
+            addonSource: 5
+            extraData: extraData
+            width: 6
+            location:
+              index: 0
+            anchorID: anchorID
+            addonID: addonID
+            height: 1
+          insertWebBlock:
+            embedURL: embedURL
+            displayText: displayText
+            lockAspectRatio: true
+            extraData: extraData
+            width: 5
+            addonType: 7
+            location:
+              index: 0
+            originalURL: originalURL
+            anchorID: anchorID
+            addonID: addonID
+            height: 2
+        - insertText:
+            location:
+              index: 0
+            text: text
+          insertImage:
+            imageID: imageID
+            addonSource: 5
+            extraData: extraData
+            width: 6
+            location:
+              index: 0
+            anchorID: anchorID
+            addonID: addonID
+            height: 1
+          insertWebBlock:
+            embedURL: embedURL
+            displayText: displayText
+            lockAspectRatio: true
+            extraData: extraData
+            width: 5
+            addonType: 7
+            location:
+              index: 0
+            originalURL: originalURL
+            anchorID: anchorID
+            addonID: addonID
+            height: 2
+        fileID: fileID
+      properties:
+        fileID:
+          type: string
+        requests:
+          items:
+            $ref: '#/components/schemas/Request'
+          type: array
+      required:
+      - fileID
+      - requests
+      type: object
+    BatchUpdateDocDataRsp:
+      properties: {}
+      type: object
+    GetDocFullTextRsp:
+      example:
+        document:
+          children:
+          - null
+          - null
+          property: {}
+          end: 1
+          text: text
+          type: type
+          begin: 6
+      properties:
+        document:
+          $ref: '#/components/schemas/Node'
+      type: object
+    GoogleProtobufAny:
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that
+        describes the type of the serialized message.
+      properties:
+        '@type':
+          description: The type of the serialized message.
+          type: string
+      type: object
+    GoogleProtobufValue:
+      description: Represents a dynamically typed value which can be either null,
+        a number, a string, a boolean, a recursive struct value, or a list of values.
+    InsertImageRequest:
+      example:
+        imageID: imageID
+        addonSource: 5
+        extraData: extraData
+        width: 6
+        location:
+          index: 0
+        anchorID: anchorID
+        addonID: addonID
+        height: 1
+      properties:
+        imageID:
+          description: 图片 ID
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        width:
+          description: 图片宽度, 单位为 emu
+          format: uint32
+          type: integer
+        height:
+          description: 图片高度, 单位为 emu
+          format: uint32
+          type: integer
+        addonSource:
+          description: 业务来源
+          format: enum
+          type: integer
+        addonID:
+          description: 插件ID
+          type: string
+        anchorID:
+          description: 文档插件元素的唯一 ID (6位的数字小写字母组合)
+          type: string
+        extraData:
+          description: 插件扩展字段
+          type: string
+      required:
+      - imageID
+      - location
+      type: object
+    InsertTextRequest:
+      example:
+        location:
+          index: 0
+        text: text
+      properties:
+        text:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+      required:
+      - location
+      - text
+      type: object
+    InsertWebBlockRequest:
+      example:
+        embedURL: embedURL
+        displayText: displayText
+        lockAspectRatio: true
+        extraData: extraData
+        width: 5
+        addonType: 7
+        location:
+          index: 0
+        originalURL: originalURL
+        anchorID: anchorID
+        addonID: addonID
+        height: 2
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        addonID:
+          description: 插件 ID
+          type: string
+        anchorID:
+          description: 文档插件元素的唯一ID(6位的数字小写字母组合)
+          type: string
+        displayText:
+          description: 展示文本
+          type: string
+        width:
+          description: 插件宽度，单位为 emu
+          format: uint32
+          type: integer
+        height:
+          description: 插件高度，单位为 emu
+          format: uint32
+          type: integer
+        originalURL:
+          description: 原始URL
+          type: string
+        embedURL:
+          description: 插件展示的URL
+          type: string
+        addonType:
+          format: enum
+          type: integer
+        extraData:
+          description: 插件扩展字段
+          type: string
+        lockAspectRatio:
+          description: '锁定宽高比, Default: true'
+          type: boolean
+      required:
+      - addonID
+      - addonType
+      - anchorID
+      - embedURL
+      - location
+      - originalURL
+      type: object
+    Location:
+      example:
+        index: 0
+      properties:
+        index:
+          format: uint32
+          type: integer
+      required:
+      - index
+      type: object
+    Node:
+      example:
+        children:
+        - null
+        - null
+        property: {}
+        end: 1
+        text: text
+        type: type
+        begin: 6
+      properties:
+        begin:
+          format: uint32
+          type: integer
+        end:
+          format: uint32
+          type: integer
+        type:
+          type: string
+        children:
+          items:
+            $ref: '#/components/schemas/Node'
+          type: array
+        text:
+          type: string
+        property:
+          additionalProperties:
+            $ref: '#/components/schemas/GoogleProtobufValue'
+          type: object
+      type: object
+    Request:
+      example:
+        insertText:
+          location:
+            index: 0
+          text: text
+        insertImage:
+          imageID: imageID
+          addonSource: 5
+          extraData: extraData
+          width: 6
+          location:
+            index: 0
+          anchorID: anchorID
+          addonID: addonID
+          height: 1
+        insertWebBlock:
+          embedURL: embedURL
+          displayText: displayText
+          lockAspectRatio: true
+          extraData: extraData
+          width: 5
+          addonType: 7
+          location:
+            index: 0
+          originalURL: originalURL
+          anchorID: anchorID
+          addonID: addonID
+          height: 2
+      properties:
+        insertText:
+          $ref: '#/components/schemas/InsertTextRequest'
+        insertImage:
+          $ref: '#/components/schemas/InsertImageRequest'
+        insertWebBlock:
+          $ref: '#/components/schemas/InsertWebBlockRequest'
+      type: object
+    Response1:
+      example:
+        getDocFullTextRsp:
+          document:
+            children:
+            - null
+            - null
+            property: {}
+            end: 1
+            text: text
+            type: type
+            begin: 6
+      properties:
+        getDocFullTextRsp:
+          $ref: '#/components/schemas/GetDocFullTextRsp'
+      type: object
+    Response2:
+      example:
+        batchUpdateDocDataRsp: '{}'
+      properties:
+        batchUpdateDocDataRsp:
+          properties: {}
+          type: object
+      type: object
+    Status:
+      description: 'The `Status` type defines a logical error model that is suitable
+        for different programming environments, including REST APIs and RPC APIs.
+        It is used by [gRPC](https://github.com/grpc). Each `Status` message contains
+        three pieces of data: error code, error message, and error details. You can
+        find out more about this error model and how to work with it in the [API Design
+        Guide](https://cloud.google.com/apis/design/errors).'
+      properties:
+        code:
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+          format: int32
+          type: integer
+        message:
+          description: A developer-facing error message, which should be in English.
+            Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details]
+            field, or localized by the client.
+          type: string
+        details:
+          description: A list of messages that carry the error details.  There is
+            a common set of message types for APIs to use.
+          items:
+            $ref: '#/components/schemas/GoogleProtobufAny'
+          type: array
+      type: object
+    UserResponse1:
+      example:
+        ret: 0
+        msg: msg
+        data:
+          getDocFullTextRsp:
+            document:
+              children:
+              - null
+              - null
+              property: {}
+              end: 1
+              text: text
+              type: type
+              begin: 6
+      properties:
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/Response1'
+      type: object
+    UserResponse2:
+      example:
+        ret: 0
+        msg: msg
+        data:
+          batchUpdateDocDataRsp: '{}'
+      properties:
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/Response2'
+      type: object
