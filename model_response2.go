@@ -17,7 +17,7 @@ import (
 
 // Response2 struct for Response2
 type Response2 struct {
-	BatchUpdateDocDataRsp *map[string]interface{} `json:"batchUpdateDocDataRsp,omitempty"`
+	BatchUpdateDocDataRsp map[string]interface{} `json:"batchUpdateDocDataRsp,omitempty"`
 }
 
 // NewResponse2 instantiates a new Response2 object
@@ -43,12 +43,12 @@ func (o *Response2) GetBatchUpdateDocDataRsp() map[string]interface{} {
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.BatchUpdateDocDataRsp
+	return o.BatchUpdateDocDataRsp
 }
 
 // GetBatchUpdateDocDataRspOk returns a tuple with the BatchUpdateDocDataRsp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Response2) GetBatchUpdateDocDataRspOk() (*map[string]interface{}, bool) {
+func (o *Response2) GetBatchUpdateDocDataRspOk() (map[string]interface{}, bool) {
 	if o == nil || o.BatchUpdateDocDataRsp == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *Response2) HasBatchUpdateDocDataRsp() bool {
 
 // SetBatchUpdateDocDataRsp gets a reference to the given map[string]interface{} and assigns it to the BatchUpdateDocDataRsp field.
 func (o *Response2) SetBatchUpdateDocDataRsp(v map[string]interface{}) {
-	o.BatchUpdateDocDataRsp = &v
+	o.BatchUpdateDocDataRsp = v
 }
 
 func (o Response2) MarshalJSON() ([]byte, error) {

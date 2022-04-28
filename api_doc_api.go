@@ -13,23 +13,23 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // DocAPIApiService DocAPIApi service
 type DocAPIApiService service
 
 type ApiDocAPIBatchUpdateDocDataRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *DocAPIApiService
 	fileID string
 	accessToken *string
@@ -58,7 +58,7 @@ func (r ApiDocAPIBatchUpdateDocDataRequest) BatchUpdateDocDataReq(batchUpdateDoc
 	return r
 }
 
-func (r ApiDocAPIBatchUpdateDocDataRequest) Execute() (UserResponse2, *_nethttp.Response, error) {
+func (r ApiDocAPIBatchUpdateDocDataRequest) Execute() (*UserResponse2, *http.Response, error) {
 	return r.ApiService.DocAPIBatchUpdateDocDataExecute(r)
 }
 
@@ -67,11 +67,11 @@ DocAPIBatchUpdateDocData Method for DocAPIBatchUpdateDocData
 
 Three required req headers
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileID
  @return ApiDocAPIBatchUpdateDocDataRequest
 */
-func (a *DocAPIApiService) DocAPIBatchUpdateDocData(ctx _context.Context, fileID string) ApiDocAPIBatchUpdateDocDataRequest {
+func (a *DocAPIApiService) DocAPIBatchUpdateDocData(ctx context.Context, fileID string) ApiDocAPIBatchUpdateDocDataRequest {
 	return ApiDocAPIBatchUpdateDocDataRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -81,27 +81,25 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocData(ctx _context.Context, fileID
 
 // Execute executes the request
 //  @return UserResponse2
-func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdateDocDataRequest) (UserResponse2, *_nethttp.Response, error) {
+func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdateDocDataRequest) (*UserResponse2, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UserResponse2
+		formFiles            []formFile
+		localVarReturnValue  *UserResponse2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocAPIApiService.DocAPIBatchUpdateDocData")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/openapi/doc/v3/{fileID}/batchUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"fileID"+"}", _neturl.PathEscape(parameterToString(r.fileID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"fileID"+"}", url.PathEscape(parameterToString(r.fileID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.accessToken == nil {
 		return localVarReturnValue, nil, reportError("accessToken is required and must be specified")
 	}
@@ -125,7 +123,7 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -137,7 +135,7 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
 	// body params
 	localVarPostBody = r.batchUpdateDocDataReq
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -147,15 +145,15 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -171,7 +169,7 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -182,7 +180,7 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 }
 
 type ApiDocAPIGetDocFullTextRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *DocAPIApiService
 	fileID string
 	accessToken *string
@@ -206,7 +204,7 @@ func (r ApiDocAPIGetDocFullTextRequest) OpenId(openId string) ApiDocAPIGetDocFul
 	return r
 }
 
-func (r ApiDocAPIGetDocFullTextRequest) Execute() (UserResponse1, *_nethttp.Response, error) {
+func (r ApiDocAPIGetDocFullTextRequest) Execute() (*UserResponse1, *http.Response, error) {
 	return r.ApiService.DocAPIGetDocFullTextExecute(r)
 }
 
@@ -215,11 +213,11 @@ DocAPIGetDocFullText Method for DocAPIGetDocFullText
 
 Three required req headers
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileID 文档 ID
  @return ApiDocAPIGetDocFullTextRequest
 */
-func (a *DocAPIApiService) DocAPIGetDocFullText(ctx _context.Context, fileID string) ApiDocAPIGetDocFullTextRequest {
+func (a *DocAPIApiService) DocAPIGetDocFullText(ctx context.Context, fileID string) ApiDocAPIGetDocFullTextRequest {
 	return ApiDocAPIGetDocFullTextRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -229,27 +227,25 @@ func (a *DocAPIApiService) DocAPIGetDocFullText(ctx _context.Context, fileID str
 
 // Execute executes the request
 //  @return UserResponse1
-func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullTextRequest) (UserResponse1, *_nethttp.Response, error) {
+func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullTextRequest) (*UserResponse1, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UserResponse1
+		formFiles            []formFile
+		localVarReturnValue  *UserResponse1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocAPIApiService.DocAPIGetDocFullText")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/openapi/doc/v3/{fileID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"fileID"+"}", _neturl.PathEscape(parameterToString(r.fileID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"fileID"+"}", url.PathEscape(parameterToString(r.fileID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.accessToken == nil {
 		return localVarReturnValue, nil, reportError("accessToken is required and must be specified")
 	}
@@ -270,7 +266,7 @@ func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullText
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -280,7 +276,7 @@ func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullText
 	localVarHeaderParams["Access-Token"] = parameterToString(*r.accessToken, "")
 	localVarHeaderParams["Client-Id"] = parameterToString(*r.clientId, "")
 	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -290,15 +286,15 @@ func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullText
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -314,7 +310,7 @@ func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullText
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

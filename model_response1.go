@@ -17,7 +17,7 @@ import (
 
 // Response1 struct for Response1
 type Response1 struct {
-	GetDocFullTextRsp *GetDocFullTextRsp `json:"getDocFullTextRsp,omitempty"`
+	Document *Node `json:"document,omitempty"`
 }
 
 // NewResponse1 instantiates a new Response1 object
@@ -37,42 +37,42 @@ func NewResponse1WithDefaults() *Response1 {
 	return &this
 }
 
-// GetGetDocFullTextRsp returns the GetDocFullTextRsp field value if set, zero value otherwise.
-func (o *Response1) GetGetDocFullTextRsp() GetDocFullTextRsp {
-	if o == nil || o.GetDocFullTextRsp == nil {
-		var ret GetDocFullTextRsp
+// GetDocument returns the Document field value if set, zero value otherwise.
+func (o *Response1) GetDocument() Node {
+	if o == nil || o.Document == nil {
+		var ret Node
 		return ret
 	}
-	return *o.GetDocFullTextRsp
+	return *o.Document
 }
 
-// GetGetDocFullTextRspOk returns a tuple with the GetDocFullTextRsp field value if set, nil otherwise
+// GetDocumentOk returns a tuple with the Document field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Response1) GetGetDocFullTextRspOk() (*GetDocFullTextRsp, bool) {
-	if o == nil || o.GetDocFullTextRsp == nil {
+func (o *Response1) GetDocumentOk() (*Node, bool) {
+	if o == nil || o.Document == nil {
 		return nil, false
 	}
-	return o.GetDocFullTextRsp, true
+	return o.Document, true
 }
 
-// HasGetDocFullTextRsp returns a boolean if a field has been set.
-func (o *Response1) HasGetDocFullTextRsp() bool {
-	if o != nil && o.GetDocFullTextRsp != nil {
+// HasDocument returns a boolean if a field has been set.
+func (o *Response1) HasDocument() bool {
+	if o != nil && o.Document != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetGetDocFullTextRsp gets a reference to the given GetDocFullTextRsp and assigns it to the GetDocFullTextRsp field.
-func (o *Response1) SetGetDocFullTextRsp(v GetDocFullTextRsp) {
-	o.GetDocFullTextRsp = &v
+// SetDocument gets a reference to the given Node and assigns it to the Document field.
+func (o *Response1) SetDocument(v Node) {
+	o.Document = &v
 }
 
 func (o Response1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.GetDocFullTextRsp != nil {
-		toSerialize["getDocFullTextRsp"] = o.GetDocFullTextRsp
+	if o.Document != nil {
+		toSerialize["document"] = o.Document
 	}
 	return json.Marshal(toSerialize)
 }

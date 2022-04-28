@@ -20,7 +20,7 @@ type Node struct {
 	Begin *int32 `json:"begin,omitempty"`
 	End *int32 `json:"end,omitempty"`
 	Type *string `json:"type,omitempty"`
-	Children *[]Node `json:"children,omitempty"`
+	Children []Node `json:"children,omitempty"`
 	Text *string `json:"text,omitempty"`
 	Property *map[string]interface{} `json:"property,omitempty"`
 }
@@ -144,12 +144,12 @@ func (o *Node) GetChildren() []Node {
 		var ret []Node
 		return ret
 	}
-	return *o.Children
+	return o.Children
 }
 
 // GetChildrenOk returns a tuple with the Children field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Node) GetChildrenOk() (*[]Node, bool) {
+func (o *Node) GetChildrenOk() ([]Node, bool) {
 	if o == nil || o.Children == nil {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *Node) HasChildren() bool {
 
 // SetChildren gets a reference to the given []Node and assigns it to the Children field.
 func (o *Node) SetChildren(v []Node) {
-	o.Children = &v
+	o.Children = v
 }
 
 // GetText returns the Text field value if set, zero value otherwise.

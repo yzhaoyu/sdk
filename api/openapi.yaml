@@ -56,7 +56,7 @@ paths:
       responses:
         "200":
           content:
-            text/plain:
+            application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse1'
           description: OK
@@ -66,6 +66,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Status'
           description: Default error response
+      security:
+      - OAuth2AuthCode:
+        - ScopeDocReadonly
       tags:
       - DocAPI
   /openapi/doc/v3/{fileID}/batchUpdate:
@@ -113,7 +116,7 @@ paths:
       responses:
         "200":
           content:
-            text/plain:
+            application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse2'
           description: OK
@@ -123,6 +126,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Status'
           description: Default error response
+      security:
+      - OAuth2AuthCode:
+        - ScopeDocEditable
       tags:
       - DocAPI
 components:
@@ -198,21 +204,6 @@ components:
       type: object
     BatchUpdateDocDataRsp:
       properties: {}
-      type: object
-    GetDocFullTextRsp:
-      example:
-        document:
-          children:
-          - null
-          - null
-          property: {}
-          end: 1
-          text: text
-          type: type
-          begin: 6
-      properties:
-        document:
-          $ref: '#/components/schemas/Node'
       type: object
     GoogleProtobufAny:
       additionalProperties: true
@@ -418,19 +409,18 @@ components:
       type: object
     Response1:
       example:
-        getDocFullTextRsp:
-          document:
-            children:
-            - null
-            - null
-            property: {}
-            end: 1
-            text: text
-            type: type
-            begin: 6
+        document:
+          children:
+          - null
+          - null
+          property: {}
+          end: 1
+          text: text
+          type: type
+          begin: 6
       properties:
-        getDocFullTextRsp:
-          $ref: '#/components/schemas/GetDocFullTextRsp'
+        document:
+          $ref: '#/components/schemas/Node'
       type: object
     Response2:
       example:
@@ -469,16 +459,15 @@ components:
         ret: 0
         msg: msg
         data:
-          getDocFullTextRsp:
-            document:
-              children:
-              - null
-              - null
-              property: {}
-              end: 1
-              text: text
-              type: type
-              begin: 6
+          document:
+            children:
+            - null
+            - null
+            property: {}
+            end: 1
+            text: text
+            type: type
+            begin: 6
       properties:
         ret:
           format: int32
@@ -487,6 +476,9 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/Response1'
+      required:
+      - msg
+      - ret
       type: object
     UserResponse2:
       example:
@@ -502,4 +494,38 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/Response2'
+      required:
+      - msg
+      - ret
       type: object
+  securitySchemes:
+    OAuth2AuthCode:
+      description: 更多内容请查阅[腾讯文档开放平台开发文档](https://docs.qq.com/open/wiki)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://docs.qq.com/oauth/v2/authorize
+          refreshUrl: https://docs.qq.com/oauth/v2/token
+          scopes:
+            ScopeFileCreatable: scope.file.creatable
+            ScopeFileDeletable: scope.file.deletable
+            ScopeFileModifiable: scope.file.modifiable
+            ScopeFileQueryable: scope.file.queryable
+            ScopeFolderCreatable: scope.folder.creatable
+            ScopeFolderDeletable: scope.folder.deletable
+            ScopeFolderModifiable: scope.folder.modifiable
+            ScopeFolderQueryable: scope.folder.queryable
+            ScopeDriveGroup: scope.drive.group
+            ScopeDriveForm: scope.drive.form
+            ScopeDrivePresentation: scope.drive.presentation
+            ScopeDocEditable: scope.doc.editable
+            ScopeDocReadonly: scope.doc.readonly
+            ScopeSheetEditable: scope.sheet.editable
+            ScopeSheetReadonly: scope.sheet.readonly
+            ScopeSlideEditable: scope.slide.editable
+            ScopeSlideReadonly: scope.slide.readonly
+            ScopeSmartsheetEditable: scope.smartsheet.editable
+            ScopeSmartsheetReadonly: scope.smartsheet.readonly
+            ScopeFormEditable: scope.form.editable
+            ScopeFormReadonly: scope.form.readonly
+          tokenUrl: https://docs.qq.com/oauth/v2/token
+      type: oauth2

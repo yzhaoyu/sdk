@@ -76,11 +76,11 @@ func (o *BatchUpdateDocDataReq) GetRequests() []Request {
 
 // GetRequestsOk returns a tuple with the Requests field value
 // and a boolean to check if the value has been set.
-func (o *BatchUpdateDocDataReq) GetRequestsOk() (*[]Request, bool) {
+func (o *BatchUpdateDocDataReq) GetRequestsOk() ([]Request, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.Requests, true
+	return o.Requests, true
 }
 
 // SetRequests sets field value

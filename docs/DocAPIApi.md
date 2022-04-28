@@ -37,8 +37,8 @@ func main() {
     batchUpdateDocDataReq := *openapiclient.NewBatchUpdateDocDataReq("FileID_example", []openapiclient.Request{*openapiclient.NewRequest()}) // BatchUpdateDocDataReq | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DocAPIApi.DocAPIBatchUpdateDocData(context.Background(), fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).BatchUpdateDocDataReq(batchUpdateDocDataReq).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DocAPIApi.DocAPIBatchUpdateDocData(context.Background(), fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).BatchUpdateDocDataReq(batchUpdateDocDataReq).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DocAPIApi.DocAPIBatchUpdateDocData``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -75,12 +75,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2AuthCode](../README.md#OAuth2AuthCode)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: text/plain, application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -114,8 +114,8 @@ func main() {
     openId := "openId_example" // string | 开放平台用户 ID，用于标识用户和接口鉴权
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DocAPIApi.DocAPIGetDocFullText(context.Background(), fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DocAPIApi.DocAPIGetDocFullText(context.Background(), fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DocAPIApi.DocAPIGetDocFullText``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -151,12 +151,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2AuthCode](../README.md#OAuth2AuthCode)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: text/plain, application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

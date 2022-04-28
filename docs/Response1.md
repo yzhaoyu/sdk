@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GetDocFullTextRsp** | Pointer to [**GetDocFullTextRsp**](GetDocFullTextRsp.md) |  | [optional] 
+**Document** | Pointer to [**Node**](Node.md) |  | [optional] 
 
 ## Methods
 
@@ -25,30 +25,30 @@ NewResponse1WithDefaults instantiates a new Response1 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetGetDocFullTextRsp
+### GetDocument
 
-`func (o *Response1) GetGetDocFullTextRsp() GetDocFullTextRsp`
+`func (o *Response1) GetDocument() Node`
 
-GetGetDocFullTextRsp returns the GetDocFullTextRsp field if non-nil, zero value otherwise.
+GetDocument returns the Document field if non-nil, zero value otherwise.
 
-### GetGetDocFullTextRspOk
+### GetDocumentOk
 
-`func (o *Response1) GetGetDocFullTextRspOk() (*GetDocFullTextRsp, bool)`
+`func (o *Response1) GetDocumentOk() (*Node, bool)`
 
-GetGetDocFullTextRspOk returns a tuple with the GetDocFullTextRsp field if it's non-nil, zero value otherwise
+GetDocumentOk returns a tuple with the Document field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetGetDocFullTextRsp
+### SetDocument
 
-`func (o *Response1) SetGetDocFullTextRsp(v GetDocFullTextRsp)`
+`func (o *Response1) SetDocument(v Node)`
 
-SetGetDocFullTextRsp sets GetDocFullTextRsp field to given value.
+SetDocument sets Document field to given value.
 
-### HasGetDocFullTextRsp
+### HasDocument
 
-`func (o *Response1) HasGetDocFullTextRsp() bool`
+`func (o *Response1) HasDocument() bool`
 
-HasGetDocFullTextRsp returns a boolean if a field has been set.
+HasDocument returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

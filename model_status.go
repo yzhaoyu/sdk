@@ -22,7 +22,7 @@ type Status struct {
 	// A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
 	Message *string `json:"message,omitempty"`
 	// A list of messages that carry the error details.  There is a common set of message types for APIs to use.
-	Details *[]GoogleProtobufAny `json:"details,omitempty"`
+	Details []GoogleProtobufAny `json:"details,omitempty"`
 }
 
 // NewStatus instantiates a new Status object
@@ -112,12 +112,12 @@ func (o *Status) GetDetails() []GoogleProtobufAny {
 		var ret []GoogleProtobufAny
 		return ret
 	}
-	return *o.Details
+	return o.Details
 }
 
 // GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Status) GetDetailsOk() (*[]GoogleProtobufAny, bool) {
+func (o *Status) GetDetailsOk() ([]GoogleProtobufAny, bool) {
 	if o == nil || o.Details == nil {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (o *Status) HasDetails() bool {
 
 // SetDetails gets a reference to the given []GoogleProtobufAny and assigns it to the Details field.
 func (o *Status) SetDetails(v []GoogleProtobufAny) {
-	o.Details = &v
+	o.Details = v
 }
 
 func (o Status) MarshalJSON() ([]byte, error) {

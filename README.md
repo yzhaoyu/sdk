@@ -23,7 +23,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./openapi"
+import openapi "github.com/GIT_USER_ID/GIT_REPO_ID"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -41,7 +41,7 @@ Default configuration comes with `Servers` field that contains server objects as
 For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
 
 ```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), openapi.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
@@ -49,7 +49,7 @@ ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
 Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
 
 ```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), openapi.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -63,10 +63,10 @@ An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
-ctx := context.WithValue(context.Background(), sw.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), openapi.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), sw.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
@@ -86,7 +86,6 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [BatchUpdateDocDataReq](docs/BatchUpdateDocDataReq.md)
- - [GetDocFullTextRsp](docs/GetDocFullTextRsp.md)
  - [GoogleProtobufAny](docs/GoogleProtobufAny.md)
  - [InsertImageRequest](docs/InsertImageRequest.md)
  - [InsertTextRequest](docs/InsertTextRequest.md)
@@ -103,7 +102,55 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
- Endpoints do not require authorization.
+
+
+### OAuth2AuthCode
+
+
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: https://docs.qq.com/oauth/v2/authorize
+- **Scopes**: 
+ - **ScopeFileCreatable**: scope.file.creatable
+ - **ScopeFileDeletable**: scope.file.deletable
+ - **ScopeFileModifiable**: scope.file.modifiable
+ - **ScopeFileQueryable**: scope.file.queryable
+ - **ScopeFolderCreatable**: scope.folder.creatable
+ - **ScopeFolderDeletable**: scope.folder.deletable
+ - **ScopeFolderModifiable**: scope.folder.modifiable
+ - **ScopeFolderQueryable**: scope.folder.queryable
+ - **ScopeDriveGroup**: scope.drive.group
+ - **ScopeDriveForm**: scope.drive.form
+ - **ScopeDrivePresentation**: scope.drive.presentation
+ - **ScopeDocEditable**: scope.doc.editable
+ - **ScopeDocReadonly**: scope.doc.readonly
+ - **ScopeSheetEditable**: scope.sheet.editable
+ - **ScopeSheetReadonly**: scope.sheet.readonly
+ - **ScopeSlideEditable**: scope.slide.editable
+ - **ScopeSlideReadonly**: scope.slide.readonly
+ - **ScopeSmartsheetEditable**: scope.smartsheet.editable
+ - **ScopeSmartsheetReadonly**: scope.smartsheet.readonly
+ - **ScopeFormEditable**: scope.form.editable
+ - **ScopeFormReadonly**: scope.form.readonly
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

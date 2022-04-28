@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ret** | Pointer to **int32** |  | [optional] 
-**Msg** | Pointer to **string** |  | [optional] 
+**Ret** | **int32** |  | 
+**Msg** | **string** |  | 
 **Data** | Pointer to [**Response2**](Response2.md) |  | [optional] 
 
 ## Methods
 
 ### NewUserResponse2
 
-`func NewUserResponse2() *UserResponse2`
+`func NewUserResponse2(ret int32, msg string, ) *UserResponse2`
 
 NewUserResponse2 instantiates a new UserResponse2 object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetRet sets Ret field to given value.
 
-### HasRet
-
-`func (o *UserResponse2) HasRet() bool`
-
-HasRet returns a boolean if a field has been set.
 
 ### GetMsg
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetMsg sets Msg field to given value.
 
-### HasMsg
-
-`func (o *UserResponse2) HasMsg() bool`
-
-HasMsg returns a boolean if a field has been set.
 
 ### GetData
 
