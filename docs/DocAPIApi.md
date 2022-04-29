@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## DocAPIBatchUpdateDocData
 
-> UserResponse2 DocAPIBatchUpdateDocData(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).BatchUpdateDocDataReq(batchUpdateDocDataReq).Execute()
+> OpenResponse1 DocAPIBatchUpdateDocData(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).BatchUpdateDocDataReq(batchUpdateDocDataReq).Execute()
 
 
 
@@ -43,7 +43,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DocAPIApi.DocAPIBatchUpdateDocData``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DocAPIBatchUpdateDocData`: UserResponse2
+    // response from `DocAPIBatchUpdateDocData`: OpenResponse1
     fmt.Fprintf(os.Stdout, "Response from `DocAPIApi.DocAPIBatchUpdateDocData`: %v\n", resp)
 }
 ```
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse2**](UserResponse2.md)
+[**OpenResponse1**](OpenResponse1.md)
 
 ### Authorization
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## DocAPIGetDocFullText
 
-> UserResponse1 DocAPIGetDocFullText(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
+> OpenResponse2 DocAPIGetDocFullText(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
 
 
 
@@ -120,7 +120,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DocAPIApi.DocAPIGetDocFullText``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DocAPIGetDocFullText`: UserResponse1
+    // response from `DocAPIGetDocFullText`: OpenResponse2
     fmt.Fprintf(os.Stdout, "Response from `DocAPIApi.DocAPIGetDocFullText`: %v\n", resp)
 }
 ```
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse1**](UserResponse1.md)
+[**OpenResponse2**](OpenResponse2.md)
 
 ### Authorization
 

@@ -81,23 +81,91 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DocAPIApi* | [**DocAPIBatchUpdateDocData**](docs/DocAPIApi.md#docapibatchupdatedocdata) | **Post** /openapi/doc/v3/{fileID}/batchUpdate | 
 *DocAPIApi* | [**DocAPIGetDocFullText**](docs/DocAPIApi.md#docapigetdocfulltext) | **Get** /openapi/doc/v3/{fileID} | 
+*ResourceAPIApi* | [**ResourceAPIUploadImage**](docs/ResourceAPIApi.md#resourceapiuploadimage) | **Post** /openapi/resources/v2/images | 
+*SmartsheetAPIApi* | [**SmartsheetAPIEditSmartsheetSubSheet**](docs/SmartsheetAPIApi.md#smartsheetapieditsmartsheetsubsheet) | **Post** /openapi/smartbook/v2/files/{fileID}/sheets | 
+*SmartsheetAPIApi* | [**SmartsheetAPIGetSmartsheetSubSheet**](docs/SmartsheetAPIApi.md#smartsheetapigetsmartsheetsubsheet) | **Get** /openapi/smartbook/v2/files/{fileID}/sheets | 
+*SmartsheetAPIApi* | [**SmartsheetAPIHandleSmartsheetResource**](docs/SmartsheetAPIApi.md#smartsheetapihandlesmartsheetresource) | **Post** /openapi/smartbook/v2/files/{fileID}/sheets/{sheetID} | 
 
 
 ## Documentation For Models
 
+ - [AddField](docs/AddField.md)
+ - [AddFieldsRequest](docs/AddFieldsRequest.md)
+ - [AddFieldsResponse](docs/AddFieldsResponse.md)
+ - [AddRecord](docs/AddRecord.md)
+ - [AddRecordsRequest](docs/AddRecordsRequest.md)
+ - [AddRecordsResponse](docs/AddRecordsResponse.md)
+ - [AddViewRequest](docs/AddViewRequest.md)
+ - [AddViewResponse](docs/AddViewResponse.md)
  - [BatchUpdateDocDataReq](docs/BatchUpdateDocDataReq.md)
+ - [BoolValue](docs/BoolValue.md)
+ - [CheckboxFieldProperty](docs/CheckboxFieldProperty.md)
+ - [CommonRecord](docs/CommonRecord.md)
+ - [CreatedTimeFieldProperty](docs/CreatedTimeFieldProperty.md)
+ - [DateTimeFieldProperty](docs/DateTimeFieldProperty.md)
+ - [DeleteContentRequest](docs/DeleteContentRequest.md)
+ - [DeleteFieldsRequest](docs/DeleteFieldsRequest.md)
+ - [DeleteRecordsRequest](docs/DeleteRecordsRequest.md)
+ - [DeleteViewsRequest](docs/DeleteViewsRequest.md)
+ - [DoubleValue](docs/DoubleValue.md)
+ - [EditSubSheetRequest](docs/EditSubSheetRequest.md)
+ - [EditSubSheetResponse](docs/EditSubSheetResponse.md)
+ - [FieldResource](docs/FieldResource.md)
+ - [GetDocFullTextRsp](docs/GetDocFullTextRsp.md)
+ - [GetFieldsRequest](docs/GetFieldsRequest.md)
+ - [GetFieldsResponse](docs/GetFieldsResponse.md)
+ - [GetRecordsRequest](docs/GetRecordsRequest.md)
+ - [GetRecordsResponse](docs/GetRecordsResponse.md)
+ - [GetSubSheetResponse](docs/GetSubSheetResponse.md)
+ - [GetViewsRequest](docs/GetViewsRequest.md)
+ - [GetViewsResponse](docs/GetViewsResponse.md)
  - [GoogleProtobufAny](docs/GoogleProtobufAny.md)
  - [InsertImageRequest](docs/InsertImageRequest.md)
+ - [InsertNumberingRequest](docs/InsertNumberingRequest.md)
+ - [InsertPageBreakRequest](docs/InsertPageBreakRequest.md)
+ - [InsertTableRequest](docs/InsertTableRequest.md)
  - [InsertTextRequest](docs/InsertTextRequest.md)
  - [InsertWebBlockRequest](docs/InsertWebBlockRequest.md)
  - [Location](docs/Location.md)
+ - [ModifiedTimeFieldProperty](docs/ModifiedTimeFieldProperty.md)
  - [Node](docs/Node.md)
+ - [NumberFieldProperty](docs/NumberFieldProperty.md)
+ - [OpenResponse1](docs/OpenResponse1.md)
+ - [OpenResponse2](docs/OpenResponse2.md)
+ - [OpenResponse4](docs/OpenResponse4.md)
+ - [OpenResponse5](docs/OpenResponse5.md)
+ - [OpenResponse6](docs/OpenResponse6.md)
+ - [OpenResponse7](docs/OpenResponse7.md)
+ - [Option](docs/Option.md)
+ - [ParagraphBorder](docs/ParagraphBorder.md)
+ - [ParagraphStyle](docs/ParagraphStyle.md)
+ - [ProgressFieldProperty](docs/ProgressFieldProperty.md)
+ - [Range](docs/Range.md)
+ - [RecordResource](docs/RecordResource.md)
+ - [ReplaceTextRequest](docs/ReplaceTextRequest.md)
  - [Request](docs/Request.md)
  - [Response1](docs/Response1.md)
- - [Response2](docs/Response2.md)
+ - [SelectFieldProperty](docs/SelectFieldProperty.md)
+ - [Shading](docs/Shading.md)
+ - [SheetData](docs/SheetData.md)
+ - [SheetProperties](docs/SheetProperties.md)
+ - [SingleSelectFieldProperty](docs/SingleSelectFieldProperty.md)
+ - [SmartsheetAddSheetReq](docs/SmartsheetAddSheetReq.md)
+ - [SmartsheetAddSheetRsp](docs/SmartsheetAddSheetRsp.md)
+ - [SmartsheetDeleteSheetReq](docs/SmartsheetDeleteSheetReq.md)
+ - [SmartsheetResourceRequest](docs/SmartsheetResourceRequest.md)
+ - [SmartsheetResourceResponse](docs/SmartsheetResourceResponse.md)
+ - [SortInfo](docs/SortInfo.md)
  - [Status](docs/Status.md)
- - [UserResponse1](docs/UserResponse1.md)
- - [UserResponse2](docs/UserResponse2.md)
+ - [StringValue](docs/StringValue.md)
+ - [TabStop](docs/TabStop.md)
+ - [UInt32Value](docs/UInt32Value.md)
+ - [UpdateFieldsRequest](docs/UpdateFieldsRequest.md)
+ - [UpdateFieldsResponse](docs/UpdateFieldsResponse.md)
+ - [UpdateRecordsRequest](docs/UpdateRecordsRequest.md)
+ - [UpdateRecordsResponse](docs/UpdateRecordsResponse.md)
+ - [UrlFieldProperty](docs/UrlFieldProperty.md)
+ - [ViewResource](docs/ViewResource.md)
 
 
 ## Documentation For Authorization
@@ -111,27 +179,7 @@ Class | Method | HTTP request | Description
 - **Flow**: accessCode
 - **Authorization URL**: https://docs.qq.com/oauth/v2/authorize
 - **Scopes**: 
- - **ScopeFileCreatable**: scope.file.creatable
- - **ScopeFileDeletable**: scope.file.deletable
- - **ScopeFileModifiable**: scope.file.modifiable
- - **ScopeFileQueryable**: scope.file.queryable
- - **ScopeFolderCreatable**: scope.folder.creatable
- - **ScopeFolderDeletable**: scope.folder.deletable
- - **ScopeFolderModifiable**: scope.folder.modifiable
- - **ScopeFolderQueryable**: scope.folder.queryable
- - **ScopeDriveGroup**: scope.drive.group
- - **ScopeDriveForm**: scope.drive.form
- - **ScopeDrivePresentation**: scope.drive.presentation
- - **ScopeDocEditable**: scope.doc.editable
- - **ScopeDocReadonly**: scope.doc.readonly
- - **ScopeSheetEditable**: scope.sheet.editable
- - **ScopeSheetReadonly**: scope.sheet.readonly
- - **ScopeSlideEditable**: scope.slide.editable
- - **ScopeSlideReadonly**: scope.slide.readonly
- - **ScopeSmartsheetEditable**: scope.smartsheet.editable
- - **ScopeSmartsheetReadonly**: scope.smartsheet.readonly
- - **ScopeFormEditable**: scope.form.editable
- - **ScopeFormReadonly**: scope.form.readonly
+ - **ScopeFileCreatable**: 开发者调用相关的OpenAPI需要确保Access-Token拥有对应的scope，其值形如scope.file.creatable
 
 Example
 
