@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FileID** | Pointer to **string** |  | [optional] 
+**FileID** | **string** |  | 
 **AddSheet** | Pointer to [**SmartsheetAddSheetReq**](SmartsheetAddSheetReq.md) |  | [optional] 
 **DeleteSheet** | Pointer to [**SmartsheetDeleteSheetReq**](SmartsheetDeleteSheetReq.md) |  | [optional] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewEditSubSheetRequest
 
-`func NewEditSubSheetRequest() *EditSubSheetRequest`
+`func NewEditSubSheetRequest(fileID string, ) *EditSubSheetRequest`
 
 NewEditSubSheetRequest instantiates a new EditSubSheetRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetFileID sets FileID field to given value.
 
-### HasFileID
-
-`func (o *EditSubSheetRequest) HasFileID() bool`
-
-HasFileID returns a boolean if a field has been set.
 
 ### GetAddSheet
 

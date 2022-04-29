@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// BatchUpdateDocDataReq struct for BatchUpdateDocDataReq
+// BatchUpdateDocDataReq BatchUpdateDocDataReq 批量更新 Doc 文档请求参数
 type BatchUpdateDocDataReq struct {
 	FileID string `json:"fileID"`
 	Requests []Request `json:"requests"`

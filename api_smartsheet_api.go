@@ -57,7 +57,7 @@ func (r ApiSmartsheetAPIEditSmartsheetSubSheetRequest) EditSubSheetRequest(editS
 	return r
 }
 
-func (r ApiSmartsheetAPIEditSmartsheetSubSheetRequest) Execute() (*OpenResponse5, *http.Response, error) {
+func (r ApiSmartsheetAPIEditSmartsheetSubSheetRequest) Execute() (*SmartsheetAPIResponse1, *http.Response, error) {
 	return r.ApiService.SmartsheetAPIEditSmartsheetSubSheetExecute(r)
 }
 
@@ -79,13 +79,13 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIEditSmartsheetSubSheet(ctx contex
 }
 
 // Execute executes the request
-//  @return OpenResponse5
-func (a *SmartsheetAPIApiService) SmartsheetAPIEditSmartsheetSubSheetExecute(r ApiSmartsheetAPIEditSmartsheetSubSheetRequest) (*OpenResponse5, *http.Response, error) {
+//  @return SmartsheetAPIResponse1
+func (a *SmartsheetAPIApiService) SmartsheetAPIEditSmartsheetSubSheetExecute(r ApiSmartsheetAPIEditSmartsheetSubSheetRequest) (*SmartsheetAPIResponse1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OpenResponse5
+		localVarReturnValue  *SmartsheetAPIResponse1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmartsheetAPIApiService.SmartsheetAPIEditSmartsheetSubSheet")
@@ -122,7 +122,7 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIEditSmartsheetSubSheetExecute(r A
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -205,7 +205,7 @@ func (r ApiSmartsheetAPIGetSmartsheetSubSheetRequest) OpenId(openId string) ApiS
 	return r
 }
 
-func (r ApiSmartsheetAPIGetSmartsheetSubSheetRequest) Execute() (*OpenResponse6, *http.Response, error) {
+func (r ApiSmartsheetAPIGetSmartsheetSubSheetRequest) Execute() (*SmartsheetAPIResponse2, *http.Response, error) {
 	return r.ApiService.SmartsheetAPIGetSmartsheetSubSheetExecute(r)
 }
 
@@ -227,13 +227,13 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIGetSmartsheetSubSheet(ctx context
 }
 
 // Execute executes the request
-//  @return OpenResponse6
-func (a *SmartsheetAPIApiService) SmartsheetAPIGetSmartsheetSubSheetExecute(r ApiSmartsheetAPIGetSmartsheetSubSheetRequest) (*OpenResponse6, *http.Response, error) {
+//  @return SmartsheetAPIResponse2
+func (a *SmartsheetAPIApiService) SmartsheetAPIGetSmartsheetSubSheetExecute(r ApiSmartsheetAPIGetSmartsheetSubSheetRequest) (*SmartsheetAPIResponse2, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OpenResponse6
+		localVarReturnValue  *SmartsheetAPIResponse2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmartsheetAPIApiService.SmartsheetAPIGetSmartsheetSubSheet")
@@ -267,7 +267,7 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIGetSmartsheetSubSheetExecute(r Ap
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -355,7 +355,7 @@ func (r ApiSmartsheetAPIHandleSmartsheetResourceRequest) SmartsheetResourceReque
 	return r
 }
 
-func (r ApiSmartsheetAPIHandleSmartsheetResourceRequest) Execute() (*OpenResponse7, *http.Response, error) {
+func (r ApiSmartsheetAPIHandleSmartsheetResourceRequest) Execute() (*SmartsheetAPIResponse3, *http.Response, error) {
 	return r.ApiService.SmartsheetAPIHandleSmartsheetResourceExecute(r)
 }
 
@@ -379,13 +379,13 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIHandleSmartsheetResource(ctx cont
 }
 
 // Execute executes the request
-//  @return OpenResponse7
-func (a *SmartsheetAPIApiService) SmartsheetAPIHandleSmartsheetResourceExecute(r ApiSmartsheetAPIHandleSmartsheetResourceRequest) (*OpenResponse7, *http.Response, error) {
+//  @return SmartsheetAPIResponse3
+func (a *SmartsheetAPIApiService) SmartsheetAPIHandleSmartsheetResourceExecute(r ApiSmartsheetAPIHandleSmartsheetResourceRequest) (*SmartsheetAPIResponse3, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OpenResponse7
+		localVarReturnValue  *SmartsheetAPIResponse3
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmartsheetAPIApiService.SmartsheetAPIHandleSmartsheetResource")
@@ -423,7 +423,7 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIHandleSmartsheetResourceExecute(r
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

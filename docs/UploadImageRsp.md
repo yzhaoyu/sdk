@@ -4,15 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ret** | **int32** |  | 
-**Msg** | **string** |  | 
-**Data** | Pointer to [**Response3**](Response3.md) |  | [optional] 
+**ImageID** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewUploadImageRsp
 
-`func NewUploadImageRsp(ret int32, msg string, ) *UploadImageRsp`
+`func NewUploadImageRsp() *UploadImageRsp`
 
 NewUploadImageRsp instantiates a new UploadImageRsp object
 This constructor will assign default values to properties that have it defined,
@@ -27,70 +25,30 @@ NewUploadImageRspWithDefaults instantiates a new UploadImageRsp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetRet
+### GetImageID
 
-`func (o *UploadImageRsp) GetRet() int32`
+`func (o *UploadImageRsp) GetImageID() string`
 
-GetRet returns the Ret field if non-nil, zero value otherwise.
+GetImageID returns the ImageID field if non-nil, zero value otherwise.
 
-### GetRetOk
+### GetImageIDOk
 
-`func (o *UploadImageRsp) GetRetOk() (*int32, bool)`
+`func (o *UploadImageRsp) GetImageIDOk() (*string, bool)`
 
-GetRetOk returns a tuple with the Ret field if it's non-nil, zero value otherwise
+GetImageIDOk returns a tuple with the ImageID field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRet
+### SetImageID
 
-`func (o *UploadImageRsp) SetRet(v int32)`
+`func (o *UploadImageRsp) SetImageID(v string)`
 
-SetRet sets Ret field to given value.
+SetImageID sets ImageID field to given value.
 
+### HasImageID
 
-### GetMsg
+`func (o *UploadImageRsp) HasImageID() bool`
 
-`func (o *UploadImageRsp) GetMsg() string`
-
-GetMsg returns the Msg field if non-nil, zero value otherwise.
-
-### GetMsgOk
-
-`func (o *UploadImageRsp) GetMsgOk() (*string, bool)`
-
-GetMsgOk returns a tuple with the Msg field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMsg
-
-`func (o *UploadImageRsp) SetMsg(v string)`
-
-SetMsg sets Msg field to given value.
-
-
-### GetData
-
-`func (o *UploadImageRsp) GetData() Response3`
-
-GetData returns the Data field if non-nil, zero value otherwise.
-
-### GetDataOk
-
-`func (o *UploadImageRsp) GetDataOk() (*Response3, bool)`
-
-GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetData
-
-`func (o *UploadImageRsp) SetData(v Response3)`
-
-SetData sets Data field to given value.
-
-### HasData
-
-`func (o *UploadImageRsp) HasData() bool`
-
-HasData returns a boolean if a field has been set.
+HasImageID returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

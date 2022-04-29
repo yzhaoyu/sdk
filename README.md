@@ -81,6 +81,8 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DocAPIApi* | [**DocAPIBatchUpdateDocData**](docs/DocAPIApi.md#docapibatchupdatedocdata) | **Post** /openapi/doc/v3/{fileID}/batchUpdate | 
 *DocAPIApi* | [**DocAPIGetDocFullText**](docs/DocAPIApi.md#docapigetdocfulltext) | **Get** /openapi/doc/v3/{fileID} | 
+*OAuthAPIApi* | [**OAuthAPIGetToken**](docs/OAuthAPIApi.md#oauthapigettoken) | **Get** /oauth/v2/token | 
+*OAuthAPIApi* | [**OAuthAPIRefreshToken**](docs/OAuthAPIApi.md#oauthapirefreshtoken) | **Get** /oauth/v2/userinfo | 
 *ResourceAPIApi* | [**ResourceAPIUploadImage**](docs/ResourceAPIApi.md#resourceapiuploadimage) | **Post** /openapi/resources/v2/images | 
 *SmartsheetAPIApi* | [**SmartsheetAPIEditSmartsheetSubSheet**](docs/SmartsheetAPIApi.md#smartsheetapieditsmartsheetsubsheet) | **Post** /openapi/smartbook/v2/files/{fileID}/sheets | 
 *SmartsheetAPIApi* | [**SmartsheetAPIGetSmartsheetSubSheet**](docs/SmartsheetAPIApi.md#smartsheetapigetsmartsheetsubsheet) | **Get** /openapi/smartbook/v2/files/{fileID}/sheets | 
@@ -107,6 +109,8 @@ Class | Method | HTTP request | Description
  - [DeleteFieldsRequest](docs/DeleteFieldsRequest.md)
  - [DeleteRecordsRequest](docs/DeleteRecordsRequest.md)
  - [DeleteViewsRequest](docs/DeleteViewsRequest.md)
+ - [DocAPIResponse1](docs/DocAPIResponse1.md)
+ - [DocAPIResponse2](docs/DocAPIResponse2.md)
  - [DoubleValue](docs/DoubleValue.md)
  - [EditSubSheetRequest](docs/EditSubSheetRequest.md)
  - [EditSubSheetResponse](docs/EditSubSheetResponse.md)
@@ -117,6 +121,8 @@ Class | Method | HTTP request | Description
  - [GetRecordsRequest](docs/GetRecordsRequest.md)
  - [GetRecordsResponse](docs/GetRecordsResponse.md)
  - [GetSubSheetResponse](docs/GetSubSheetResponse.md)
+ - [GetTokenRsp](docs/GetTokenRsp.md)
+ - [GetUserInfoRsp](docs/GetUserInfoRsp.md)
  - [GetViewsRequest](docs/GetViewsRequest.md)
  - [GetViewsResponse](docs/GetViewsResponse.md)
  - [GoogleProtobufAny](docs/GoogleProtobufAny.md)
@@ -130,26 +136,27 @@ Class | Method | HTTP request | Description
  - [ModifiedTimeFieldProperty](docs/ModifiedTimeFieldProperty.md)
  - [Node](docs/Node.md)
  - [NumberFieldProperty](docs/NumberFieldProperty.md)
- - [OpenResponse1](docs/OpenResponse1.md)
- - [OpenResponse2](docs/OpenResponse2.md)
- - [OpenResponse4](docs/OpenResponse4.md)
- - [OpenResponse5](docs/OpenResponse5.md)
- - [OpenResponse6](docs/OpenResponse6.md)
- - [OpenResponse7](docs/OpenResponse7.md)
+ - [OAuthAPIResponse1](docs/OAuthAPIResponse1.md)
+ - [OAuthAPIResponse2](docs/OAuthAPIResponse2.md)
+ - [OAuthAPIResponse3](docs/OAuthAPIResponse3.md)
  - [Option](docs/Option.md)
  - [ParagraphBorder](docs/ParagraphBorder.md)
  - [ParagraphStyle](docs/ParagraphStyle.md)
  - [ProgressFieldProperty](docs/ProgressFieldProperty.md)
  - [Range](docs/Range.md)
  - [RecordResource](docs/RecordResource.md)
+ - [RefreshTokenRsp](docs/RefreshTokenRsp.md)
  - [ReplaceTextRequest](docs/ReplaceTextRequest.md)
  - [Request](docs/Request.md)
- - [Response1](docs/Response1.md)
+ - [ResourcesAPIResponse1](docs/ResourcesAPIResponse1.md)
  - [SelectFieldProperty](docs/SelectFieldProperty.md)
  - [Shading](docs/Shading.md)
  - [SheetData](docs/SheetData.md)
  - [SheetProperties](docs/SheetProperties.md)
  - [SingleSelectFieldProperty](docs/SingleSelectFieldProperty.md)
+ - [SmartsheetAPIResponse1](docs/SmartsheetAPIResponse1.md)
+ - [SmartsheetAPIResponse2](docs/SmartsheetAPIResponse2.md)
+ - [SmartsheetAPIResponse3](docs/SmartsheetAPIResponse3.md)
  - [SmartsheetAddSheetReq](docs/SmartsheetAddSheetReq.md)
  - [SmartsheetAddSheetRsp](docs/SmartsheetAddSheetRsp.md)
  - [SmartsheetDeleteSheetReq](docs/SmartsheetDeleteSheetReq.md)
@@ -164,6 +171,7 @@ Class | Method | HTTP request | Description
  - [UpdateFieldsResponse](docs/UpdateFieldsResponse.md)
  - [UpdateRecordsRequest](docs/UpdateRecordsRequest.md)
  - [UpdateRecordsResponse](docs/UpdateRecordsResponse.md)
+ - [UploadImageRsp](docs/UploadImageRsp.md)
  - [UrlFieldProperty](docs/UrlFieldProperty.md)
  - [ViewResource](docs/ViewResource.md)
 

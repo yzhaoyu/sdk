@@ -29,7 +29,6 @@ type ApiResourceAPIUploadImageRequest struct {
 	accessToken *string
 	clientId *string
 	openId *string
-	body *string
 }
 
 // 访问令牌，用于标识用户和接口鉴权
@@ -50,12 +49,7 @@ func (r ApiResourceAPIUploadImageRequest) OpenId(openId string) ApiResourceAPIUp
 	return r
 }
 
-func (r ApiResourceAPIUploadImageRequest) Body(body string) ApiResourceAPIUploadImageRequest {
-	r.body = &body
-	return r
-}
-
-func (r ApiResourceAPIUploadImageRequest) Execute() (*OpenResponse4, *http.Response, error) {
+func (r ApiResourceAPIUploadImageRequest) Execute() (*ResourcesAPIResponse1, *http.Response, error) {
 	return r.ApiService.ResourceAPIUploadImageExecute(r)
 }
 
@@ -75,13 +69,13 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImage(ctx context.Context) ApiR
 }
 
 // Execute executes the request
-//  @return OpenResponse4
-func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUploadImageRequest) (*OpenResponse4, *http.Response, error) {
+//  @return ResourcesAPIResponse1
+func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUploadImageRequest) (*ResourcesAPIResponse1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OpenResponse4
+		localVarReturnValue  *ResourcesAPIResponse1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceAPIApiService.ResourceAPIUploadImage")
@@ -103,12 +97,9 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	if r.openId == nil {
 		return localVarReturnValue, nil, reportError("openId is required and must be specified")
 	}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{"application/x-www-form-urlencoded"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -117,7 +108,7 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -127,8 +118,6 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	localVarHeaderParams["Access-Token"] = parameterToString(*r.accessToken, "")
 	localVarHeaderParams["Client-Id"] = parameterToString(*r.clientId, "")
 	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
-	// body params
-	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

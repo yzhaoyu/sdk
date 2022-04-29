@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// SmartsheetResourceResponse SmartsheetResourceResponse 对第三方开发者的响应
+// SmartsheetResourceResponse SmartsheetResourceResponse 处理 Smartsheet 视图、记录、字段资源的响应参数
 type SmartsheetResourceResponse struct {
 	GetViews *GetViewsResponse `json:"getViews,omitempty"`
 	GetRecords *GetRecordsResponse `json:"getRecords,omitempty"`

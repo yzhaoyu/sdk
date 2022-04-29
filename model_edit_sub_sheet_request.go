@@ -17,7 +17,7 @@ import (
 
 // EditSubSheetRequest EditSheetRequest 编辑子表请求，创建、删除 Smartsheet 子表
 type EditSubSheetRequest struct {
-	FileID *string `json:"fileID,omitempty"`
+	FileID string `json:"fileID"`
 	AddSheet *SmartsheetAddSheetReq `json:"addSheet,omitempty"`
 	DeleteSheet *SmartsheetDeleteSheetReq `json:"deleteSheet,omitempty"`
 }
@@ -26,8 +26,9 @@ type EditSubSheetRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEditSubSheetRequest() *EditSubSheetRequest {
+func NewEditSubSheetRequest(fileID string) *EditSubSheetRequest {
 	this := EditSubSheetRequest{}
+	this.FileID = fileID
 	return &this
 }
 
@@ -39,36 +40,28 @@ func NewEditSubSheetRequestWithDefaults() *EditSubSheetRequest {
 	return &this
 }
 
-// GetFileID returns the FileID field value if set, zero value otherwise.
+// GetFileID returns the FileID field value
 func (o *EditSubSheetRequest) GetFileID() string {
-	if o == nil || o.FileID == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FileID
+
+	return o.FileID
 }
 
-// GetFileIDOk returns a tuple with the FileID field value if set, nil otherwise
+// GetFileIDOk returns a tuple with the FileID field value
 // and a boolean to check if the value has been set.
 func (o *EditSubSheetRequest) GetFileIDOk() (*string, bool) {
-	if o == nil || o.FileID == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FileID, true
+	return &o.FileID, true
 }
 
-// HasFileID returns a boolean if a field has been set.
-func (o *EditSubSheetRequest) HasFileID() bool {
-	if o != nil && o.FileID != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFileID gets a reference to the given string and assigns it to the FileID field.
+// SetFileID sets field value
 func (o *EditSubSheetRequest) SetFileID(v string) {
-	o.FileID = &v
+	o.FileID = v
 }
 
 // GetAddSheet returns the AddSheet field value if set, zero value otherwise.
@@ -137,7 +130,7 @@ func (o *EditSubSheetRequest) SetDeleteSheet(v SmartsheetDeleteSheetReq) {
 
 func (o EditSubSheetRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.FileID != nil {
+	if true {
 		toSerialize["fileID"] = o.FileID
 	}
 	if o.AddSheet != nil {

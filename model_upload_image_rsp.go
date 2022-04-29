@@ -15,21 +15,17 @@ import (
 	"encoding/json"
 )
 
-// UploadImageRsp struct for UploadImageRsp
+// UploadImageRsp UploadImageRsp 上传图片接口响应参数
 type UploadImageRsp struct {
-	Ret int32 `json:"ret"`
-	Msg string `json:"msg"`
-	Data *Response3 `json:"data,omitempty"`
+	ImageID *string `json:"imageID,omitempty"`
 }
 
 // NewUploadImageRsp instantiates a new UploadImageRsp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUploadImageRsp(ret int32, msg string) *UploadImageRsp {
+func NewUploadImageRsp() *UploadImageRsp {
 	this := UploadImageRsp{}
-	this.Ret = ret
-	this.Msg = msg
 	return &this
 }
 
@@ -41,96 +37,42 @@ func NewUploadImageRspWithDefaults() *UploadImageRsp {
 	return &this
 }
 
-// GetRet returns the Ret field value
-func (o *UploadImageRsp) GetRet() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Ret
-}
-
-// GetRetOk returns a tuple with the Ret field value
-// and a boolean to check if the value has been set.
-func (o *UploadImageRsp) GetRetOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Ret, true
-}
-
-// SetRet sets field value
-func (o *UploadImageRsp) SetRet(v int32) {
-	o.Ret = v
-}
-
-// GetMsg returns the Msg field value
-func (o *UploadImageRsp) GetMsg() string {
-	if o == nil {
+// GetImageID returns the ImageID field value if set, zero value otherwise.
+func (o *UploadImageRsp) GetImageID() string {
+	if o == nil || o.ImageID == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Msg
+	return *o.ImageID
 }
 
-// GetMsgOk returns a tuple with the Msg field value
+// GetImageIDOk returns a tuple with the ImageID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UploadImageRsp) GetMsgOk() (*string, bool) {
-	if o == nil {
+func (o *UploadImageRsp) GetImageIDOk() (*string, bool) {
+	if o == nil || o.ImageID == nil {
 		return nil, false
 	}
-	return &o.Msg, true
+	return o.ImageID, true
 }
 
-// SetMsg sets field value
-func (o *UploadImageRsp) SetMsg(v string) {
-	o.Msg = v
-}
-
-// GetData returns the Data field value if set, zero value otherwise.
-func (o *UploadImageRsp) GetData() Response3 {
-	if o == nil || o.Data == nil {
-		var ret Response3
-		return ret
-	}
-	return *o.Data
-}
-
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UploadImageRsp) GetDataOk() (*Response3, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
-	}
-	return o.Data, true
-}
-
-// HasData returns a boolean if a field has been set.
-func (o *UploadImageRsp) HasData() bool {
-	if o != nil && o.Data != nil {
+// HasImageID returns a boolean if a field has been set.
+func (o *UploadImageRsp) HasImageID() bool {
+	if o != nil && o.ImageID != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetData gets a reference to the given Response3 and assigns it to the Data field.
-func (o *UploadImageRsp) SetData(v Response3) {
-	o.Data = &v
+// SetImageID gets a reference to the given string and assigns it to the ImageID field.
+func (o *UploadImageRsp) SetImageID(v string) {
+	o.ImageID = &v
 }
 
 func (o UploadImageRsp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["ret"] = o.Ret
-	}
-	if true {
-		toSerialize["msg"] = o.Msg
-	}
-	if o.Data != nil {
-		toSerialize["data"] = o.Data
+	if o.ImageID != nil {
+		toSerialize["imageID"] = o.ImageID
 	}
 	return json.Marshal(toSerialize)
 }

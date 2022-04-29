@@ -15,9 +15,111 @@ servers:
 - url: https://docs.qq.com
 tags:
 - name: DocAPI
+- name: OAuthAPI
 - name: ResourceAPI
 - name: SmartsheetAPI
 paths:
+  /oauth/v2/token:
+    get:
+      operationId: OAuthAPI_GetToken
+      parameters:
+      - explode: true
+        in: query
+        name: clientId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: clientSecret
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: redirectUri
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: grantType
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: code
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAuthAPIResponse1'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Default error response
+      tags:
+      - OAuthAPI
+  /oauth/v2/userinfo:
+    get:
+      operationId: OAuthAPI_RefreshToken
+      parameters:
+      - explode: true
+        in: query
+        name: clientId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: clientSecret
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: grantType
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: refreshToken
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OAuthAPIResponse3'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Default error response
+      tags:
+      - OAuthAPI
   /openapi/doc/v3/{fileID}:
     get:
       description: Three required req headers
@@ -58,9 +160,9 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/OpenResponse2'
+                $ref: '#/components/schemas/DocAPIResponse2'
           description: OK
         default:
           content:
@@ -118,9 +220,9 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/OpenResponse1'
+                $ref: '#/components/schemas/DocAPIResponse1'
           description: OK
         default:
           content:
@@ -164,16 +266,16 @@ paths:
         style: simple
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: string
         required: true
       responses:
         "200":
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/OpenResponse4'
+                $ref: '#/components/schemas/ResourcesAPIResponse1'
           description: OK
         default:
           content:
@@ -225,9 +327,9 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/OpenResponse6'
+                $ref: '#/components/schemas/SmartsheetAPIResponse2'
           description: OK
         default:
           content:
@@ -284,9 +386,9 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/OpenResponse5'
+                $ref: '#/components/schemas/SmartsheetAPIResponse1'
           description: OK
         default:
           content:
@@ -351,9 +453,9 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/OpenResponse7'
+                $ref: '#/components/schemas/SmartsheetAPIResponse3'
           description: OK
         default:
           content:
@@ -740,6 +842,7 @@ components:
       properties: {}
       type: object
     BatchUpdateDocDataReq:
+      description: BatchUpdateDocDataReq 批量更新 Doc 文档请求参数
       example:
         requests:
         - insertText:
@@ -991,6 +1094,7 @@ components:
       - requests
       type: object
     BatchUpdateDocDataRsp:
+      description: BatchUpdateDocDataRsp 批量更新 Doc 文档响应
       properties: {}
       type: object
     BoolValue:
@@ -1100,6 +1204,46 @@ components:
       description: 删除指定表格指定子表中的指定视图回包
       properties: {}
       type: object
+    DocAPIResponse1:
+      example:
+        ret: 0
+        msg: msg
+        data: "{}"
+      properties:
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          description: BatchUpdateDocDataRsp 批量更新 Doc 文档响应
+          properties: {}
+          type: object
+      type: object
+    DocAPIResponse2:
+      example:
+        ret: 0
+        msg: msg
+        data:
+          document:
+            children:
+            - null
+            - null
+            property:
+              key: null
+            end: 1
+            text: text
+            type: type
+            begin: 6
+      properties:
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetDocFullTextRsp'
+      type: object
     DoubleValue:
       description: Wrapper message for `double`. The JSON representation for `DoubleValue`
         is JSON number.
@@ -1129,6 +1273,8 @@ components:
           $ref: '#/components/schemas/SmartsheetAddSheetReq'
         deleteSheet:
           $ref: '#/components/schemas/SmartsheetDeleteSheetReq'
+      required:
+      - fileID
       type: object
     EditSubSheetResponse:
       description: EditSheetResponse 编辑子表响应，创建、删除 Smartsheet 子表
@@ -1499,6 +1645,40 @@ components:
             $ref: '#/components/schemas/SheetData'
           type: array
       type: object
+    GetTokenRsp:
+      example:
+        expiresIn: 6
+        scope: scope
+        accessToken: accessToken
+        tokenType: tokenType
+        userId: userId
+        refreshToken: refreshToken
+      properties:
+        accessToken:
+          type: string
+        tokenType:
+          type: string
+        expiresIn:
+          format: int64
+          type: integer
+        refreshToken:
+          type: string
+        userId:
+          type: string
+        scope:
+          type: string
+      type: object
+    GetUserInfoRsp:
+      properties:
+        openID:
+          type: string
+        nick:
+          type: string
+        avatar:
+          type: string
+        source:
+          type: string
+      type: object
     GetViewsRequest:
       description: 获取所有视图请求
       example:
@@ -1844,11 +2024,17 @@ components:
         useSeparate:
           type: boolean
       type: object
-    OpenResponse1:
+    OAuthAPIResponse1:
       example:
         ret: 0
         msg: msg
-        data: "{}"
+        data:
+          expiresIn: 6
+          scope: scope
+          accessToken: accessToken
+          tokenType: tokenType
+          userId: userId
+          refreshToken: refreshToken
       properties:
         ret:
           format: int32
@@ -1856,40 +2042,404 @@ components:
         msg:
           type: string
         data:
-          properties: {}
+          $ref: '#/components/schemas/GetTokenRsp'
+      type: object
+    OAuthAPIResponse2:
+      properties:
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetUserInfoRsp'
+      type: object
+    OAuthAPIResponse3:
+      example:
+        ret: 0
+        msg: msg
+        data:
+          expiresIn: 6
+          scope: scope
+          accessToken: accessToken
+          tokenType: tokenType
+          userId: userId
+      properties:
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/RefreshTokenRsp'
+      type: object
+    Option:
+      example:
+        style: 1
+        id: id
+        text: text
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        style:
+          format: int32
+          type: integer
+      type: object
+    ParagraphBorder:
+      example:
+        padding:
+          value: 1
+        color: color
+        width:
+          value: 1
+        borderStyle: 1
+      properties:
+        color:
+          type: string
+        width:
+          $ref: '#/components/schemas/UInt32Value'
+        padding:
+          $ref: '#/components/schemas/UInt32Value'
+        borderStyle:
+          format: enum
+          type: integer
+      type: object
+    ParagraphStyle:
+      example:
+        indentFirstLine:
+          value: 7.386281948385884
+        shading:
+          backgroundColor: backgroundColor
+        indentStart:
+          value: 7.386281948385884
+        lineSpacing:
+          value: 7.386281948385884
+        borderTop:
+          padding:
+            value: 1
+          color: color
+          width:
+            value: 1
+          borderStyle: 1
+        textDirection: 1
+        indentEnd:
+          value: 7.386281948385884
+        borderLeft:
+          padding:
+            value: 1
+          color: color
+          width:
+            value: 1
+          borderStyle: 1
+        spaceAbove:
+          value: 7.386281948385884
+        keepWithNext:
+          value: true
+        borderRight:
+          padding:
+            value: 1
+          color: color
+          width:
+            value: 1
+          borderStyle: 1
+        borderBetween:
+          padding:
+            value: 1
+          color: color
+          width:
+            value: 1
+          borderStyle: 1
+        keepLinesTogether:
+          value: true
+        tabStops:
+        - offset:
+            value: 7.386281948385884
+          alignment: 6
+        - offset:
+            value: 7.386281948385884
+          alignment: 6
+        alignment: 4
+        borderBottom:
+          padding:
+            value: 1
+          color: color
+          width:
+            value: 1
+          borderStyle: 1
+        avoidWidowAndOrphan:
+          value: true
+        namedStyleType: 2
+        spaceBelow:
+          value: 7.386281948385884
+      properties:
+        namedStyleType:
+          format: enum
+          type: integer
+        alignment:
+          format: enum
+          type: integer
+        lineSpacing:
+          $ref: '#/components/schemas/DoubleValue'
+        textDirection:
+          format: enum
+          type: integer
+        spaceAbove:
+          $ref: '#/components/schemas/DoubleValue'
+        spaceBelow:
+          $ref: '#/components/schemas/DoubleValue'
+        borderBetween:
+          $ref: '#/components/schemas/ParagraphBorder'
+        borderTop:
+          $ref: '#/components/schemas/ParagraphBorder'
+        borderBottom:
+          $ref: '#/components/schemas/ParagraphBorder'
+        borderLeft:
+          $ref: '#/components/schemas/ParagraphBorder'
+        borderRight:
+          $ref: '#/components/schemas/ParagraphBorder'
+        indentFirstLine:
+          $ref: '#/components/schemas/DoubleValue'
+        indentStart:
+          $ref: '#/components/schemas/DoubleValue'
+        indentEnd:
+          $ref: '#/components/schemas/DoubleValue'
+        tabStops:
+          items:
+            $ref: '#/components/schemas/TabStop'
+          type: array
+        keepLinesTogether:
+          $ref: '#/components/schemas/BoolValue'
+        keepWithNext:
+          $ref: '#/components/schemas/BoolValue'
+        avoidWidowAndOrphan:
+          $ref: '#/components/schemas/BoolValue'
+        shading:
+          $ref: '#/components/schemas/Shading'
+      type: object
+    PhoneNumberFieldProperty:
+      properties: {}
+      type: object
+    ProgressFieldProperty:
+      example:
+        decimalPlaces: 1
+      properties:
+        decimalPlaces:
+          format: int32
+          type: integer
+      type: object
+    Range:
+      example:
+        startIndex: 0
+        length: 6
+      properties:
+        startIndex:
+          format: uint32
+          type: integer
+        length:
+          format: uint32
+          type: integer
+      required:
+      - length
+      - startIndex
+      type: object
+    RecordResource:
+      example:
+        recordID: recordID
+        createTime: 7
+        values:
+          key: null
+        updateTime: 9
+      properties:
+        recordID:
+          type: string
+        createTime:
+          format: int64
+          type: integer
+        updateTime:
+          format: int64
+          type: integer
+        values:
+          additionalProperties:
+            $ref: '#/components/schemas/GoogleProtobufValue'
           type: object
-      required:
-      - msg
-      - ret
       type: object
-    OpenResponse2:
+    RefreshTokenRsp:
       example:
-        ret: 0
-        msg: msg
-        data:
-          document:
-            children:
-            - null
-            - null
-            property:
-              key: null
-            end: 1
-            text: text
-            type: type
-            begin: 6
+        expiresIn: 6
+        scope: scope
+        accessToken: accessToken
+        tokenType: tokenType
+        userId: userId
       properties:
-        ret:
-          format: int32
-          type: integer
-        msg:
+        accessToken:
           type: string
-        data:
-          $ref: '#/components/schemas/GetDocFullTextRsp'
-      required:
-      - msg
-      - ret
+        tokenType:
+          type: string
+        expiresIn:
+          format: int64
+          type: integer
+        userId:
+          type: string
+        scope:
+          type: string
       type: object
-    OpenResponse4:
+    ReplaceTextRequest:
+      example:
+        range:
+        - startIndex: 0
+          length: 6
+        - startIndex: 0
+          length: 6
+        text: text
+      properties:
+        text:
+          type: string
+        range:
+          items:
+            $ref: '#/components/schemas/Range'
+          type: array
+      type: object
+    Request:
+      example:
+        insertText:
+          location:
+            index: 1
+          text: text
+        replaceText:
+          range:
+          - startIndex: 0
+            length: 6
+          - startIndex: 0
+            length: 6
+          text: text
+        insertImage:
+          imageID: imageID
+          addonSource: 2
+          extraData: extraData
+          width: 5
+          location:
+            index: 1
+          anchorID: anchorID
+          addonID: addonID
+          height: 5
+        insertTable:
+          location:
+            index: 1
+          rows: 7
+          cols: 9
+        insertPageBreak:
+          location:
+            index: 1
+        insertNumbering:
+          paragraphIndex: 3
+          pStyle:
+            indentFirstLine:
+              value: 7.386281948385884
+            shading:
+              backgroundColor: backgroundColor
+            indentStart:
+              value: 7.386281948385884
+            lineSpacing:
+              value: 7.386281948385884
+            borderTop:
+              padding:
+                value: 1
+              color: color
+              width:
+                value: 1
+              borderStyle: 1
+            textDirection: 1
+            indentEnd:
+              value: 7.386281948385884
+            borderLeft:
+              padding:
+                value: 1
+              color: color
+              width:
+                value: 1
+              borderStyle: 1
+            spaceAbove:
+              value: 7.386281948385884
+            keepWithNext:
+              value: true
+            borderRight:
+              padding:
+                value: 1
+              color: color
+              width:
+                value: 1
+              borderStyle: 1
+            borderBetween:
+              padding:
+                value: 1
+              color: color
+              width:
+                value: 1
+              borderStyle: 1
+            keepLinesTogether:
+              value: true
+            tabStops:
+            - offset:
+                value: 7.386281948385884
+              alignment: 6
+            - offset:
+                value: 7.386281948385884
+              alignment: 6
+            alignment: 4
+            borderBottom:
+              padding:
+                value: 1
+              color: color
+              width:
+                value: 1
+              borderStyle: 1
+            avoidWidowAndOrphan:
+              value: true
+            namedStyleType: 2
+            spaceBelow:
+              value: 7.386281948385884
+          range:
+            startIndex: 0
+            length: 6
+          abstractNumID: abstractNumID
+        deleteContent:
+          range:
+            startIndex: 0
+            length: 6
+        insertWebBlock:
+          embedURL: embedURL
+          displayText: displayText
+          lockAspectRatio: true
+          extraData: extraData
+          width: 7
+          addonType: 4
+          location:
+            index: 1
+          originalURL: originalURL
+          anchorID: anchorID
+          addonID: addonID
+          height: 1
+      properties:
+        replaceText:
+          $ref: '#/components/schemas/ReplaceTextRequest'
+        insertText:
+          $ref: '#/components/schemas/InsertTextRequest'
+        deleteContent:
+          $ref: '#/components/schemas/DeleteContentRequest'
+        insertImage:
+          $ref: '#/components/schemas/InsertImageRequest'
+        insertPageBreak:
+          $ref: '#/components/schemas/InsertPageBreakRequest'
+        insertTable:
+          $ref: '#/components/schemas/InsertTableRequest'
+        insertNumbering:
+          $ref: '#/components/schemas/InsertNumberingRequest'
+        insertWebBlock:
+          $ref: '#/components/schemas/InsertWebBlockRequest'
+      type: object
+    ResourcesAPIResponse1:
       example:
         ret: 0
         msg: msg
@@ -1902,12 +2452,85 @@ components:
         msg:
           type: string
         data:
-          $ref: '#/components/schemas/Response1'
-      required:
-      - msg
-      - ret
+          $ref: '#/components/schemas/UploadImageRsp'
       type: object
-    OpenResponse5:
+    SelectFieldProperty:
+      example:
+        options:
+        - style: 1
+          id: id
+          text: text
+        - style: 1
+          id: id
+          text: text
+        isQuickAdd: true
+        isMultiple: true
+      properties:
+        isMultiple:
+          type: boolean
+        isQuickAdd:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+      type: object
+    Shading:
+      example:
+        backgroundColor: backgroundColor
+      properties:
+        backgroundColor:
+          type: string
+      type: object
+    SheetData:
+      example:
+        sheetID: sheetID
+        isVisible: true
+        title: title
+      properties:
+        sheetID:
+          type: string
+        title:
+          type: string
+        isVisible:
+          type: boolean
+      type: object
+    SheetProperties:
+      example:
+        sheetID: sheetID
+        index: 6
+        title: title
+      properties:
+        sheetID:
+          type: string
+        title:
+          type: string
+        index:
+          format: int32
+          type: integer
+      type: object
+    SingleSelectFieldProperty:
+      example:
+        options:
+        - style: 1
+          id: id
+          text: text
+        - style: 1
+          id: id
+          text: text
+        isQuickAdd: true
+        isMultiple: true
+      properties:
+        isMultiple:
+          type: boolean
+        isQuickAdd:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+      type: object
+    SmartsheetAPIResponse1:
       example:
         ret: 0
         msg: msg
@@ -1926,11 +2549,8 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/EditSubSheetResponse'
-      required:
-      - msg
-      - ret
       type: object
-    OpenResponse6:
+    SmartsheetAPIResponse2:
       example:
         ret: 0
         msg: msg
@@ -1950,11 +2570,8 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/GetSubSheetResponse'
-      required:
-      - msg
-      - ret
       type: object
-    OpenResponse7:
+    SmartsheetAPIResponse3:
       example:
         ret: 0
         msg: msg
@@ -2314,440 +2931,6 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/SmartsheetResourceResponse'
-      required:
-      - msg
-      - ret
-      type: object
-    Option:
-      example:
-        style: 1
-        id: id
-        text: text
-      properties:
-        id:
-          type: string
-        text:
-          type: string
-        style:
-          format: int32
-          type: integer
-      type: object
-    ParagraphBorder:
-      example:
-        padding:
-          value: 1
-        color: color
-        width:
-          value: 1
-        borderStyle: 1
-      properties:
-        color:
-          type: string
-        width:
-          $ref: '#/components/schemas/UInt32Value'
-        padding:
-          $ref: '#/components/schemas/UInt32Value'
-        borderStyle:
-          format: enum
-          type: integer
-      type: object
-    ParagraphStyle:
-      example:
-        indentFirstLine:
-          value: 7.386281948385884
-        shading:
-          backgroundColor: backgroundColor
-        indentStart:
-          value: 7.386281948385884
-        lineSpacing:
-          value: 7.386281948385884
-        borderTop:
-          padding:
-            value: 1
-          color: color
-          width:
-            value: 1
-          borderStyle: 1
-        textDirection: 1
-        indentEnd:
-          value: 7.386281948385884
-        borderLeft:
-          padding:
-            value: 1
-          color: color
-          width:
-            value: 1
-          borderStyle: 1
-        spaceAbove:
-          value: 7.386281948385884
-        keepWithNext:
-          value: true
-        borderRight:
-          padding:
-            value: 1
-          color: color
-          width:
-            value: 1
-          borderStyle: 1
-        borderBetween:
-          padding:
-            value: 1
-          color: color
-          width:
-            value: 1
-          borderStyle: 1
-        keepLinesTogether:
-          value: true
-        tabStops:
-        - offset:
-            value: 7.386281948385884
-          alignment: 6
-        - offset:
-            value: 7.386281948385884
-          alignment: 6
-        alignment: 4
-        borderBottom:
-          padding:
-            value: 1
-          color: color
-          width:
-            value: 1
-          borderStyle: 1
-        avoidWidowAndOrphan:
-          value: true
-        namedStyleType: 2
-        spaceBelow:
-          value: 7.386281948385884
-      properties:
-        namedStyleType:
-          format: enum
-          type: integer
-        alignment:
-          format: enum
-          type: integer
-        lineSpacing:
-          $ref: '#/components/schemas/DoubleValue'
-        textDirection:
-          format: enum
-          type: integer
-        spaceAbove:
-          $ref: '#/components/schemas/DoubleValue'
-        spaceBelow:
-          $ref: '#/components/schemas/DoubleValue'
-        borderBetween:
-          $ref: '#/components/schemas/ParagraphBorder'
-        borderTop:
-          $ref: '#/components/schemas/ParagraphBorder'
-        borderBottom:
-          $ref: '#/components/schemas/ParagraphBorder'
-        borderLeft:
-          $ref: '#/components/schemas/ParagraphBorder'
-        borderRight:
-          $ref: '#/components/schemas/ParagraphBorder'
-        indentFirstLine:
-          $ref: '#/components/schemas/DoubleValue'
-        indentStart:
-          $ref: '#/components/schemas/DoubleValue'
-        indentEnd:
-          $ref: '#/components/schemas/DoubleValue'
-        tabStops:
-          items:
-            $ref: '#/components/schemas/TabStop'
-          type: array
-        keepLinesTogether:
-          $ref: '#/components/schemas/BoolValue'
-        keepWithNext:
-          $ref: '#/components/schemas/BoolValue'
-        avoidWidowAndOrphan:
-          $ref: '#/components/schemas/BoolValue'
-        shading:
-          $ref: '#/components/schemas/Shading'
-      type: object
-    PhoneNumberFieldProperty:
-      properties: {}
-      type: object
-    ProgressFieldProperty:
-      example:
-        decimalPlaces: 1
-      properties:
-        decimalPlaces:
-          format: int32
-          type: integer
-      type: object
-    Range:
-      example:
-        startIndex: 0
-        length: 6
-      properties:
-        startIndex:
-          format: uint32
-          type: integer
-        length:
-          format: uint32
-          type: integer
-      required:
-      - length
-      - startIndex
-      type: object
-    RecordResource:
-      example:
-        recordID: recordID
-        createTime: 7
-        values:
-          key: null
-        updateTime: 9
-      properties:
-        recordID:
-          type: string
-        createTime:
-          format: int64
-          type: integer
-        updateTime:
-          format: int64
-          type: integer
-        values:
-          additionalProperties:
-            $ref: '#/components/schemas/GoogleProtobufValue'
-          type: object
-      type: object
-    ReplaceTextRequest:
-      example:
-        range:
-        - startIndex: 0
-          length: 6
-        - startIndex: 0
-          length: 6
-        text: text
-      properties:
-        text:
-          type: string
-        range:
-          items:
-            $ref: '#/components/schemas/Range'
-          type: array
-      type: object
-    Request:
-      example:
-        insertText:
-          location:
-            index: 1
-          text: text
-        replaceText:
-          range:
-          - startIndex: 0
-            length: 6
-          - startIndex: 0
-            length: 6
-          text: text
-        insertImage:
-          imageID: imageID
-          addonSource: 2
-          extraData: extraData
-          width: 5
-          location:
-            index: 1
-          anchorID: anchorID
-          addonID: addonID
-          height: 5
-        insertTable:
-          location:
-            index: 1
-          rows: 7
-          cols: 9
-        insertPageBreak:
-          location:
-            index: 1
-        insertNumbering:
-          paragraphIndex: 3
-          pStyle:
-            indentFirstLine:
-              value: 7.386281948385884
-            shading:
-              backgroundColor: backgroundColor
-            indentStart:
-              value: 7.386281948385884
-            lineSpacing:
-              value: 7.386281948385884
-            borderTop:
-              padding:
-                value: 1
-              color: color
-              width:
-                value: 1
-              borderStyle: 1
-            textDirection: 1
-            indentEnd:
-              value: 7.386281948385884
-            borderLeft:
-              padding:
-                value: 1
-              color: color
-              width:
-                value: 1
-              borderStyle: 1
-            spaceAbove:
-              value: 7.386281948385884
-            keepWithNext:
-              value: true
-            borderRight:
-              padding:
-                value: 1
-              color: color
-              width:
-                value: 1
-              borderStyle: 1
-            borderBetween:
-              padding:
-                value: 1
-              color: color
-              width:
-                value: 1
-              borderStyle: 1
-            keepLinesTogether:
-              value: true
-            tabStops:
-            - offset:
-                value: 7.386281948385884
-              alignment: 6
-            - offset:
-                value: 7.386281948385884
-              alignment: 6
-            alignment: 4
-            borderBottom:
-              padding:
-                value: 1
-              color: color
-              width:
-                value: 1
-              borderStyle: 1
-            avoidWidowAndOrphan:
-              value: true
-            namedStyleType: 2
-            spaceBelow:
-              value: 7.386281948385884
-          range:
-            startIndex: 0
-            length: 6
-          abstractNumID: abstractNumID
-        deleteContent:
-          range:
-            startIndex: 0
-            length: 6
-        insertWebBlock:
-          embedURL: embedURL
-          displayText: displayText
-          lockAspectRatio: true
-          extraData: extraData
-          width: 7
-          addonType: 4
-          location:
-            index: 1
-          originalURL: originalURL
-          anchorID: anchorID
-          addonID: addonID
-          height: 1
-      properties:
-        replaceText:
-          $ref: '#/components/schemas/ReplaceTextRequest'
-        insertText:
-          $ref: '#/components/schemas/InsertTextRequest'
-        deleteContent:
-          $ref: '#/components/schemas/DeleteContentRequest'
-        insertImage:
-          $ref: '#/components/schemas/InsertImageRequest'
-        insertPageBreak:
-          $ref: '#/components/schemas/InsertPageBreakRequest'
-        insertTable:
-          $ref: '#/components/schemas/InsertTableRequest'
-        insertNumbering:
-          $ref: '#/components/schemas/InsertNumberingRequest'
-        insertWebBlock:
-          $ref: '#/components/schemas/InsertWebBlockRequest'
-      type: object
-    Response1:
-      example:
-        imageID: imageID
-      properties:
-        imageID:
-          type: string
-      required:
-      - imageID
-      type: object
-    SelectFieldProperty:
-      example:
-        options:
-        - style: 1
-          id: id
-          text: text
-        - style: 1
-          id: id
-          text: text
-        isQuickAdd: true
-        isMultiple: true
-      properties:
-        isMultiple:
-          type: boolean
-        isQuickAdd:
-          type: boolean
-        options:
-          items:
-            $ref: '#/components/schemas/Option'
-          type: array
-      type: object
-    Shading:
-      example:
-        backgroundColor: backgroundColor
-      properties:
-        backgroundColor:
-          type: string
-      type: object
-    SheetData:
-      example:
-        sheetID: sheetID
-        isVisible: true
-        title: title
-      properties:
-        sheetID:
-          type: string
-        title:
-          type: string
-        isVisible:
-          type: boolean
-      type: object
-    SheetProperties:
-      example:
-        sheetID: sheetID
-        index: 6
-        title: title
-      properties:
-        sheetID:
-          type: string
-        title:
-          type: string
-        index:
-          format: int32
-          type: integer
-      type: object
-    SingleSelectFieldProperty:
-      example:
-        options:
-        - style: 1
-          id: id
-          text: text
-        - style: 1
-          id: id
-          text: text
-        isQuickAdd: true
-        isMultiple: true
-      properties:
-        isMultiple:
-          type: boolean
-        isQuickAdd:
-          type: boolean
-        options:
-          items:
-            $ref: '#/components/schemas/Option'
-          type: array
       type: object
     SmartsheetAddSheetReq:
       example:
@@ -2780,7 +2963,7 @@ components:
       properties: {}
       type: object
     SmartsheetResourceRequest:
-      description: SmartsheetResourceRequest 对第三方开发者提供的请求
+      description: SmartsheetResourceRequest 处理 Smartsheet 视图、记录、字段资源的请求参数
       example:
         addRecords:
           records:
@@ -3068,7 +3251,7 @@ components:
       - sheetID
       type: object
     SmartsheetResourceResponse:
-      description: SmartsheetResourceResponse 对第三方开发者的响应
+      description: SmartsheetResourceResponse 处理 Smartsheet 视图、记录、字段资源的响应参数
       example:
         getFields:
           next: 2
@@ -3760,6 +3943,14 @@ components:
           items:
             $ref: '#/components/schemas/CommonRecord'
           type: array
+      type: object
+    UploadImageRsp:
+      description: UploadImageRsp 上传图片接口响应参数
+      example:
+        imageID: imageID
+      properties:
+        imageID:
+          type: string
       type: object
     UrlFieldProperty:
       example:

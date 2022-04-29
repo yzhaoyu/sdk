@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// SmartsheetResourceRequest SmartsheetResourceRequest 对第三方开发者提供的请求
+// SmartsheetResourceRequest SmartsheetResourceRequest 处理 Smartsheet 视图、记录、字段资源的请求参数
 type SmartsheetResourceRequest struct {
 	FileID string `json:"fileID"`
 	SheetID string `json:"sheetID"`

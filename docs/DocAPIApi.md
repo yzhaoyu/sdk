@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## DocAPIBatchUpdateDocData
 
-> OpenResponse1 DocAPIBatchUpdateDocData(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).BatchUpdateDocDataReq(batchUpdateDocDataReq).Execute()
+> DocAPIResponse1 DocAPIBatchUpdateDocData(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).BatchUpdateDocDataReq(batchUpdateDocDataReq).Execute()
 
 
 
@@ -43,7 +43,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DocAPIApi.DocAPIBatchUpdateDocData``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DocAPIBatchUpdateDocData`: OpenResponse1
+    // response from `DocAPIBatchUpdateDocData`: DocAPIResponse1
     fmt.Fprintf(os.Stdout, "Response from `DocAPIApi.DocAPIBatchUpdateDocData`: %v\n", resp)
 }
 ```
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OpenResponse1**](OpenResponse1.md)
+[**DocAPIResponse1**](DocAPIResponse1.md)
 
 ### Authorization
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: text/plain, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## DocAPIGetDocFullText
 
-> OpenResponse2 DocAPIGetDocFullText(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
+> DocAPIResponse2 DocAPIGetDocFullText(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
 
 
 
@@ -120,7 +120,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DocAPIApi.DocAPIGetDocFullText``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DocAPIGetDocFullText`: OpenResponse2
+    // response from `DocAPIGetDocFullText`: DocAPIResponse2
     fmt.Fprintf(os.Stdout, "Response from `DocAPIApi.DocAPIGetDocFullText`: %v\n", resp)
 }
 ```
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OpenResponse2**](OpenResponse2.md)
+[**DocAPIResponse2**](DocAPIResponse2.md)
 
 ### Authorization
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: text/plain, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

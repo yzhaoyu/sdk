@@ -17,103 +17,102 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 
-// DocAPIApiService DocAPIApi service
-type DocAPIApiService service
+// OAuthAPIApiService OAuthAPIApi service
+type OAuthAPIApiService service
 
-type ApiDocAPIBatchUpdateDocDataRequest struct {
+type ApiOAuthAPIGetTokenRequest struct {
 	ctx context.Context
-	ApiService *DocAPIApiService
-	fileID string
-	accessToken *string
+	ApiService *OAuthAPIApiService
 	clientId *string
-	openId *string
-	batchUpdateDocDataReq *BatchUpdateDocDataReq
+	clientSecret *string
+	redirectUri *string
+	grantType *string
+	code *string
 }
 
-// 访问令牌，用于标识用户和接口鉴权
-func (r ApiDocAPIBatchUpdateDocDataRequest) AccessToken(accessToken string) ApiDocAPIBatchUpdateDocDataRequest {
-	r.accessToken = &accessToken
-	return r
-}
-
-// 应用 ID，用于标识应用和接口鉴权
-func (r ApiDocAPIBatchUpdateDocDataRequest) ClientId(clientId string) ApiDocAPIBatchUpdateDocDataRequest {
+func (r ApiOAuthAPIGetTokenRequest) ClientId(clientId string) ApiOAuthAPIGetTokenRequest {
 	r.clientId = &clientId
 	return r
 }
 
-// 开放平台用户 ID，用于标识用户和接口鉴权
-func (r ApiDocAPIBatchUpdateDocDataRequest) OpenId(openId string) ApiDocAPIBatchUpdateDocDataRequest {
-	r.openId = &openId
+func (r ApiOAuthAPIGetTokenRequest) ClientSecret(clientSecret string) ApiOAuthAPIGetTokenRequest {
+	r.clientSecret = &clientSecret
 	return r
 }
 
-func (r ApiDocAPIBatchUpdateDocDataRequest) BatchUpdateDocDataReq(batchUpdateDocDataReq BatchUpdateDocDataReq) ApiDocAPIBatchUpdateDocDataRequest {
-	r.batchUpdateDocDataReq = &batchUpdateDocDataReq
+func (r ApiOAuthAPIGetTokenRequest) RedirectUri(redirectUri string) ApiOAuthAPIGetTokenRequest {
+	r.redirectUri = &redirectUri
 	return r
 }
 
-func (r ApiDocAPIBatchUpdateDocDataRequest) Execute() (*DocAPIResponse1, *http.Response, error) {
-	return r.ApiService.DocAPIBatchUpdateDocDataExecute(r)
+func (r ApiOAuthAPIGetTokenRequest) GrantType(grantType string) ApiOAuthAPIGetTokenRequest {
+	r.grantType = &grantType
+	return r
+}
+
+func (r ApiOAuthAPIGetTokenRequest) Code(code string) ApiOAuthAPIGetTokenRequest {
+	r.code = &code
+	return r
+}
+
+func (r ApiOAuthAPIGetTokenRequest) Execute() (*OAuthAPIResponse1, *http.Response, error) {
+	return r.ApiService.OAuthAPIGetTokenExecute(r)
 }
 
 /*
-DocAPIBatchUpdateDocData Method for DocAPIBatchUpdateDocData
-
-Three required req headers
+OAuthAPIGetToken Method for OAuthAPIGetToken
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param fileID
- @return ApiDocAPIBatchUpdateDocDataRequest
+ @return ApiOAuthAPIGetTokenRequest
 */
-func (a *DocAPIApiService) DocAPIBatchUpdateDocData(ctx context.Context, fileID string) ApiDocAPIBatchUpdateDocDataRequest {
-	return ApiDocAPIBatchUpdateDocDataRequest{
+func (a *OAuthAPIApiService) OAuthAPIGetToken(ctx context.Context) ApiOAuthAPIGetTokenRequest {
+	return ApiOAuthAPIGetTokenRequest{
 		ApiService: a,
 		ctx: ctx,
-		fileID: fileID,
 	}
 }
 
 // Execute executes the request
-//  @return DocAPIResponse1
-func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdateDocDataRequest) (*DocAPIResponse1, *http.Response, error) {
+//  @return OAuthAPIResponse1
+func (a *OAuthAPIApiService) OAuthAPIGetTokenExecute(r ApiOAuthAPIGetTokenRequest) (*OAuthAPIResponse1, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DocAPIResponse1
+		localVarReturnValue  *OAuthAPIResponse1
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocAPIApiService.DocAPIBatchUpdateDocData")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OAuthAPIApiService.OAuthAPIGetToken")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/openapi/doc/v3/{fileID}/batchUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"fileID"+"}", url.PathEscape(parameterToString(r.fileID, "")), -1)
+	localVarPath := localBasePath + "/oauth/v2/token"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.accessToken == nil {
-		return localVarReturnValue, nil, reportError("accessToken is required and must be specified")
-	}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
-	if r.openId == nil {
-		return localVarReturnValue, nil, reportError("openId is required and must be specified")
-	}
-	if r.batchUpdateDocDataReq == nil {
-		return localVarReturnValue, nil, reportError("batchUpdateDocDataReq is required and must be specified")
-	}
 
+	if r.clientId != nil {
+		localVarQueryParams.Add("clientId", parameterToString(*r.clientId, ""))
+	}
+	if r.clientSecret != nil {
+		localVarQueryParams.Add("clientSecret", parameterToString(*r.clientSecret, ""))
+	}
+	if r.redirectUri != nil {
+		localVarQueryParams.Add("redirectUri", parameterToString(*r.redirectUri, ""))
+	}
+	if r.grantType != nil {
+		localVarQueryParams.Add("grantType", parameterToString(*r.grantType, ""))
+	}
+	if r.code != nil {
+		localVarQueryParams.Add("code", parameterToString(*r.code, ""))
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -129,11 +128,6 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarHeaderParams["Access-Token"] = parameterToString(*r.accessToken, "")
-	localVarHeaderParams["Client-Id"] = parameterToString(*r.clientId, "")
-	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
-	// body params
-	localVarPostBody = r.batchUpdateDocDataReq
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -178,85 +172,85 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDocAPIGetDocFullTextRequest struct {
+type ApiOAuthAPIRefreshTokenRequest struct {
 	ctx context.Context
-	ApiService *DocAPIApiService
-	fileID string
-	accessToken *string
+	ApiService *OAuthAPIApiService
 	clientId *string
-	openId *string
+	clientSecret *string
+	grantType *string
+	refreshToken *string
 }
 
-// 访问令牌，用于标识用户和接口鉴权
-func (r ApiDocAPIGetDocFullTextRequest) AccessToken(accessToken string) ApiDocAPIGetDocFullTextRequest {
-	r.accessToken = &accessToken
-	return r
-}
-
-// 应用 ID，用于标识应用和接口鉴权
-func (r ApiDocAPIGetDocFullTextRequest) ClientId(clientId string) ApiDocAPIGetDocFullTextRequest {
+func (r ApiOAuthAPIRefreshTokenRequest) ClientId(clientId string) ApiOAuthAPIRefreshTokenRequest {
 	r.clientId = &clientId
 	return r
 }
 
-// 开放平台用户 ID，用于标识用户和接口鉴权
-func (r ApiDocAPIGetDocFullTextRequest) OpenId(openId string) ApiDocAPIGetDocFullTextRequest {
-	r.openId = &openId
+func (r ApiOAuthAPIRefreshTokenRequest) ClientSecret(clientSecret string) ApiOAuthAPIRefreshTokenRequest {
+	r.clientSecret = &clientSecret
 	return r
 }
 
-func (r ApiDocAPIGetDocFullTextRequest) Execute() (*DocAPIResponse2, *http.Response, error) {
-	return r.ApiService.DocAPIGetDocFullTextExecute(r)
+func (r ApiOAuthAPIRefreshTokenRequest) GrantType(grantType string) ApiOAuthAPIRefreshTokenRequest {
+	r.grantType = &grantType
+	return r
+}
+
+func (r ApiOAuthAPIRefreshTokenRequest) RefreshToken(refreshToken string) ApiOAuthAPIRefreshTokenRequest {
+	r.refreshToken = &refreshToken
+	return r
+}
+
+func (r ApiOAuthAPIRefreshTokenRequest) Execute() (*OAuthAPIResponse3, *http.Response, error) {
+	return r.ApiService.OAuthAPIRefreshTokenExecute(r)
 }
 
 /*
-DocAPIGetDocFullText Method for DocAPIGetDocFullText
-
-Three required req headers
+OAuthAPIRefreshToken Method for OAuthAPIRefreshToken
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param fileID 文档 ID
- @return ApiDocAPIGetDocFullTextRequest
+ @return ApiOAuthAPIRefreshTokenRequest
 */
-func (a *DocAPIApiService) DocAPIGetDocFullText(ctx context.Context, fileID string) ApiDocAPIGetDocFullTextRequest {
-	return ApiDocAPIGetDocFullTextRequest{
+func (a *OAuthAPIApiService) OAuthAPIRefreshToken(ctx context.Context) ApiOAuthAPIRefreshTokenRequest {
+	return ApiOAuthAPIRefreshTokenRequest{
 		ApiService: a,
 		ctx: ctx,
-		fileID: fileID,
 	}
 }
 
 // Execute executes the request
-//  @return DocAPIResponse2
-func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullTextRequest) (*DocAPIResponse2, *http.Response, error) {
+//  @return OAuthAPIResponse3
+func (a *OAuthAPIApiService) OAuthAPIRefreshTokenExecute(r ApiOAuthAPIRefreshTokenRequest) (*OAuthAPIResponse3, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DocAPIResponse2
+		localVarReturnValue  *OAuthAPIResponse3
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocAPIApiService.DocAPIGetDocFullText")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OAuthAPIApiService.OAuthAPIRefreshToken")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/openapi/doc/v3/{fileID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"fileID"+"}", url.PathEscape(parameterToString(r.fileID, "")), -1)
+	localVarPath := localBasePath + "/oauth/v2/userinfo"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.accessToken == nil {
-		return localVarReturnValue, nil, reportError("accessToken is required and must be specified")
-	}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
-	if r.openId == nil {
-		return localVarReturnValue, nil, reportError("openId is required and must be specified")
-	}
 
+	if r.clientId != nil {
+		localVarQueryParams.Add("clientId", parameterToString(*r.clientId, ""))
+	}
+	if r.clientSecret != nil {
+		localVarQueryParams.Add("clientSecret", parameterToString(*r.clientSecret, ""))
+	}
+	if r.grantType != nil {
+		localVarQueryParams.Add("grantType", parameterToString(*r.grantType, ""))
+	}
+	if r.refreshToken != nil {
+		localVarQueryParams.Add("refreshToken", parameterToString(*r.refreshToken, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -274,9 +268,6 @@ func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullText
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarHeaderParams["Access-Token"] = parameterToString(*r.accessToken, "")
-	localVarHeaderParams["Client-Id"] = parameterToString(*r.clientId, "")
-	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

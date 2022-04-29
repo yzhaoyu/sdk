@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## SmartsheetAPIEditSmartsheetSubSheet
 
-> OpenResponse5 SmartsheetAPIEditSmartsheetSubSheet(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).EditSubSheetRequest(editSubSheetRequest).Execute()
+> SmartsheetAPIResponse1 SmartsheetAPIEditSmartsheetSubSheet(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).EditSubSheetRequest(editSubSheetRequest).Execute()
 
 
 
@@ -35,7 +35,7 @@ func main() {
     accessToken := "accessToken_example" // string | 访问令牌，用于标识用户和接口鉴权
     clientId := "clientId_example" // string | 应用 ID，用于标识应用和接口鉴权
     openId := "openId_example" // string | 开放平台用户 ID，用于标识用户和接口鉴权
-    editSubSheetRequest := *openapiclient.NewEditSubSheetRequest() // EditSubSheetRequest | 
+    editSubSheetRequest := *openapiclient.NewEditSubSheetRequest("FileID_example") // EditSubSheetRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -44,7 +44,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SmartsheetAPIApi.SmartsheetAPIEditSmartsheetSubSheet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SmartsheetAPIEditSmartsheetSubSheet`: OpenResponse5
+    // response from `SmartsheetAPIEditSmartsheetSubSheet`: SmartsheetAPIResponse1
     fmt.Fprintf(os.Stdout, "Response from `SmartsheetAPIApi.SmartsheetAPIEditSmartsheetSubSheet`: %v\n", resp)
 }
 ```
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OpenResponse5**](OpenResponse5.md)
+[**SmartsheetAPIResponse1**](SmartsheetAPIResponse1.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: text/plain, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## SmartsheetAPIGetSmartsheetSubSheet
 
-> OpenResponse6 SmartsheetAPIGetSmartsheetSubSheet(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
+> SmartsheetAPIResponse2 SmartsheetAPIGetSmartsheetSubSheet(ctx, fileID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Execute()
 
 
 
@@ -121,7 +121,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SmartsheetAPIApi.SmartsheetAPIGetSmartsheetSubSheet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SmartsheetAPIGetSmartsheetSubSheet`: OpenResponse6
+    // response from `SmartsheetAPIGetSmartsheetSubSheet`: SmartsheetAPIResponse2
     fmt.Fprintf(os.Stdout, "Response from `SmartsheetAPIApi.SmartsheetAPIGetSmartsheetSubSheet`: %v\n", resp)
 }
 ```
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OpenResponse6**](OpenResponse6.md)
+[**SmartsheetAPIResponse2**](SmartsheetAPIResponse2.md)
 
 ### Authorization
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: text/plain, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 ## SmartsheetAPIHandleSmartsheetResource
 
-> OpenResponse7 SmartsheetAPIHandleSmartsheetResource(ctx, fileID, sheetID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).SmartsheetResourceRequest(smartsheetResourceRequest).Execute()
+> SmartsheetAPIResponse3 SmartsheetAPIHandleSmartsheetResource(ctx, fileID, sheetID).AccessToken(accessToken).ClientId(clientId).OpenId(openId).SmartsheetResourceRequest(smartsheetResourceRequest).Execute()
 
 
 
@@ -199,7 +199,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SmartsheetAPIApi.SmartsheetAPIHandleSmartsheetResource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SmartsheetAPIHandleSmartsheetResource`: OpenResponse7
+    // response from `SmartsheetAPIHandleSmartsheetResource`: SmartsheetAPIResponse3
     fmt.Fprintf(os.Stdout, "Response from `SmartsheetAPIApi.SmartsheetAPIHandleSmartsheetResource`: %v\n", resp)
 }
 ```
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OpenResponse7**](OpenResponse7.md)
+[**SmartsheetAPIResponse3**](SmartsheetAPIResponse3.md)
 
 ### Authorization
 
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: text/plain, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
