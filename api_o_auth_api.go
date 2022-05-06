@@ -65,6 +65,8 @@ func (r ApiOAuthAPIGetTokenRequest) Execute() (*OAuthAPIResponse1, *http.Respons
 /*
 OAuthAPIGetToken Method for OAuthAPIGetToken
 
+GetToken 接口用于获取 Access Token
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOAuthAPIGetTokenRequest
 */
@@ -200,6 +202,8 @@ func (r ApiOAuthAPIRefreshTokenRequest) Execute() (*OAuthAPIResponse3, *http.Res
 
 /*
 OAuthAPIRefreshToken Method for OAuthAPIRefreshToken
+
+RefreshToken 接口用于刷新 Access Token
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOAuthAPIRefreshTokenRequest

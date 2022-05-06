@@ -29,7 +29,10 @@ type ApiDriveAPICreateFileRequest struct {
 	accessToken *string
 	clientId *string
 	openId *string
-	createFileReq *CreateFileReq
+	title *string
+	type_ *string
+	templateID *string
+	folderID *string
 }
 
 // 访问令牌，用于标识用户和接口鉴权
@@ -50,8 +53,23 @@ func (r ApiDriveAPICreateFileRequest) OpenId(openId string) ApiDriveAPICreateFil
 	return r
 }
 
-func (r ApiDriveAPICreateFileRequest) CreateFileReq(createFileReq CreateFileReq) ApiDriveAPICreateFileRequest {
-	r.createFileReq = &createFileReq
+func (r ApiDriveAPICreateFileRequest) Title(title string) ApiDriveAPICreateFileRequest {
+	r.title = &title
+	return r
+}
+
+func (r ApiDriveAPICreateFileRequest) Type_(type_ string) ApiDriveAPICreateFileRequest {
+	r.type_ = &type_
+	return r
+}
+
+func (r ApiDriveAPICreateFileRequest) TemplateID(templateID string) ApiDriveAPICreateFileRequest {
+	r.templateID = &templateID
+	return r
+}
+
+func (r ApiDriveAPICreateFileRequest) FolderID(folderID string) ApiDriveAPICreateFileRequest {
+	r.folderID = &folderID
 	return r
 }
 
@@ -62,7 +80,7 @@ func (r ApiDriveAPICreateFileRequest) Execute() (*DriveAPIResponse1, *http.Respo
 /*
 DriveAPICreateFile Method for DriveAPICreateFile
 
-新建文档
+CreateFile 接口用于新建文档
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDriveAPICreateFileRequest
@@ -103,12 +121,15 @@ func (a *DriveAPIApiService) DriveAPICreateFileExecute(r ApiDriveAPICreateFileRe
 	if r.openId == nil {
 		return localVarReturnValue, nil, reportError("openId is required and must be specified")
 	}
-	if r.createFileReq == nil {
-		return localVarReturnValue, nil, reportError("createFileReq is required and must be specified")
+	if r.title == nil {
+		return localVarReturnValue, nil, reportError("title is required and must be specified")
+	}
+	if r.type_ == nil {
+		return localVarReturnValue, nil, reportError("type_ is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{"application/x-www-form-urlencoded"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -127,8 +148,14 @@ func (a *DriveAPIApiService) DriveAPICreateFileExecute(r ApiDriveAPICreateFileRe
 	localVarHeaderParams["Access-Token"] = parameterToString(*r.accessToken, "")
 	localVarHeaderParams["Client-Id"] = parameterToString(*r.clientId, "")
 	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
-	// body params
-	localVarPostBody = r.createFileReq
+	localVarFormParams.Add("title", parameterToString(*r.title, ""))
+	localVarFormParams.Add("type", parameterToString(*r.type_, ""))
+	if r.templateID != nil {
+		localVarFormParams.Add("templateID", parameterToString(*r.templateID, ""))
+	}
+	if r.folderID != nil {
+		localVarFormParams.Add("folderID", parameterToString(*r.folderID, ""))
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

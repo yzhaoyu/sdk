@@ -64,7 +64,7 @@ func (r ApiSmartsheetAPIEditSmartsheetSubSheetRequest) Execute() (*SmartsheetAPI
 /*
 SmartsheetAPIEditSmartsheetSubSheet Method for SmartsheetAPIEditSmartsheetSubSheet
 
-Three required req headers
+EditSmartsheetSubSheet 接口用于编辑 Smartsheet 子表接口，可用于创建、删除 Smartsheet 子表
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileID
@@ -205,7 +205,7 @@ func (r ApiSmartsheetAPIGetSmartsheetSubSheetRequest) Execute() (*SmartsheetAPIR
 /*
 SmartsheetAPIGetSmartsheetSubSheet Method for SmartsheetAPIGetSmartsheetSubSheet
 
-Three required req headers
+GetSmartsheetSubSheet 接口用于获取 Smartsheet 子表信息接口，可以获取一篇在线文档下全部智能表的信息
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileID
@@ -348,7 +348,7 @@ func (r ApiSmartsheetAPIHandleSmartsheetResourceRequest) Execute() (*SmartsheetA
 /*
 SmartsheetAPIHandleSmartsheetResource Method for SmartsheetAPIHandleSmartsheetResource
 
-Three required req headers
+HandleSmartsheetResource 接口用于编辑 Smartsheet 资源接口，可以用于 Smartsheet 视图资源的增删查，记录和字段的增删改查
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileID

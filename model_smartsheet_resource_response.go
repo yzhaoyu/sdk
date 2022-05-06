@@ -17,18 +17,18 @@ import (
 
 // SmartsheetResourceResponse SmartsheetResourceResponse 处理 Smartsheet 视图、记录、字段资源的响应参数
 type SmartsheetResourceResponse struct {
-	GetViews *SmartsheetentityGetViewsResponse `json:"getViews,omitempty"`
-	GetRecords *SmartsheetentityGetRecordsResponse `json:"getRecords,omitempty"`
-	GetFields *SmartsheetentityGetFieldsResponse `json:"getFields,omitempty"`
-	AddView *SmartsheetentityAddViewResponse `json:"addView,omitempty"`
+	GetViews *SmartsheetGetViewsResponse `json:"getViews,omitempty"`
+	GetRecords *SmartsheetGetRecordsResponse `json:"getRecords,omitempty"`
+	GetFields *SmartsheetGetFieldsResponse `json:"getFields,omitempty"`
+	AddView *SmartsheetAddViewResponse `json:"addView,omitempty"`
 	// 删除指定表格指定子表中的指定视图回包
 	DeleteViews map[string]interface{} `json:"deleteViews,omitempty"`
-	AddRecords *SmartsheetentityAddRecordsResponse `json:"addRecords,omitempty"`
-	UpdateRecords *SmartsheetentityUpdateRecordsResponse `json:"updateRecords,omitempty"`
+	AddRecords *SmartsheetAddRecordsResponse `json:"addRecords,omitempty"`
+	UpdateRecords *SmartsheetUpdateRecordsResponse `json:"updateRecords,omitempty"`
 	// 删除指定表格和子表中的一到多条记录回包
 	DeleteRecords map[string]interface{} `json:"deleteRecords,omitempty"`
-	AddFields *SmartsheetentityAddFieldsResponse `json:"addFields,omitempty"`
-	UpdateFields *SmartsheetentityUpdateFieldsResponse `json:"updateFields,omitempty"`
+	AddFields *SmartsheetAddFieldsResponse `json:"addFields,omitempty"`
+	UpdateFields *SmartsheetUpdateFieldsResponse `json:"updateFields,omitempty"`
 	// 删除字段回包
 	DeleteFields map[string]interface{} `json:"deleteFields,omitempty"`
 }
@@ -51,9 +51,9 @@ func NewSmartsheetResourceResponseWithDefaults() *SmartsheetResourceResponse {
 }
 
 // GetGetViews returns the GetViews field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetGetViews() SmartsheetentityGetViewsResponse {
+func (o *SmartsheetResourceResponse) GetGetViews() SmartsheetGetViewsResponse {
 	if o == nil || o.GetViews == nil {
-		var ret SmartsheetentityGetViewsResponse
+		var ret SmartsheetGetViewsResponse
 		return ret
 	}
 	return *o.GetViews
@@ -61,7 +61,7 @@ func (o *SmartsheetResourceResponse) GetGetViews() SmartsheetentityGetViewsRespo
 
 // GetGetViewsOk returns a tuple with the GetViews field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetGetViewsOk() (*SmartsheetentityGetViewsResponse, bool) {
+func (o *SmartsheetResourceResponse) GetGetViewsOk() (*SmartsheetGetViewsResponse, bool) {
 	if o == nil || o.GetViews == nil {
 		return nil, false
 	}
@@ -77,15 +77,15 @@ func (o *SmartsheetResourceResponse) HasGetViews() bool {
 	return false
 }
 
-// SetGetViews gets a reference to the given SmartsheetentityGetViewsResponse and assigns it to the GetViews field.
-func (o *SmartsheetResourceResponse) SetGetViews(v SmartsheetentityGetViewsResponse) {
+// SetGetViews gets a reference to the given SmartsheetGetViewsResponse and assigns it to the GetViews field.
+func (o *SmartsheetResourceResponse) SetGetViews(v SmartsheetGetViewsResponse) {
 	o.GetViews = &v
 }
 
 // GetGetRecords returns the GetRecords field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetGetRecords() SmartsheetentityGetRecordsResponse {
+func (o *SmartsheetResourceResponse) GetGetRecords() SmartsheetGetRecordsResponse {
 	if o == nil || o.GetRecords == nil {
-		var ret SmartsheetentityGetRecordsResponse
+		var ret SmartsheetGetRecordsResponse
 		return ret
 	}
 	return *o.GetRecords
@@ -93,7 +93,7 @@ func (o *SmartsheetResourceResponse) GetGetRecords() SmartsheetentityGetRecordsR
 
 // GetGetRecordsOk returns a tuple with the GetRecords field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetGetRecordsOk() (*SmartsheetentityGetRecordsResponse, bool) {
+func (o *SmartsheetResourceResponse) GetGetRecordsOk() (*SmartsheetGetRecordsResponse, bool) {
 	if o == nil || o.GetRecords == nil {
 		return nil, false
 	}
@@ -109,15 +109,15 @@ func (o *SmartsheetResourceResponse) HasGetRecords() bool {
 	return false
 }
 
-// SetGetRecords gets a reference to the given SmartsheetentityGetRecordsResponse and assigns it to the GetRecords field.
-func (o *SmartsheetResourceResponse) SetGetRecords(v SmartsheetentityGetRecordsResponse) {
+// SetGetRecords gets a reference to the given SmartsheetGetRecordsResponse and assigns it to the GetRecords field.
+func (o *SmartsheetResourceResponse) SetGetRecords(v SmartsheetGetRecordsResponse) {
 	o.GetRecords = &v
 }
 
 // GetGetFields returns the GetFields field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetGetFields() SmartsheetentityGetFieldsResponse {
+func (o *SmartsheetResourceResponse) GetGetFields() SmartsheetGetFieldsResponse {
 	if o == nil || o.GetFields == nil {
-		var ret SmartsheetentityGetFieldsResponse
+		var ret SmartsheetGetFieldsResponse
 		return ret
 	}
 	return *o.GetFields
@@ -125,7 +125,7 @@ func (o *SmartsheetResourceResponse) GetGetFields() SmartsheetentityGetFieldsRes
 
 // GetGetFieldsOk returns a tuple with the GetFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetGetFieldsOk() (*SmartsheetentityGetFieldsResponse, bool) {
+func (o *SmartsheetResourceResponse) GetGetFieldsOk() (*SmartsheetGetFieldsResponse, bool) {
 	if o == nil || o.GetFields == nil {
 		return nil, false
 	}
@@ -141,15 +141,15 @@ func (o *SmartsheetResourceResponse) HasGetFields() bool {
 	return false
 }
 
-// SetGetFields gets a reference to the given SmartsheetentityGetFieldsResponse and assigns it to the GetFields field.
-func (o *SmartsheetResourceResponse) SetGetFields(v SmartsheetentityGetFieldsResponse) {
+// SetGetFields gets a reference to the given SmartsheetGetFieldsResponse and assigns it to the GetFields field.
+func (o *SmartsheetResourceResponse) SetGetFields(v SmartsheetGetFieldsResponse) {
 	o.GetFields = &v
 }
 
 // GetAddView returns the AddView field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetAddView() SmartsheetentityAddViewResponse {
+func (o *SmartsheetResourceResponse) GetAddView() SmartsheetAddViewResponse {
 	if o == nil || o.AddView == nil {
-		var ret SmartsheetentityAddViewResponse
+		var ret SmartsheetAddViewResponse
 		return ret
 	}
 	return *o.AddView
@@ -157,7 +157,7 @@ func (o *SmartsheetResourceResponse) GetAddView() SmartsheetentityAddViewRespons
 
 // GetAddViewOk returns a tuple with the AddView field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetAddViewOk() (*SmartsheetentityAddViewResponse, bool) {
+func (o *SmartsheetResourceResponse) GetAddViewOk() (*SmartsheetAddViewResponse, bool) {
 	if o == nil || o.AddView == nil {
 		return nil, false
 	}
@@ -173,8 +173,8 @@ func (o *SmartsheetResourceResponse) HasAddView() bool {
 	return false
 }
 
-// SetAddView gets a reference to the given SmartsheetentityAddViewResponse and assigns it to the AddView field.
-func (o *SmartsheetResourceResponse) SetAddView(v SmartsheetentityAddViewResponse) {
+// SetAddView gets a reference to the given SmartsheetAddViewResponse and assigns it to the AddView field.
+func (o *SmartsheetResourceResponse) SetAddView(v SmartsheetAddViewResponse) {
 	o.AddView = &v
 }
 
@@ -211,9 +211,9 @@ func (o *SmartsheetResourceResponse) SetDeleteViews(v map[string]interface{}) {
 }
 
 // GetAddRecords returns the AddRecords field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetAddRecords() SmartsheetentityAddRecordsResponse {
+func (o *SmartsheetResourceResponse) GetAddRecords() SmartsheetAddRecordsResponse {
 	if o == nil || o.AddRecords == nil {
-		var ret SmartsheetentityAddRecordsResponse
+		var ret SmartsheetAddRecordsResponse
 		return ret
 	}
 	return *o.AddRecords
@@ -221,7 +221,7 @@ func (o *SmartsheetResourceResponse) GetAddRecords() SmartsheetentityAddRecordsR
 
 // GetAddRecordsOk returns a tuple with the AddRecords field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetAddRecordsOk() (*SmartsheetentityAddRecordsResponse, bool) {
+func (o *SmartsheetResourceResponse) GetAddRecordsOk() (*SmartsheetAddRecordsResponse, bool) {
 	if o == nil || o.AddRecords == nil {
 		return nil, false
 	}
@@ -237,15 +237,15 @@ func (o *SmartsheetResourceResponse) HasAddRecords() bool {
 	return false
 }
 
-// SetAddRecords gets a reference to the given SmartsheetentityAddRecordsResponse and assigns it to the AddRecords field.
-func (o *SmartsheetResourceResponse) SetAddRecords(v SmartsheetentityAddRecordsResponse) {
+// SetAddRecords gets a reference to the given SmartsheetAddRecordsResponse and assigns it to the AddRecords field.
+func (o *SmartsheetResourceResponse) SetAddRecords(v SmartsheetAddRecordsResponse) {
 	o.AddRecords = &v
 }
 
 // GetUpdateRecords returns the UpdateRecords field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetUpdateRecords() SmartsheetentityUpdateRecordsResponse {
+func (o *SmartsheetResourceResponse) GetUpdateRecords() SmartsheetUpdateRecordsResponse {
 	if o == nil || o.UpdateRecords == nil {
-		var ret SmartsheetentityUpdateRecordsResponse
+		var ret SmartsheetUpdateRecordsResponse
 		return ret
 	}
 	return *o.UpdateRecords
@@ -253,7 +253,7 @@ func (o *SmartsheetResourceResponse) GetUpdateRecords() SmartsheetentityUpdateRe
 
 // GetUpdateRecordsOk returns a tuple with the UpdateRecords field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetUpdateRecordsOk() (*SmartsheetentityUpdateRecordsResponse, bool) {
+func (o *SmartsheetResourceResponse) GetUpdateRecordsOk() (*SmartsheetUpdateRecordsResponse, bool) {
 	if o == nil || o.UpdateRecords == nil {
 		return nil, false
 	}
@@ -269,8 +269,8 @@ func (o *SmartsheetResourceResponse) HasUpdateRecords() bool {
 	return false
 }
 
-// SetUpdateRecords gets a reference to the given SmartsheetentityUpdateRecordsResponse and assigns it to the UpdateRecords field.
-func (o *SmartsheetResourceResponse) SetUpdateRecords(v SmartsheetentityUpdateRecordsResponse) {
+// SetUpdateRecords gets a reference to the given SmartsheetUpdateRecordsResponse and assigns it to the UpdateRecords field.
+func (o *SmartsheetResourceResponse) SetUpdateRecords(v SmartsheetUpdateRecordsResponse) {
 	o.UpdateRecords = &v
 }
 
@@ -307,9 +307,9 @@ func (o *SmartsheetResourceResponse) SetDeleteRecords(v map[string]interface{}) 
 }
 
 // GetAddFields returns the AddFields field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetAddFields() SmartsheetentityAddFieldsResponse {
+func (o *SmartsheetResourceResponse) GetAddFields() SmartsheetAddFieldsResponse {
 	if o == nil || o.AddFields == nil {
-		var ret SmartsheetentityAddFieldsResponse
+		var ret SmartsheetAddFieldsResponse
 		return ret
 	}
 	return *o.AddFields
@@ -317,7 +317,7 @@ func (o *SmartsheetResourceResponse) GetAddFields() SmartsheetentityAddFieldsRes
 
 // GetAddFieldsOk returns a tuple with the AddFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetAddFieldsOk() (*SmartsheetentityAddFieldsResponse, bool) {
+func (o *SmartsheetResourceResponse) GetAddFieldsOk() (*SmartsheetAddFieldsResponse, bool) {
 	if o == nil || o.AddFields == nil {
 		return nil, false
 	}
@@ -333,15 +333,15 @@ func (o *SmartsheetResourceResponse) HasAddFields() bool {
 	return false
 }
 
-// SetAddFields gets a reference to the given SmartsheetentityAddFieldsResponse and assigns it to the AddFields field.
-func (o *SmartsheetResourceResponse) SetAddFields(v SmartsheetentityAddFieldsResponse) {
+// SetAddFields gets a reference to the given SmartsheetAddFieldsResponse and assigns it to the AddFields field.
+func (o *SmartsheetResourceResponse) SetAddFields(v SmartsheetAddFieldsResponse) {
 	o.AddFields = &v
 }
 
 // GetUpdateFields returns the UpdateFields field value if set, zero value otherwise.
-func (o *SmartsheetResourceResponse) GetUpdateFields() SmartsheetentityUpdateFieldsResponse {
+func (o *SmartsheetResourceResponse) GetUpdateFields() SmartsheetUpdateFieldsResponse {
 	if o == nil || o.UpdateFields == nil {
-		var ret SmartsheetentityUpdateFieldsResponse
+		var ret SmartsheetUpdateFieldsResponse
 		return ret
 	}
 	return *o.UpdateFields
@@ -349,7 +349,7 @@ func (o *SmartsheetResourceResponse) GetUpdateFields() SmartsheetentityUpdateFie
 
 // GetUpdateFieldsOk returns a tuple with the UpdateFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SmartsheetResourceResponse) GetUpdateFieldsOk() (*SmartsheetentityUpdateFieldsResponse, bool) {
+func (o *SmartsheetResourceResponse) GetUpdateFieldsOk() (*SmartsheetUpdateFieldsResponse, bool) {
 	if o == nil || o.UpdateFields == nil {
 		return nil, false
 	}
@@ -365,8 +365,8 @@ func (o *SmartsheetResourceResponse) HasUpdateFields() bool {
 	return false
 }
 
-// SetUpdateFields gets a reference to the given SmartsheetentityUpdateFieldsResponse and assigns it to the UpdateFields field.
-func (o *SmartsheetResourceResponse) SetUpdateFields(v SmartsheetentityUpdateFieldsResponse) {
+// SetUpdateFields gets a reference to the given SmartsheetUpdateFieldsResponse and assigns it to the UpdateFields field.
+func (o *SmartsheetResourceResponse) SetUpdateFields(v SmartsheetUpdateFieldsResponse) {
 	o.UpdateFields = &v
 }
 

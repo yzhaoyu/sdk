@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -84,6 +86,8 @@ No authorization required
 ## OAuthAPIRefreshToken
 
 > OAuthAPIResponse3 OAuthAPIRefreshToken(ctx).ClientId(clientId).ClientSecret(clientSecret).GrantType(grantType).RefreshToken(refreshToken).Execute()
+
+
 
 
 

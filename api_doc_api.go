@@ -64,7 +64,7 @@ func (r ApiDocAPIBatchUpdateDocDataRequest) Execute() (*DocAPIResponse1, *http.R
 /*
 DocAPIBatchUpdateDocData Method for DocAPIBatchUpdateDocData
 
-Three required req headers
+BatchUpdateDocData 接口用于更新 Doc 文档内容，支持批量更新
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileID
@@ -205,7 +205,7 @@ func (r ApiDocAPIGetDocFullTextRequest) Execute() (*DocAPIResponse2, *http.Respo
 /*
 DocAPIGetDocFullText Method for DocAPIGetDocFullText
 
-Three required req headers
+GetDocFullText 接口用于获取 Doc 文档内容
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileID 文档 ID

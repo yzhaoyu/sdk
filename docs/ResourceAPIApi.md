@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ResourceAPIUploadImage
 
-> ResourcesAPIResponse1 ResourceAPIUploadImage(ctx).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Body(body).Execute()
+> ResourcesAPIResponse1 ResourceAPIUploadImage(ctx).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Image(image).Execute()
 
 
 
@@ -32,11 +32,11 @@ func main() {
     accessToken := "accessToken_example" // string | 访问令牌，用于标识用户和接口鉴权
     clientId := "clientId_example" // string | 应用 ID，用于标识应用和接口鉴权
     openId := "openId_example" // string | 开放平台用户 ID，用于标识用户和接口鉴权
-    body := "body_example" // string | 
+    image := os.NewFile(1234, "some_file") // *os.File | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ResourceAPIApi.ResourceAPIUploadImage(context.Background()).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Body(body).Execute()
+    resp, r, err := apiClient.ResourceAPIApi.ResourceAPIUploadImage(context.Background()).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Image(image).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ResourceAPIApi.ResourceAPIUploadImage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
  **accessToken** | **string** | 访问令牌，用于标识用户和接口鉴权 | 
  **clientId** | **string** | 应用 ID，用于标识应用和接口鉴权 | 
  **openId** | **string** | 开放平台用户 ID，用于标识用户和接口鉴权 | 
- **body** | **string** |  | 
+ **image** | ***os.File** |  | 
 
 ### Return type
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data
 - **Accept**: text/plain
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

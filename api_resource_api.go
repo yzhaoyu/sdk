@@ -17,6 +17,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"os"
 )
 
 
@@ -29,7 +30,7 @@ type ApiResourceAPIUploadImageRequest struct {
 	accessToken *string
 	clientId *string
 	openId *string
-	body *string
+	image **os.File
 }
 
 // 访问令牌，用于标识用户和接口鉴权
@@ -50,8 +51,8 @@ func (r ApiResourceAPIUploadImageRequest) OpenId(openId string) ApiResourceAPIUp
 	return r
 }
 
-func (r ApiResourceAPIUploadImageRequest) Body(body string) ApiResourceAPIUploadImageRequest {
-	r.body = &body
+func (r ApiResourceAPIUploadImageRequest) Image(image *os.File) ApiResourceAPIUploadImageRequest {
+	r.image = &image
 	return r
 }
 
@@ -62,7 +63,7 @@ func (r ApiResourceAPIUploadImageRequest) Execute() (*ResourcesAPIResponse1, *ht
 /*
 ResourceAPIUploadImage Method for ResourceAPIUploadImage
 
-Three required req headers
+UploadImage 接口用于上传图片
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiResourceAPIUploadImageRequest
@@ -103,12 +104,12 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	if r.openId == nil {
 		return localVarReturnValue, nil, reportError("openId is required and must be specified")
 	}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.image == nil {
+		return localVarReturnValue, nil, reportError("image is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -127,8 +128,20 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	localVarHeaderParams["Access-Token"] = parameterToString(*r.accessToken, "")
 	localVarHeaderParams["Client-Id"] = parameterToString(*r.clientId, "")
 	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
-	// body params
-	localVarPostBody = r.body
+	var imageLocalVarFormFileName string
+	var imageLocalVarFileName     string
+	var imageLocalVarFileBytes    []byte
+
+	imageLocalVarFormFileName = "image"
+
+	imageLocalVarFile := *r.image
+	if imageLocalVarFile != nil {
+		fbs, _ := ioutil.ReadAll(imageLocalVarFile)
+		imageLocalVarFileBytes = fbs
+		imageLocalVarFileName = imageLocalVarFile.Name()
+		imageLocalVarFile.Close()
+	}
+	formFiles = append(formFiles, formFile{fileBytes: imageLocalVarFileBytes, fileName: imageLocalVarFileName, formFileName: imageLocalVarFormFileName})
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

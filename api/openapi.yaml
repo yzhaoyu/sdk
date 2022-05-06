@@ -22,6 +22,7 @@ tags:
 paths:
   /oauth/v2/token:
     get:
+      description: GetToken 接口用于获取 Access Token
       operationId: OAuthAPI_GetToken
       parameters:
       - explode: true
@@ -70,6 +71,7 @@ paths:
       - OAuthAPI
   /oauth/v2/userinfo:
     get:
+      description: RefreshToken 接口用于刷新 Access Token
       operationId: OAuthAPI_RefreshToken
       parameters:
       - explode: true
@@ -111,7 +113,7 @@ paths:
       - OAuthAPI
   /openapi/doc/v3/{fileID}:
     get:
-      description: Three required req headers
+      description: GetDocFullText 接口用于获取 Doc 文档内容
       operationId: DocAPI_GetDocFullText
       parameters:
       - description: 文档 ID
@@ -160,7 +162,7 @@ paths:
       - DocAPI
   /openapi/doc/v3/{fileID}/batchUpdate:
     post:
-      description: Three required req headers
+      description: BatchUpdateDocData 接口用于更新 Doc 文档内容，支持批量更新
       operationId: DocAPI_BatchUpdateDocData
       parameters:
       - explode: false
@@ -214,7 +216,7 @@ paths:
       - DocAPI
   /openapi/drive/v2/files:
     post:
-      description: 新建文档
+      description: CreateFile 接口用于新建文档
       operationId: DriveAPI_CreateFile
       parameters:
       - description: 访问令牌，用于标识用户和接口鉴权
@@ -243,9 +245,10 @@ paths:
         style: simple
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/CreateFileReq'
+        description: DriveAPI Content-Type
         required: true
       responses:
         "200":
@@ -261,7 +264,7 @@ paths:
       - DriveAPI
   /openapi/resources/v2/images:
     post:
-      description: Three required req headers
+      description: UploadImage 接口用于上传图片
       operationId: ResourceAPI_UploadImage
       parameters:
       - description: 访问令牌，用于标识用户和接口鉴权
@@ -290,9 +293,10 @@ paths:
         style: simple
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              type: string
+              $ref: '#/components/schemas/UploadImageReq'
+        description: ResourceAPI Content-Type
         required: true
       responses:
         "200":
@@ -308,7 +312,7 @@ paths:
       - ResourceAPI
   /openapi/smartbook/v2/files/{fileID}/sheets:
     get:
-      description: Three required req headers
+      description: GetSmartsheetSubSheet 接口用于获取 Smartsheet 子表信息接口，可以获取一篇在线文档下全部智能表的信息
       operationId: SmartsheetAPI_GetSmartsheetSubSheet
       parameters:
       - explode: false
@@ -355,7 +359,8 @@ paths:
       tags:
       - SmartsheetAPI
     post:
-      description: Three required req headers
+      description: EditSmartsheetSubSheet 接口用于编辑 Smartsheet 子表接口，可用于创建、删除 Smartsheet
+        子表
       operationId: SmartsheetAPI_EditSmartsheetSubSheet
       parameters:
       - explode: false
@@ -409,7 +414,8 @@ paths:
       - SmartsheetAPI
   /openapi/smartbook/v2/files/{fileID}/sheets/{sheetID}:
     post:
-      description: Three required req headers
+      description: HandleSmartsheetResource 接口用于编辑 Smartsheet 资源接口，可以用于 Smartsheet
+        视图资源的增删查，记录和字段的增删改查
       operationId: SmartsheetAPI_HandleSmartsheetResource
       parameters:
       - explode: false
@@ -727,12 +733,7 @@ components:
       properties: {}
       type: object
     CreateFileReq:
-      description: '************************************ DriveAPI Definition *****************************************'
-      example:
-        title: title
-        type: type
-        templateID: templateID
-        folderID: folderID
+      description: CreateFileReq 创建文档请求参数
       properties:
         title:
           type: string
@@ -1938,27 +1939,27 @@ components:
         sheetID:
           type: string
         getViews:
-          $ref: '#/components/schemas/smartsheetentity.GetViewsRequest'
+          $ref: '#/components/schemas/smartsheet.GetViewsRequest'
         getRecords:
-          $ref: '#/components/schemas/smartsheetentity.GetRecordsRequest'
+          $ref: '#/components/schemas/smartsheet.GetRecordsRequest'
         getFields:
-          $ref: '#/components/schemas/smartsheetentity.GetFieldsRequest'
+          $ref: '#/components/schemas/smartsheet.GetFieldsRequest'
         addView:
-          $ref: '#/components/schemas/smartsheetentity.AddViewRequest'
+          $ref: '#/components/schemas/smartsheet.AddViewRequest'
         deleteViews:
-          $ref: '#/components/schemas/smartsheetentity.DeleteViewsRequest'
+          $ref: '#/components/schemas/smartsheet.DeleteViewsRequest'
         addRecords:
-          $ref: '#/components/schemas/smartsheetentity.AddRecordsRequest'
+          $ref: '#/components/schemas/smartsheet.AddRecordsRequest'
         updateRecords:
-          $ref: '#/components/schemas/smartsheetentity.UpdateRecordsRequest'
+          $ref: '#/components/schemas/smartsheet.UpdateRecordsRequest'
         deleteRecords:
-          $ref: '#/components/schemas/smartsheetentity.DeleteRecordsRequest'
+          $ref: '#/components/schemas/smartsheet.DeleteRecordsRequest'
         addFields:
-          $ref: '#/components/schemas/smartsheetentity.AddFieldsRequest'
+          $ref: '#/components/schemas/smartsheet.AddFieldsRequest'
         updateFields:
-          $ref: '#/components/schemas/smartsheetentity.UpdateFieldsRequest'
+          $ref: '#/components/schemas/smartsheet.UpdateFieldsRequest'
         deleteFields:
-          $ref: '#/components/schemas/smartsheetentity.DeleteFieldsRequest'
+          $ref: '#/components/schemas/smartsheet.DeleteFieldsRequest'
       required:
       - fileID
       - sheetID
@@ -1967,29 +1968,29 @@ components:
       description: SmartsheetResourceResponse 处理 Smartsheet 视图、记录、字段资源的响应参数
       properties:
         getViews:
-          $ref: '#/components/schemas/smartsheetentity.GetViewsResponse'
+          $ref: '#/components/schemas/smartsheet.GetViewsResponse'
         getRecords:
-          $ref: '#/components/schemas/smartsheetentity.GetRecordsResponse'
+          $ref: '#/components/schemas/smartsheet.GetRecordsResponse'
         getFields:
-          $ref: '#/components/schemas/smartsheetentity.GetFieldsResponse'
+          $ref: '#/components/schemas/smartsheet.GetFieldsResponse'
         addView:
-          $ref: '#/components/schemas/smartsheetentity.AddViewResponse'
+          $ref: '#/components/schemas/smartsheet.AddViewResponse'
         deleteViews:
           description: 删除指定表格指定子表中的指定视图回包
           properties: {}
           type: object
         addRecords:
-          $ref: '#/components/schemas/smartsheetentity.AddRecordsResponse'
+          $ref: '#/components/schemas/smartsheet.AddRecordsResponse'
         updateRecords:
-          $ref: '#/components/schemas/smartsheetentity.UpdateRecordsResponse'
+          $ref: '#/components/schemas/smartsheet.UpdateRecordsResponse'
         deleteRecords:
           description: 删除指定表格和子表中的一到多条记录回包
           properties: {}
           type: object
         addFields:
-          $ref: '#/components/schemas/smartsheetentity.AddFieldsResponse'
+          $ref: '#/components/schemas/smartsheet.AddFieldsResponse'
         updateFields:
-          $ref: '#/components/schemas/smartsheetentity.UpdateFieldsResponse'
+          $ref: '#/components/schemas/smartsheet.UpdateFieldsResponse'
         deleteFields:
           description: 删除字段回包
           properties: {}
@@ -2011,6 +2012,15 @@ components:
           - TAB_STOP_END
           format: enum
           type: string
+      type: object
+    UploadImageReq:
+      description: UploadImageRsp 上传图片接口响应参数
+      properties:
+        image:
+          format: binary
+          type: string
+      required:
+      - image
       type: object
     UploadImageRsp:
       properties:
@@ -2159,7 +2169,7 @@ components:
     smartsheet.UserFieldProperty:
       properties: {}
       type: object
-    smartsheetentity.AddField:
+    smartsheet.AddField:
       example:
         propertyImage: "{}"
         propertyProgress:
@@ -2275,7 +2285,7 @@ components:
         propertySingleSelect:
           $ref: '#/components/schemas/smartsheet.SingleSelectFieldProperty'
       type: object
-    smartsheetentity.AddFieldsRequest:
+    smartsheet.AddFieldsRequest:
       description: 新增字段请求
       example:
         fields:
@@ -2374,18 +2384,18 @@ components:
       properties:
         fields:
           items:
-            $ref: '#/components/schemas/smartsheetentity.AddField'
+            $ref: '#/components/schemas/smartsheet.AddField'
           type: array
       type: object
-    smartsheetentity.AddFieldsResponse:
+    smartsheet.AddFieldsResponse:
       description: 新增字段回包
       properties:
         fields:
           items:
-            $ref: '#/components/schemas/smartsheetentity.Field'
+            $ref: '#/components/schemas/smartsheet.Field'
           type: array
       type: object
-    smartsheetentity.AddRecord:
+    smartsheet.AddRecord:
       example:
         values:
           key: null
@@ -2395,7 +2405,7 @@ components:
             $ref: '#/components/schemas/google.protobuf.Value'
           type: object
       type: object
-    smartsheetentity.AddRecordsRequest:
+    smartsheet.AddRecordsRequest:
       description: 在指定表格和子表中创建一到多条新记录请求
       example:
         records:
@@ -2406,18 +2416,18 @@ components:
       properties:
         records:
           items:
-            $ref: '#/components/schemas/smartsheetentity.AddRecord'
+            $ref: '#/components/schemas/smartsheet.AddRecord'
           type: array
       type: object
-    smartsheetentity.AddRecordsResponse:
+    smartsheet.AddRecordsResponse:
       description: 在指定表格和子表中创建一到多条新记录回包
       properties:
         records:
           items:
-            $ref: '#/components/schemas/smartsheetentity.CommonRecord'
+            $ref: '#/components/schemas/smartsheet.CommonRecord'
           type: array
       type: object
-    smartsheetentity.AddViewRequest:
+    smartsheet.AddViewRequest:
       description: 新建视图请求，创建一个视图
       example:
         viewType: VIEW_UNKNOWN
@@ -2435,13 +2445,13 @@ components:
           format: enum
           type: string
       type: object
-    smartsheetentity.AddViewResponse:
+    smartsheet.AddViewResponse:
       description: 新建视图回包
       properties:
         view:
-          $ref: '#/components/schemas/smartsheetentity.View'
+          $ref: '#/components/schemas/smartsheet.View'
       type: object
-    smartsheetentity.CommonRecord:
+    smartsheet.CommonRecord:
       example:
         recordID: recordID
         values:
@@ -2454,7 +2464,7 @@ components:
             $ref: '#/components/schemas/google.protobuf.Value'
           type: object
       type: object
-    smartsheetentity.DeleteFieldsRequest:
+    smartsheet.DeleteFieldsRequest:
       description: 删除字段请求
       example:
         fieldIDs:
@@ -2466,11 +2476,11 @@ components:
             type: string
           type: array
       type: object
-    smartsheetentity.DeleteFieldsResponse:
+    smartsheet.DeleteFieldsResponse:
       description: 删除字段回包
       properties: {}
       type: object
-    smartsheetentity.DeleteRecordsRequest:
+    smartsheet.DeleteRecordsRequest:
       description: 删除指定表格和子表中的一到多条记录请求
       example:
         recordIDs:
@@ -2482,11 +2492,11 @@ components:
             type: string
           type: array
       type: object
-    smartsheetentity.DeleteRecordsResponse:
+    smartsheet.DeleteRecordsResponse:
       description: 删除指定表格和子表中的一到多条记录回包
       properties: {}
       type: object
-    smartsheetentity.DeleteViewsRequest:
+    smartsheet.DeleteViewsRequest:
       description: 删除指定表格指定子表中的指定视图请求
       example:
         viewIDs:
@@ -2498,11 +2508,11 @@ components:
             type: string
           type: array
       type: object
-    smartsheetentity.DeleteViewsResponse:
+    smartsheet.DeleteViewsResponse:
       description: 删除指定表格指定子表中的指定视图回包
       properties: {}
       type: object
-    smartsheetentity.Field:
+    smartsheet.Field:
       example:
         propertyImage: "{}"
         propertyProgress:
@@ -2622,7 +2632,7 @@ components:
         propertySingleSelect:
           $ref: '#/components/schemas/smartsheet.SingleSelectFieldProperty'
       type: object
-    smartsheetentity.GetFieldsRequest:
+    smartsheet.GetFieldsRequest:
       description: 获取指定表格和子表中的所有字段请求
       example:
         viewID: viewID
@@ -2652,7 +2662,7 @@ components:
           format: uint32
           type: integer
       type: object
-    smartsheetentity.GetFieldsResponse:
+    smartsheet.GetFieldsResponse:
       description: 获取指定表格和子表中的所有字段回包
       properties:
         total:
@@ -2665,10 +2675,10 @@ components:
           type: integer
         fields:
           items:
-            $ref: '#/components/schemas/smartsheetentity.Field'
+            $ref: '#/components/schemas/smartsheet.Field'
           type: array
       type: object
-    smartsheetentity.GetRecordsRequest:
+    smartsheet.GetRecordsRequest:
       description: 获取指定表格和子表下指定视图中的所有记录、指定返回记录里要包含的字段、获取指定筛选条件和指定数量的记录三个接口合一
       example:
         viewID: viewID
@@ -2698,7 +2708,7 @@ components:
           type: array
         sort:
           items:
-            $ref: '#/components/schemas/smartsheetentity.Sort'
+            $ref: '#/components/schemas/smartsheet.Sort'
           type: array
         offset:
           format: uint32
@@ -2707,7 +2717,7 @@ components:
           format: uint32
           type: integer
       type: object
-    smartsheetentity.GetRecordsResponse:
+    smartsheet.GetRecordsResponse:
       description: 获取指定表格和子表下指定视图中的所有记录回包
       properties:
         total:
@@ -2720,10 +2730,10 @@ components:
           type: integer
         records:
           items:
-            $ref: '#/components/schemas/smartsheetentity.Record'
+            $ref: '#/components/schemas/smartsheet.Record'
           type: array
       type: object
-    smartsheetentity.GetViewsRequest:
+    smartsheet.GetViewsRequest:
       description: 获取所有视图请求
       example:
         viewIDs:
@@ -2743,7 +2753,7 @@ components:
           format: uint32
           type: integer
       type: object
-    smartsheetentity.GetViewsResponse:
+    smartsheet.GetViewsResponse:
       description: 获取指定表格指定子表中的所有视图回包
       properties:
         total:
@@ -2756,10 +2766,10 @@ components:
           type: integer
         views:
           items:
-            $ref: '#/components/schemas/smartsheetentity.View'
+            $ref: '#/components/schemas/smartsheet.View'
           type: array
       type: object
-    smartsheetentity.Record:
+    smartsheet.Record:
       properties:
         recordID:
           type: string
@@ -2774,7 +2784,7 @@ components:
             $ref: '#/components/schemas/google.protobuf.Value'
           type: object
       type: object
-    smartsheetentity.Sort:
+    smartsheet.Sort:
       example:
         fieldTitle: fieldTitle
         desc: true
@@ -2784,7 +2794,7 @@ components:
         desc:
           type: boolean
       type: object
-    smartsheetentity.UpdateFieldsRequest:
+    smartsheet.UpdateFieldsRequest:
       description: 更新字段请求
       example:
         fields:
@@ -2887,18 +2897,18 @@ components:
       properties:
         fields:
           items:
-            $ref: '#/components/schemas/smartsheetentity.Field'
+            $ref: '#/components/schemas/smartsheet.Field'
           type: array
       type: object
-    smartsheetentity.UpdateFieldsResponse:
+    smartsheet.UpdateFieldsResponse:
       description: 更新字段回包
       properties:
         fields:
           items:
-            $ref: '#/components/schemas/smartsheetentity.Field'
+            $ref: '#/components/schemas/smartsheet.Field'
           type: array
       type: object
-    smartsheetentity.UpdateRecordsRequest:
+    smartsheet.UpdateRecordsRequest:
       description: 更新指定表格和子表中的一到多条记录请求
       example:
         records:
@@ -2911,18 +2921,18 @@ components:
       properties:
         records:
           items:
-            $ref: '#/components/schemas/smartsheetentity.CommonRecord'
+            $ref: '#/components/schemas/smartsheet.CommonRecord'
           type: array
       type: object
-    smartsheetentity.UpdateRecordsResponse:
+    smartsheet.UpdateRecordsResponse:
       description: 更新指定表格和子表中的一到多条记录回包
       properties:
         records:
           items:
-            $ref: '#/components/schemas/smartsheetentity.CommonRecord'
+            $ref: '#/components/schemas/smartsheet.CommonRecord'
           type: array
       type: object
-    smartsheetentity.View:
+    smartsheet.View:
       properties:
         viewID:
           type: string
