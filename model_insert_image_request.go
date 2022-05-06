@@ -25,7 +25,7 @@ type InsertImageRequest struct {
 	// 图片高度, 单位为 emu
 	Height *int32 `json:"height,omitempty"`
 	// 业务来源
-	AddonSource *int32 `json:"addonSource,omitempty"`
+	AddonSource *string `json:"addonSource,omitempty"`
 	// 插件ID
 	AddonID *string `json:"addonID,omitempty"`
 	// 文档插件元素的唯一 ID (6位的数字小写字母组合)
@@ -166,9 +166,9 @@ func (o *InsertImageRequest) SetHeight(v int32) {
 }
 
 // GetAddonSource returns the AddonSource field value if set, zero value otherwise.
-func (o *InsertImageRequest) GetAddonSource() int32 {
+func (o *InsertImageRequest) GetAddonSource() string {
 	if o == nil || o.AddonSource == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.AddonSource
@@ -176,7 +176,7 @@ func (o *InsertImageRequest) GetAddonSource() int32 {
 
 // GetAddonSourceOk returns a tuple with the AddonSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InsertImageRequest) GetAddonSourceOk() (*int32, bool) {
+func (o *InsertImageRequest) GetAddonSourceOk() (*string, bool) {
 	if o == nil || o.AddonSource == nil {
 		return nil, false
 	}
@@ -192,8 +192,8 @@ func (o *InsertImageRequest) HasAddonSource() bool {
 	return false
 }
 
-// SetAddonSource gets a reference to the given int32 and assigns it to the AddonSource field.
-func (o *InsertImageRequest) SetAddonSource(v int32) {
+// SetAddonSource gets a reference to the given string and assigns it to the AddonSource field.
+func (o *InsertImageRequest) SetAddonSource(v string) {
 	o.AddonSource = &v
 }
 

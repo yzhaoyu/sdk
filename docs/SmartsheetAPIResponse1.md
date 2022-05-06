@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ret** | Pointer to **int32** |  | [optional] 
-**Msg** | Pointer to **string** |  | [optional] 
+**Ret** | **int32** |  | 
+**Msg** | **string** |  | 
 **Data** | Pointer to [**EditSubSheetResponse**](EditSubSheetResponse.md) |  | [optional] 
 
 ## Methods
 
 ### NewSmartsheetAPIResponse1
 
-`func NewSmartsheetAPIResponse1() *SmartsheetAPIResponse1`
+`func NewSmartsheetAPIResponse1(ret int32, msg string, ) *SmartsheetAPIResponse1`
 
 NewSmartsheetAPIResponse1 instantiates a new SmartsheetAPIResponse1 object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetRet sets Ret field to given value.
 
-### HasRet
-
-`func (o *SmartsheetAPIResponse1) HasRet() bool`
-
-HasRet returns a boolean if a field has been set.
 
 ### GetMsg
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetMsg sets Msg field to given value.
 
-### HasMsg
-
-`func (o *SmartsheetAPIResponse1) HasMsg() bool`
-
-HasMsg returns a boolean if a field has been set.
 
 ### GetData
 

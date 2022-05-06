@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// UploadImageRsp UploadImageRsp 上传图片接口响应参数
+// UploadImageRsp struct for UploadImageRsp
 type UploadImageRsp struct {
 	ImageID *string `json:"imageID,omitempty"`
 }

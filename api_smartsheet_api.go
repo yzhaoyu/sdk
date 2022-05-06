@@ -122,7 +122,7 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIEditSmartsheetSubSheetExecute(r A
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -156,13 +156,6 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIEditSmartsheetSubSheetExecute(r A
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -267,7 +260,7 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIGetSmartsheetSubSheetExecute(r Ap
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -299,13 +292,6 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIGetSmartsheetSubSheetExecute(r Ap
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -423,7 +409,7 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIHandleSmartsheetResourceExecute(r
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -457,13 +443,6 @@ func (a *SmartsheetAPIApiService) SmartsheetAPIHandleSmartsheetResourceExecute(r
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

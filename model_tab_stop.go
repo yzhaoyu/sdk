@@ -17,8 +17,8 @@ import (
 
 // TabStop struct for TabStop
 type TabStop struct {
-	Offset *DoubleValue `json:"offset,omitempty"`
-	Alignment *int32 `json:"alignment,omitempty"`
+	Offset *GoogleProtobufDoubleValue `json:"offset,omitempty"`
+	Alignment *string `json:"alignment,omitempty"`
 }
 
 // NewTabStop instantiates a new TabStop object
@@ -39,9 +39,9 @@ func NewTabStopWithDefaults() *TabStop {
 }
 
 // GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *TabStop) GetOffset() DoubleValue {
+func (o *TabStop) GetOffset() GoogleProtobufDoubleValue {
 	if o == nil || o.Offset == nil {
-		var ret DoubleValue
+		var ret GoogleProtobufDoubleValue
 		return ret
 	}
 	return *o.Offset
@@ -49,7 +49,7 @@ func (o *TabStop) GetOffset() DoubleValue {
 
 // GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TabStop) GetOffsetOk() (*DoubleValue, bool) {
+func (o *TabStop) GetOffsetOk() (*GoogleProtobufDoubleValue, bool) {
 	if o == nil || o.Offset == nil {
 		return nil, false
 	}
@@ -65,15 +65,15 @@ func (o *TabStop) HasOffset() bool {
 	return false
 }
 
-// SetOffset gets a reference to the given DoubleValue and assigns it to the Offset field.
-func (o *TabStop) SetOffset(v DoubleValue) {
+// SetOffset gets a reference to the given GoogleProtobufDoubleValue and assigns it to the Offset field.
+func (o *TabStop) SetOffset(v GoogleProtobufDoubleValue) {
 	o.Offset = &v
 }
 
 // GetAlignment returns the Alignment field value if set, zero value otherwise.
-func (o *TabStop) GetAlignment() int32 {
+func (o *TabStop) GetAlignment() string {
 	if o == nil || o.Alignment == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.Alignment
@@ -81,7 +81,7 @@ func (o *TabStop) GetAlignment() int32 {
 
 // GetAlignmentOk returns a tuple with the Alignment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TabStop) GetAlignmentOk() (*int32, bool) {
+func (o *TabStop) GetAlignmentOk() (*string, bool) {
 	if o == nil || o.Alignment == nil {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *TabStop) HasAlignment() bool {
 	return false
 }
 
-// SetAlignment gets a reference to the given int32 and assigns it to the Alignment field.
-func (o *TabStop) SetAlignment(v int32) {
+// SetAlignment gets a reference to the given string and assigns it to the Alignment field.
+func (o *TabStop) SetAlignment(v string) {
 	o.Alignment = &v
 }
 

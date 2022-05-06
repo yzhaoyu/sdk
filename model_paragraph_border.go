@@ -18,9 +18,9 @@ import (
 // ParagraphBorder struct for ParagraphBorder
 type ParagraphBorder struct {
 	Color *string `json:"color,omitempty"`
-	Width *UInt32Value `json:"width,omitempty"`
-	Padding *UInt32Value `json:"padding,omitempty"`
-	BorderStyle *int32 `json:"borderStyle,omitempty"`
+	Width *GoogleProtobufUInt32Value `json:"width,omitempty"`
+	Padding *GoogleProtobufUInt32Value `json:"padding,omitempty"`
+	BorderStyle *string `json:"borderStyle,omitempty"`
 }
 
 // NewParagraphBorder instantiates a new ParagraphBorder object
@@ -73,9 +73,9 @@ func (o *ParagraphBorder) SetColor(v string) {
 }
 
 // GetWidth returns the Width field value if set, zero value otherwise.
-func (o *ParagraphBorder) GetWidth() UInt32Value {
+func (o *ParagraphBorder) GetWidth() GoogleProtobufUInt32Value {
 	if o == nil || o.Width == nil {
-		var ret UInt32Value
+		var ret GoogleProtobufUInt32Value
 		return ret
 	}
 	return *o.Width
@@ -83,7 +83,7 @@ func (o *ParagraphBorder) GetWidth() UInt32Value {
 
 // GetWidthOk returns a tuple with the Width field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphBorder) GetWidthOk() (*UInt32Value, bool) {
+func (o *ParagraphBorder) GetWidthOk() (*GoogleProtobufUInt32Value, bool) {
 	if o == nil || o.Width == nil {
 		return nil, false
 	}
@@ -99,15 +99,15 @@ func (o *ParagraphBorder) HasWidth() bool {
 	return false
 }
 
-// SetWidth gets a reference to the given UInt32Value and assigns it to the Width field.
-func (o *ParagraphBorder) SetWidth(v UInt32Value) {
+// SetWidth gets a reference to the given GoogleProtobufUInt32Value and assigns it to the Width field.
+func (o *ParagraphBorder) SetWidth(v GoogleProtobufUInt32Value) {
 	o.Width = &v
 }
 
 // GetPadding returns the Padding field value if set, zero value otherwise.
-func (o *ParagraphBorder) GetPadding() UInt32Value {
+func (o *ParagraphBorder) GetPadding() GoogleProtobufUInt32Value {
 	if o == nil || o.Padding == nil {
-		var ret UInt32Value
+		var ret GoogleProtobufUInt32Value
 		return ret
 	}
 	return *o.Padding
@@ -115,7 +115,7 @@ func (o *ParagraphBorder) GetPadding() UInt32Value {
 
 // GetPaddingOk returns a tuple with the Padding field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphBorder) GetPaddingOk() (*UInt32Value, bool) {
+func (o *ParagraphBorder) GetPaddingOk() (*GoogleProtobufUInt32Value, bool) {
 	if o == nil || o.Padding == nil {
 		return nil, false
 	}
@@ -131,15 +131,15 @@ func (o *ParagraphBorder) HasPadding() bool {
 	return false
 }
 
-// SetPadding gets a reference to the given UInt32Value and assigns it to the Padding field.
-func (o *ParagraphBorder) SetPadding(v UInt32Value) {
+// SetPadding gets a reference to the given GoogleProtobufUInt32Value and assigns it to the Padding field.
+func (o *ParagraphBorder) SetPadding(v GoogleProtobufUInt32Value) {
 	o.Padding = &v
 }
 
 // GetBorderStyle returns the BorderStyle field value if set, zero value otherwise.
-func (o *ParagraphBorder) GetBorderStyle() int32 {
+func (o *ParagraphBorder) GetBorderStyle() string {
 	if o == nil || o.BorderStyle == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.BorderStyle
@@ -147,7 +147,7 @@ func (o *ParagraphBorder) GetBorderStyle() int32 {
 
 // GetBorderStyleOk returns a tuple with the BorderStyle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphBorder) GetBorderStyleOk() (*int32, bool) {
+func (o *ParagraphBorder) GetBorderStyleOk() (*string, bool) {
 	if o == nil || o.BorderStyle == nil {
 		return nil, false
 	}
@@ -163,8 +163,8 @@ func (o *ParagraphBorder) HasBorderStyle() bool {
 	return false
 }
 
-// SetBorderStyle gets a reference to the given int32 and assigns it to the BorderStyle field.
-func (o *ParagraphBorder) SetBorderStyle(v int32) {
+// SetBorderStyle gets a reference to the given string and assigns it to the BorderStyle field.
+func (o *ParagraphBorder) SetBorderStyle(v string) {
 	o.BorderStyle = &v
 }
 

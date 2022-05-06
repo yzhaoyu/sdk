@@ -17,8 +17,8 @@ import (
 
 // SmartsheetAPIResponse2 struct for SmartsheetAPIResponse2
 type SmartsheetAPIResponse2 struct {
-	Ret *int32 `json:"ret,omitempty"`
-	Msg *string `json:"msg,omitempty"`
+	Ret int32 `json:"ret"`
+	Msg string `json:"msg"`
 	Data *GetSubSheetResponse `json:"data,omitempty"`
 }
 
@@ -26,8 +26,10 @@ type SmartsheetAPIResponse2 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSmartsheetAPIResponse2() *SmartsheetAPIResponse2 {
+func NewSmartsheetAPIResponse2(ret int32, msg string) *SmartsheetAPIResponse2 {
 	this := SmartsheetAPIResponse2{}
+	this.Ret = ret
+	this.Msg = msg
 	return &this
 }
 
@@ -39,68 +41,52 @@ func NewSmartsheetAPIResponse2WithDefaults() *SmartsheetAPIResponse2 {
 	return &this
 }
 
-// GetRet returns the Ret field value if set, zero value otherwise.
+// GetRet returns the Ret field value
 func (o *SmartsheetAPIResponse2) GetRet() int32 {
-	if o == nil || o.Ret == nil {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Ret
+
+	return o.Ret
 }
 
-// GetRetOk returns a tuple with the Ret field value if set, nil otherwise
+// GetRetOk returns a tuple with the Ret field value
 // and a boolean to check if the value has been set.
 func (o *SmartsheetAPIResponse2) GetRetOk() (*int32, bool) {
-	if o == nil || o.Ret == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ret, true
+	return &o.Ret, true
 }
 
-// HasRet returns a boolean if a field has been set.
-func (o *SmartsheetAPIResponse2) HasRet() bool {
-	if o != nil && o.Ret != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRet gets a reference to the given int32 and assigns it to the Ret field.
+// SetRet sets field value
 func (o *SmartsheetAPIResponse2) SetRet(v int32) {
-	o.Ret = &v
+	o.Ret = v
 }
 
-// GetMsg returns the Msg field value if set, zero value otherwise.
+// GetMsg returns the Msg field value
 func (o *SmartsheetAPIResponse2) GetMsg() string {
-	if o == nil || o.Msg == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Msg
+
+	return o.Msg
 }
 
-// GetMsgOk returns a tuple with the Msg field value if set, nil otherwise
+// GetMsgOk returns a tuple with the Msg field value
 // and a boolean to check if the value has been set.
 func (o *SmartsheetAPIResponse2) GetMsgOk() (*string, bool) {
-	if o == nil || o.Msg == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Msg, true
+	return &o.Msg, true
 }
 
-// HasMsg returns a boolean if a field has been set.
-func (o *SmartsheetAPIResponse2) HasMsg() bool {
-	if o != nil && o.Msg != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMsg gets a reference to the given string and assigns it to the Msg field.
+// SetMsg sets field value
 func (o *SmartsheetAPIResponse2) SetMsg(v string) {
-	o.Msg = &v
+	o.Msg = v
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
@@ -137,10 +123,10 @@ func (o *SmartsheetAPIResponse2) SetData(v GetSubSheetResponse) {
 
 func (o SmartsheetAPIResponse2) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Ret != nil {
+	if true {
 		toSerialize["ret"] = o.Ret
 	}
-	if o.Msg != nil {
+	if true {
 		toSerialize["msg"] = o.Msg
 	}
 	if o.Data != nil {

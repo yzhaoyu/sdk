@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Height** | Pointer to **int32** | 插件高度，单位为 emu | [optional] 
 **OriginalURL** | **string** | 原始URL | 
 **EmbedURL** | **string** | 插件展示的URL | 
-**AddonType** | **int32** |  | 
+**AddonType** | **string** |  | 
 **ExtraData** | Pointer to **string** | 插件扩展字段 | [optional] 
 **LockAspectRatio** | Pointer to **bool** | 锁定宽高比, Default: true | [optional] 
 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewInsertWebBlockRequest
 
-`func NewInsertWebBlockRequest(location Location, addonID string, anchorID string, originalURL string, embedURL string, addonType int32, ) *InsertWebBlockRequest`
+`func NewInsertWebBlockRequest(location Location, addonID string, anchorID string, originalURL string, embedURL string, addonType string, ) *InsertWebBlockRequest`
 
 NewInsertWebBlockRequest instantiates a new InsertWebBlockRequest object
 This constructor will assign default values to properties that have it defined,
@@ -212,20 +212,20 @@ SetEmbedURL sets EmbedURL field to given value.
 
 ### GetAddonType
 
-`func (o *InsertWebBlockRequest) GetAddonType() int32`
+`func (o *InsertWebBlockRequest) GetAddonType() string`
 
 GetAddonType returns the AddonType field if non-nil, zero value otherwise.
 
 ### GetAddonTypeOk
 
-`func (o *InsertWebBlockRequest) GetAddonTypeOk() (*int32, bool)`
+`func (o *InsertWebBlockRequest) GetAddonTypeOk() (*string, bool)`
 
 GetAddonTypeOk returns a tuple with the AddonType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddonType
 
-`func (o *InsertWebBlockRequest) SetAddonType(v int32)`
+`func (o *InsertWebBlockRequest) SetAddonType(v string)`
 
 SetAddonType sets AddonType field to given value.
 

@@ -17,10 +17,10 @@ import (
 
 // RefreshTokenRsp struct for RefreshTokenRsp
 type RefreshTokenRsp struct {
-	AccessToken *string `json:"accessToken,omitempty"`
-	TokenType *string `json:"tokenType,omitempty"`
-	ExpiresIn *int64 `json:"expiresIn,omitempty"`
-	UserId *string `json:"userId,omitempty"`
+	AccessToken *string `json:"access_token,omitempty"`
+	TokenType *string `json:"token_type,omitempty"`
+	ExpiresIn *int64 `json:"expires_in,omitempty"`
+	UserId *string `json:"user_id,omitempty"`
 	Scope *string `json:"scope,omitempty"`
 }
 
@@ -204,16 +204,16 @@ func (o *RefreshTokenRsp) SetScope(v string) {
 func (o RefreshTokenRsp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AccessToken != nil {
-		toSerialize["accessToken"] = o.AccessToken
+		toSerialize["access_token"] = o.AccessToken
 	}
 	if o.TokenType != nil {
-		toSerialize["tokenType"] = o.TokenType
+		toSerialize["token_type"] = o.TokenType
 	}
 	if o.ExpiresIn != nil {
-		toSerialize["expiresIn"] = o.ExpiresIn
+		toSerialize["expires_in"] = o.ExpiresIn
 	}
 	if o.UserId != nil {
-		toSerialize["userId"] = o.UserId
+		toSerialize["user_id"] = o.UserId
 	}
 	if o.Scope != nil {
 		toSerialize["scope"] = o.Scope

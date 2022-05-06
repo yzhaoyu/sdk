@@ -17,11 +17,11 @@ import (
 
 // GetTokenRsp struct for GetTokenRsp
 type GetTokenRsp struct {
-	AccessToken *string `json:"accessToken,omitempty"`
-	TokenType *string `json:"tokenType,omitempty"`
-	ExpiresIn *int64 `json:"expiresIn,omitempty"`
-	RefreshToken *string `json:"refreshToken,omitempty"`
-	UserId *string `json:"userId,omitempty"`
+	AccessToken *string `json:"access_token,omitempty"`
+	TokenType *string `json:"token_type,omitempty"`
+	ExpiresIn *int64 `json:"expires_in,omitempty"`
+	RefreshToken *string `json:"refresh_token,omitempty"`
+	UserId *string `json:"user_id,omitempty"`
 	Scope *string `json:"scope,omitempty"`
 }
 
@@ -237,19 +237,19 @@ func (o *GetTokenRsp) SetScope(v string) {
 func (o GetTokenRsp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AccessToken != nil {
-		toSerialize["accessToken"] = o.AccessToken
+		toSerialize["access_token"] = o.AccessToken
 	}
 	if o.TokenType != nil {
-		toSerialize["tokenType"] = o.TokenType
+		toSerialize["token_type"] = o.TokenType
 	}
 	if o.ExpiresIn != nil {
-		toSerialize["expiresIn"] = o.ExpiresIn
+		toSerialize["expires_in"] = o.ExpiresIn
 	}
 	if o.RefreshToken != nil {
-		toSerialize["refreshToken"] = o.RefreshToken
+		toSerialize["refresh_token"] = o.RefreshToken
 	}
 	if o.UserId != nil {
-		toSerialize["userId"] = o.UserId
+		toSerialize["user_id"] = o.UserId
 	}
 	if o.Scope != nil {
 		toSerialize["scope"] = o.Scope

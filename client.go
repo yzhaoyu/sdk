@@ -52,6 +52,8 @@ type APIClient struct {
 
 	DocAPIApi *DocAPIApiService
 
+	DriveAPIApi *DriveAPIApiService
+
 	OAuthAPIApi *OAuthAPIApiService
 
 	ResourceAPIApi *ResourceAPIApiService
@@ -76,6 +78,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.DocAPIApi = (*DocAPIApiService)(&c.common)
+	c.DriveAPIApi = (*DriveAPIApiService)(&c.common)
 	c.OAuthAPIApi = (*OAuthAPIApiService)(&c.common)
 	c.ResourceAPIApi = (*ResourceAPIApiService)(&c.common)
 	c.SmartsheetAPIApi = (*SmartsheetAPIApiService)(&c.common)

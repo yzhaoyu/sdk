@@ -17,8 +17,8 @@ import (
 
 // DocAPIResponse1 struct for DocAPIResponse1
 type DocAPIResponse1 struct {
-	Ret *int32 `json:"ret,omitempty"`
-	Msg *string `json:"msg,omitempty"`
+	Ret int32 `json:"ret"`
+	Msg string `json:"msg"`
 	// BatchUpdateDocDataRsp 批量更新 Doc 文档响应
 	Data map[string]interface{} `json:"data,omitempty"`
 }
@@ -27,8 +27,10 @@ type DocAPIResponse1 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDocAPIResponse1() *DocAPIResponse1 {
+func NewDocAPIResponse1(ret int32, msg string) *DocAPIResponse1 {
 	this := DocAPIResponse1{}
+	this.Ret = ret
+	this.Msg = msg
 	return &this
 }
 
@@ -40,68 +42,52 @@ func NewDocAPIResponse1WithDefaults() *DocAPIResponse1 {
 	return &this
 }
 
-// GetRet returns the Ret field value if set, zero value otherwise.
+// GetRet returns the Ret field value
 func (o *DocAPIResponse1) GetRet() int32 {
-	if o == nil || o.Ret == nil {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Ret
+
+	return o.Ret
 }
 
-// GetRetOk returns a tuple with the Ret field value if set, nil otherwise
+// GetRetOk returns a tuple with the Ret field value
 // and a boolean to check if the value has been set.
 func (o *DocAPIResponse1) GetRetOk() (*int32, bool) {
-	if o == nil || o.Ret == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ret, true
+	return &o.Ret, true
 }
 
-// HasRet returns a boolean if a field has been set.
-func (o *DocAPIResponse1) HasRet() bool {
-	if o != nil && o.Ret != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRet gets a reference to the given int32 and assigns it to the Ret field.
+// SetRet sets field value
 func (o *DocAPIResponse1) SetRet(v int32) {
-	o.Ret = &v
+	o.Ret = v
 }
 
-// GetMsg returns the Msg field value if set, zero value otherwise.
+// GetMsg returns the Msg field value
 func (o *DocAPIResponse1) GetMsg() string {
-	if o == nil || o.Msg == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Msg
+
+	return o.Msg
 }
 
-// GetMsgOk returns a tuple with the Msg field value if set, nil otherwise
+// GetMsgOk returns a tuple with the Msg field value
 // and a boolean to check if the value has been set.
 func (o *DocAPIResponse1) GetMsgOk() (*string, bool) {
-	if o == nil || o.Msg == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Msg, true
+	return &o.Msg, true
 }
 
-// HasMsg returns a boolean if a field has been set.
-func (o *DocAPIResponse1) HasMsg() bool {
-	if o != nil && o.Msg != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMsg gets a reference to the given string and assigns it to the Msg field.
+// SetMsg sets field value
 func (o *DocAPIResponse1) SetMsg(v string) {
-	o.Msg = &v
+	o.Msg = v
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
@@ -138,10 +124,10 @@ func (o *DocAPIResponse1) SetData(v map[string]interface{}) {
 
 func (o DocAPIResponse1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Ret != nil {
+	if true {
 		toSerialize["ret"] = o.Ret
 	}
-	if o.Msg != nil {
+	if true {
 		toSerialize["msg"] = o.Msg
 	}
 	if o.Data != nil {

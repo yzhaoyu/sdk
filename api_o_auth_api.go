@@ -97,16 +97,16 @@ func (a *OAuthAPIApiService) OAuthAPIGetTokenExecute(r ApiOAuthAPIGetTokenReques
 	localVarFormParams := url.Values{}
 
 	if r.clientId != nil {
-		localVarQueryParams.Add("clientId", parameterToString(*r.clientId, ""))
+		localVarQueryParams.Add("client_id", parameterToString(*r.clientId, ""))
 	}
 	if r.clientSecret != nil {
-		localVarQueryParams.Add("clientSecret", parameterToString(*r.clientSecret, ""))
+		localVarQueryParams.Add("client_secret", parameterToString(*r.clientSecret, ""))
 	}
 	if r.redirectUri != nil {
-		localVarQueryParams.Add("redirectUri", parameterToString(*r.redirectUri, ""))
+		localVarQueryParams.Add("redirect_uri", parameterToString(*r.redirectUri, ""))
 	}
 	if r.grantType != nil {
-		localVarQueryParams.Add("grantType", parameterToString(*r.grantType, ""))
+		localVarQueryParams.Add("grant_type", parameterToString(*r.grantType, ""))
 	}
 	if r.code != nil {
 		localVarQueryParams.Add("code", parameterToString(*r.code, ""))
@@ -121,7 +121,7 @@ func (a *OAuthAPIApiService) OAuthAPIGetTokenExecute(r ApiOAuthAPIGetTokenReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -150,13 +150,6 @@ func (a *OAuthAPIApiService) OAuthAPIGetTokenExecute(r ApiOAuthAPIGetTokenReques
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -240,16 +233,16 @@ func (a *OAuthAPIApiService) OAuthAPIRefreshTokenExecute(r ApiOAuthAPIRefreshTok
 	localVarFormParams := url.Values{}
 
 	if r.clientId != nil {
-		localVarQueryParams.Add("clientId", parameterToString(*r.clientId, ""))
+		localVarQueryParams.Add("client_id", parameterToString(*r.clientId, ""))
 	}
 	if r.clientSecret != nil {
-		localVarQueryParams.Add("clientSecret", parameterToString(*r.clientSecret, ""))
+		localVarQueryParams.Add("client_secret", parameterToString(*r.clientSecret, ""))
 	}
 	if r.grantType != nil {
-		localVarQueryParams.Add("grantType", parameterToString(*r.grantType, ""))
+		localVarQueryParams.Add("grant_type", parameterToString(*r.grantType, ""))
 	}
 	if r.refreshToken != nil {
-		localVarQueryParams.Add("refreshToken", parameterToString(*r.refreshToken, ""))
+		localVarQueryParams.Add("refresh_token", parameterToString(*r.refreshToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -261,7 +254,7 @@ func (a *OAuthAPIApiService) OAuthAPIRefreshTokenExecute(r ApiOAuthAPIRefreshTok
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -290,13 +283,6 @@ func (a *OAuthAPIApiService) OAuthAPIRefreshTokenExecute(r ApiOAuthAPIRefreshTok
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

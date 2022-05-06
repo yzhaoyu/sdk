@@ -122,7 +122,7 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -156,13 +156,6 @@ func (a *DocAPIApiService) DocAPIBatchUpdateDocDataExecute(r ApiDocAPIBatchUpdat
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -267,7 +260,7 @@ func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullText
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -299,13 +292,6 @@ func (a *DocAPIApiService) DocAPIGetDocFullTextExecute(r ApiDocAPIGetDocFullText
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

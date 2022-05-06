@@ -32,7 +32,7 @@ type InsertWebBlockRequest struct {
 	OriginalURL string `json:"originalURL"`
 	// 插件展示的URL
 	EmbedURL string `json:"embedURL"`
-	AddonType int32 `json:"addonType"`
+	AddonType string `json:"addonType"`
 	// 插件扩展字段
 	ExtraData *string `json:"extraData,omitempty"`
 	// 锁定宽高比, Default: true
@@ -43,7 +43,7 @@ type InsertWebBlockRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInsertWebBlockRequest(location Location, addonID string, anchorID string, originalURL string, embedURL string, addonType int32) *InsertWebBlockRequest {
+func NewInsertWebBlockRequest(location Location, addonID string, anchorID string, originalURL string, embedURL string, addonType string) *InsertWebBlockRequest {
 	this := InsertWebBlockRequest{}
 	this.Location = location
 	this.AddonID = addonID
@@ -279,9 +279,9 @@ func (o *InsertWebBlockRequest) SetEmbedURL(v string) {
 }
 
 // GetAddonType returns the AddonType field value
-func (o *InsertWebBlockRequest) GetAddonType() int32 {
+func (o *InsertWebBlockRequest) GetAddonType() string {
 	if o == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 
@@ -290,7 +290,7 @@ func (o *InsertWebBlockRequest) GetAddonType() int32 {
 
 // GetAddonTypeOk returns a tuple with the AddonType field value
 // and a boolean to check if the value has been set.
-func (o *InsertWebBlockRequest) GetAddonTypeOk() (*int32, bool) {
+func (o *InsertWebBlockRequest) GetAddonTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -298,7 +298,7 @@ func (o *InsertWebBlockRequest) GetAddonTypeOk() (*int32, bool) {
 }
 
 // SetAddonType sets field value
-func (o *InsertWebBlockRequest) SetAddonType(v int32) {
+func (o *InsertWebBlockRequest) SetAddonType(v string) {
 	o.AddonType = v
 }
 

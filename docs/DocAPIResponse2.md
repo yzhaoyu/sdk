@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ret** | Pointer to **int32** |  | [optional] 
-**Msg** | Pointer to **string** |  | [optional] 
+**Ret** | **int32** |  | 
+**Msg** | **string** |  | 
 **Data** | Pointer to [**GetDocFullTextRsp**](GetDocFullTextRsp.md) |  | [optional] 
 
 ## Methods
 
 ### NewDocAPIResponse2
 
-`func NewDocAPIResponse2() *DocAPIResponse2`
+`func NewDocAPIResponse2(ret int32, msg string, ) *DocAPIResponse2`
 
 NewDocAPIResponse2 instantiates a new DocAPIResponse2 object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetRet sets Ret field to given value.
 
-### HasRet
-
-`func (o *DocAPIResponse2) HasRet() bool`
-
-HasRet returns a boolean if a field has been set.
 
 ### GetMsg
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetMsg sets Msg field to given value.
 
-### HasMsg
-
-`func (o *DocAPIResponse2) HasMsg() bool`
-
-HasMsg returns a boolean if a field has been set.
 
 ### GetData
 

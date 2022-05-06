@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ret** | Pointer to **int32** |  | [optional] 
-**Msg** | Pointer to **string** |  | [optional] 
+**Ret** | **int32** |  | 
+**Msg** | **string** |  | 
 **Data** | Pointer to [**GetUserInfoRsp**](GetUserInfoRsp.md) |  | [optional] 
 
 ## Methods
 
 ### NewOAuthAPIResponse2
 
-`func NewOAuthAPIResponse2() *OAuthAPIResponse2`
+`func NewOAuthAPIResponse2(ret int32, msg string, ) *OAuthAPIResponse2`
 
 NewOAuthAPIResponse2 instantiates a new OAuthAPIResponse2 object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetRet sets Ret field to given value.
 
-### HasRet
-
-`func (o *OAuthAPIResponse2) HasRet() bool`
-
-HasRet returns a boolean if a field has been set.
 
 ### GetMsg
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetMsg sets Msg field to given value.
 
-### HasMsg
-
-`func (o *OAuthAPIResponse2) HasMsg() bool`
-
-HasMsg returns a boolean if a field has been set.
 
 ### GetData
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Location** | [**Location**](Location.md) |  | 
 **Width** | Pointer to **int32** | 图片宽度, 单位为 emu | [optional] 
 **Height** | Pointer to **int32** | 图片高度, 单位为 emu | [optional] 
-**AddonSource** | Pointer to **int32** | 业务来源 | [optional] 
+**AddonSource** | Pointer to **string** | 业务来源 | [optional] 
 **AddonID** | Pointer to **string** | 插件ID | [optional] 
 **AnchorID** | Pointer to **string** | 文档插件元素的唯一 ID (6位的数字小写字母组合) | [optional] 
 **ExtraData** | Pointer to **string** | 插件扩展字段 | [optional] 
@@ -124,20 +124,20 @@ HasHeight returns a boolean if a field has been set.
 
 ### GetAddonSource
 
-`func (o *InsertImageRequest) GetAddonSource() int32`
+`func (o *InsertImageRequest) GetAddonSource() string`
 
 GetAddonSource returns the AddonSource field if non-nil, zero value otherwise.
 
 ### GetAddonSourceOk
 
-`func (o *InsertImageRequest) GetAddonSourceOk() (*int32, bool)`
+`func (o *InsertImageRequest) GetAddonSourceOk() (*string, bool)`
 
 GetAddonSourceOk returns a tuple with the AddonSource field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddonSource
 
-`func (o *InsertImageRequest) SetAddonSource(v int32)`
+`func (o *InsertImageRequest) SetAddonSource(v string)`
 
 SetAddonSource sets AddonSource field to given value.
 

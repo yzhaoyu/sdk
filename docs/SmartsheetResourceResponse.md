@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GetViews** | Pointer to [**GetViewsResponse**](GetViewsResponse.md) |  | [optional] 
-**GetRecords** | Pointer to [**GetRecordsResponse**](GetRecordsResponse.md) |  | [optional] 
-**GetFields** | Pointer to [**GetFieldsResponse**](GetFieldsResponse.md) |  | [optional] 
-**AddView** | Pointer to [**AddViewResponse**](AddViewResponse.md) |  | [optional] 
+**GetViews** | Pointer to [**SmartsheetentityGetViewsResponse**](SmartsheetentityGetViewsResponse.md) |  | [optional] 
+**GetRecords** | Pointer to [**SmartsheetentityGetRecordsResponse**](SmartsheetentityGetRecordsResponse.md) |  | [optional] 
+**GetFields** | Pointer to [**SmartsheetentityGetFieldsResponse**](SmartsheetentityGetFieldsResponse.md) |  | [optional] 
+**AddView** | Pointer to [**SmartsheetentityAddViewResponse**](SmartsheetentityAddViewResponse.md) |  | [optional] 
 **DeleteViews** | Pointer to **map[string]interface{}** | 删除指定表格指定子表中的指定视图回包 | [optional] 
-**AddRecords** | Pointer to [**AddRecordsResponse**](AddRecordsResponse.md) |  | [optional] 
-**UpdateRecords** | Pointer to [**UpdateRecordsResponse**](UpdateRecordsResponse.md) |  | [optional] 
+**AddRecords** | Pointer to [**SmartsheetentityAddRecordsResponse**](SmartsheetentityAddRecordsResponse.md) |  | [optional] 
+**UpdateRecords** | Pointer to [**SmartsheetentityUpdateRecordsResponse**](SmartsheetentityUpdateRecordsResponse.md) |  | [optional] 
 **DeleteRecords** | Pointer to **map[string]interface{}** | 删除指定表格和子表中的一到多条记录回包 | [optional] 
-**AddFields** | Pointer to [**AddFieldsResponse**](AddFieldsResponse.md) |  | [optional] 
-**UpdateFields** | Pointer to [**UpdateFieldsResponse**](UpdateFieldsResponse.md) |  | [optional] 
+**AddFields** | Pointer to [**SmartsheetentityAddFieldsResponse**](SmartsheetentityAddFieldsResponse.md) |  | [optional] 
+**UpdateFields** | Pointer to [**SmartsheetentityUpdateFieldsResponse**](SmartsheetentityUpdateFieldsResponse.md) |  | [optional] 
 **DeleteFields** | Pointer to **map[string]interface{}** | 删除字段回包 | [optional] 
 
 ## Methods
@@ -37,20 +37,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetGetViews
 
-`func (o *SmartsheetResourceResponse) GetGetViews() GetViewsResponse`
+`func (o *SmartsheetResourceResponse) GetGetViews() SmartsheetentityGetViewsResponse`
 
 GetGetViews returns the GetViews field if non-nil, zero value otherwise.
 
 ### GetGetViewsOk
 
-`func (o *SmartsheetResourceResponse) GetGetViewsOk() (*GetViewsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetGetViewsOk() (*SmartsheetentityGetViewsResponse, bool)`
 
 GetGetViewsOk returns a tuple with the GetViews field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGetViews
 
-`func (o *SmartsheetResourceResponse) SetGetViews(v GetViewsResponse)`
+`func (o *SmartsheetResourceResponse) SetGetViews(v SmartsheetentityGetViewsResponse)`
 
 SetGetViews sets GetViews field to given value.
 
@@ -62,20 +62,20 @@ HasGetViews returns a boolean if a field has been set.
 
 ### GetGetRecords
 
-`func (o *SmartsheetResourceResponse) GetGetRecords() GetRecordsResponse`
+`func (o *SmartsheetResourceResponse) GetGetRecords() SmartsheetentityGetRecordsResponse`
 
 GetGetRecords returns the GetRecords field if non-nil, zero value otherwise.
 
 ### GetGetRecordsOk
 
-`func (o *SmartsheetResourceResponse) GetGetRecordsOk() (*GetRecordsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetGetRecordsOk() (*SmartsheetentityGetRecordsResponse, bool)`
 
 GetGetRecordsOk returns a tuple with the GetRecords field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGetRecords
 
-`func (o *SmartsheetResourceResponse) SetGetRecords(v GetRecordsResponse)`
+`func (o *SmartsheetResourceResponse) SetGetRecords(v SmartsheetentityGetRecordsResponse)`
 
 SetGetRecords sets GetRecords field to given value.
 
@@ -87,20 +87,20 @@ HasGetRecords returns a boolean if a field has been set.
 
 ### GetGetFields
 
-`func (o *SmartsheetResourceResponse) GetGetFields() GetFieldsResponse`
+`func (o *SmartsheetResourceResponse) GetGetFields() SmartsheetentityGetFieldsResponse`
 
 GetGetFields returns the GetFields field if non-nil, zero value otherwise.
 
 ### GetGetFieldsOk
 
-`func (o *SmartsheetResourceResponse) GetGetFieldsOk() (*GetFieldsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetGetFieldsOk() (*SmartsheetentityGetFieldsResponse, bool)`
 
 GetGetFieldsOk returns a tuple with the GetFields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGetFields
 
-`func (o *SmartsheetResourceResponse) SetGetFields(v GetFieldsResponse)`
+`func (o *SmartsheetResourceResponse) SetGetFields(v SmartsheetentityGetFieldsResponse)`
 
 SetGetFields sets GetFields field to given value.
 
@@ -112,20 +112,20 @@ HasGetFields returns a boolean if a field has been set.
 
 ### GetAddView
 
-`func (o *SmartsheetResourceResponse) GetAddView() AddViewResponse`
+`func (o *SmartsheetResourceResponse) GetAddView() SmartsheetentityAddViewResponse`
 
 GetAddView returns the AddView field if non-nil, zero value otherwise.
 
 ### GetAddViewOk
 
-`func (o *SmartsheetResourceResponse) GetAddViewOk() (*AddViewResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetAddViewOk() (*SmartsheetentityAddViewResponse, bool)`
 
 GetAddViewOk returns a tuple with the AddView field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddView
 
-`func (o *SmartsheetResourceResponse) SetAddView(v AddViewResponse)`
+`func (o *SmartsheetResourceResponse) SetAddView(v SmartsheetentityAddViewResponse)`
 
 SetAddView sets AddView field to given value.
 
@@ -162,20 +162,20 @@ HasDeleteViews returns a boolean if a field has been set.
 
 ### GetAddRecords
 
-`func (o *SmartsheetResourceResponse) GetAddRecords() AddRecordsResponse`
+`func (o *SmartsheetResourceResponse) GetAddRecords() SmartsheetentityAddRecordsResponse`
 
 GetAddRecords returns the AddRecords field if non-nil, zero value otherwise.
 
 ### GetAddRecordsOk
 
-`func (o *SmartsheetResourceResponse) GetAddRecordsOk() (*AddRecordsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetAddRecordsOk() (*SmartsheetentityAddRecordsResponse, bool)`
 
 GetAddRecordsOk returns a tuple with the AddRecords field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddRecords
 
-`func (o *SmartsheetResourceResponse) SetAddRecords(v AddRecordsResponse)`
+`func (o *SmartsheetResourceResponse) SetAddRecords(v SmartsheetentityAddRecordsResponse)`
 
 SetAddRecords sets AddRecords field to given value.
 
@@ -187,20 +187,20 @@ HasAddRecords returns a boolean if a field has been set.
 
 ### GetUpdateRecords
 
-`func (o *SmartsheetResourceResponse) GetUpdateRecords() UpdateRecordsResponse`
+`func (o *SmartsheetResourceResponse) GetUpdateRecords() SmartsheetentityUpdateRecordsResponse`
 
 GetUpdateRecords returns the UpdateRecords field if non-nil, zero value otherwise.
 
 ### GetUpdateRecordsOk
 
-`func (o *SmartsheetResourceResponse) GetUpdateRecordsOk() (*UpdateRecordsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetUpdateRecordsOk() (*SmartsheetentityUpdateRecordsResponse, bool)`
 
 GetUpdateRecordsOk returns a tuple with the UpdateRecords field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdateRecords
 
-`func (o *SmartsheetResourceResponse) SetUpdateRecords(v UpdateRecordsResponse)`
+`func (o *SmartsheetResourceResponse) SetUpdateRecords(v SmartsheetentityUpdateRecordsResponse)`
 
 SetUpdateRecords sets UpdateRecords field to given value.
 
@@ -237,20 +237,20 @@ HasDeleteRecords returns a boolean if a field has been set.
 
 ### GetAddFields
 
-`func (o *SmartsheetResourceResponse) GetAddFields() AddFieldsResponse`
+`func (o *SmartsheetResourceResponse) GetAddFields() SmartsheetentityAddFieldsResponse`
 
 GetAddFields returns the AddFields field if non-nil, zero value otherwise.
 
 ### GetAddFieldsOk
 
-`func (o *SmartsheetResourceResponse) GetAddFieldsOk() (*AddFieldsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetAddFieldsOk() (*SmartsheetentityAddFieldsResponse, bool)`
 
 GetAddFieldsOk returns a tuple with the AddFields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddFields
 
-`func (o *SmartsheetResourceResponse) SetAddFields(v AddFieldsResponse)`
+`func (o *SmartsheetResourceResponse) SetAddFields(v SmartsheetentityAddFieldsResponse)`
 
 SetAddFields sets AddFields field to given value.
 
@@ -262,20 +262,20 @@ HasAddFields returns a boolean if a field has been set.
 
 ### GetUpdateFields
 
-`func (o *SmartsheetResourceResponse) GetUpdateFields() UpdateFieldsResponse`
+`func (o *SmartsheetResourceResponse) GetUpdateFields() SmartsheetentityUpdateFieldsResponse`
 
 GetUpdateFields returns the UpdateFields field if non-nil, zero value otherwise.
 
 ### GetUpdateFieldsOk
 
-`func (o *SmartsheetResourceResponse) GetUpdateFieldsOk() (*UpdateFieldsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetUpdateFieldsOk() (*SmartsheetentityUpdateFieldsResponse, bool)`
 
 GetUpdateFieldsOk returns a tuple with the UpdateFields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdateFields
 
-`func (o *SmartsheetResourceResponse) SetUpdateFields(v UpdateFieldsResponse)`
+`func (o *SmartsheetResourceResponse) SetUpdateFields(v SmartsheetentityUpdateFieldsResponse)`
 
 SetUpdateFields sets UpdateFields field to given value.
 

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ret** | Pointer to **int32** |  | [optional] 
-**Msg** | Pointer to **string** |  | [optional] 
+**Ret** | **int32** |  | 
+**Msg** | **string** |  | 
 **Data** | Pointer to [**RefreshTokenRsp**](RefreshTokenRsp.md) |  | [optional] 
 
 ## Methods
 
 ### NewOAuthAPIResponse3
 
-`func NewOAuthAPIResponse3() *OAuthAPIResponse3`
+`func NewOAuthAPIResponse3(ret int32, msg string, ) *OAuthAPIResponse3`
 
 NewOAuthAPIResponse3 instantiates a new OAuthAPIResponse3 object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetRet sets Ret field to given value.
 
-### HasRet
-
-`func (o *OAuthAPIResponse3) HasRet() bool`
-
-HasRet returns a boolean if a field has been set.
 
 ### GetMsg
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetMsg sets Msg field to given value.
 
-### HasMsg
-
-`func (o *OAuthAPIResponse3) HasMsg() bool`
-
-HasMsg returns a boolean if a field has been set.
 
 ### GetData
 

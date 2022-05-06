@@ -17,24 +17,24 @@ import (
 
 // ParagraphStyle struct for ParagraphStyle
 type ParagraphStyle struct {
-	NamedStyleType *int32 `json:"namedStyleType,omitempty"`
-	Alignment *int32 `json:"alignment,omitempty"`
-	LineSpacing *DoubleValue `json:"lineSpacing,omitempty"`
-	TextDirection *int32 `json:"textDirection,omitempty"`
-	SpaceAbove *DoubleValue `json:"spaceAbove,omitempty"`
-	SpaceBelow *DoubleValue `json:"spaceBelow,omitempty"`
+	NamedStyleType *string `json:"namedStyleType,omitempty"`
+	Alignment *string `json:"alignment,omitempty"`
+	LineSpacing *GoogleProtobufDoubleValue `json:"lineSpacing,omitempty"`
+	TextDirection *string `json:"textDirection,omitempty"`
+	SpaceAbove *GoogleProtobufDoubleValue `json:"spaceAbove,omitempty"`
+	SpaceBelow *GoogleProtobufDoubleValue `json:"spaceBelow,omitempty"`
 	BorderBetween *ParagraphBorder `json:"borderBetween,omitempty"`
 	BorderTop *ParagraphBorder `json:"borderTop,omitempty"`
 	BorderBottom *ParagraphBorder `json:"borderBottom,omitempty"`
 	BorderLeft *ParagraphBorder `json:"borderLeft,omitempty"`
 	BorderRight *ParagraphBorder `json:"borderRight,omitempty"`
-	IndentFirstLine *DoubleValue `json:"indentFirstLine,omitempty"`
-	IndentStart *DoubleValue `json:"indentStart,omitempty"`
-	IndentEnd *DoubleValue `json:"indentEnd,omitempty"`
+	IndentFirstLine *GoogleProtobufDoubleValue `json:"indentFirstLine,omitempty"`
+	IndentStart *GoogleProtobufDoubleValue `json:"indentStart,omitempty"`
+	IndentEnd *GoogleProtobufDoubleValue `json:"indentEnd,omitempty"`
 	TabStops []TabStop `json:"tabStops,omitempty"`
-	KeepLinesTogether *BoolValue `json:"keepLinesTogether,omitempty"`
-	KeepWithNext *BoolValue `json:"keepWithNext,omitempty"`
-	AvoidWidowAndOrphan *BoolValue `json:"avoidWidowAndOrphan,omitempty"`
+	KeepLinesTogether *GoogleProtobufBoolValue `json:"keepLinesTogether,omitempty"`
+	KeepWithNext *GoogleProtobufBoolValue `json:"keepWithNext,omitempty"`
+	AvoidWidowAndOrphan *GoogleProtobufBoolValue `json:"avoidWidowAndOrphan,omitempty"`
 	Shading *Shading `json:"shading,omitempty"`
 }
 
@@ -56,9 +56,9 @@ func NewParagraphStyleWithDefaults() *ParagraphStyle {
 }
 
 // GetNamedStyleType returns the NamedStyleType field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetNamedStyleType() int32 {
+func (o *ParagraphStyle) GetNamedStyleType() string {
 	if o == nil || o.NamedStyleType == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.NamedStyleType
@@ -66,7 +66,7 @@ func (o *ParagraphStyle) GetNamedStyleType() int32 {
 
 // GetNamedStyleTypeOk returns a tuple with the NamedStyleType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetNamedStyleTypeOk() (*int32, bool) {
+func (o *ParagraphStyle) GetNamedStyleTypeOk() (*string, bool) {
 	if o == nil || o.NamedStyleType == nil {
 		return nil, false
 	}
@@ -82,15 +82,15 @@ func (o *ParagraphStyle) HasNamedStyleType() bool {
 	return false
 }
 
-// SetNamedStyleType gets a reference to the given int32 and assigns it to the NamedStyleType field.
-func (o *ParagraphStyle) SetNamedStyleType(v int32) {
+// SetNamedStyleType gets a reference to the given string and assigns it to the NamedStyleType field.
+func (o *ParagraphStyle) SetNamedStyleType(v string) {
 	o.NamedStyleType = &v
 }
 
 // GetAlignment returns the Alignment field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetAlignment() int32 {
+func (o *ParagraphStyle) GetAlignment() string {
 	if o == nil || o.Alignment == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.Alignment
@@ -98,7 +98,7 @@ func (o *ParagraphStyle) GetAlignment() int32 {
 
 // GetAlignmentOk returns a tuple with the Alignment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetAlignmentOk() (*int32, bool) {
+func (o *ParagraphStyle) GetAlignmentOk() (*string, bool) {
 	if o == nil || o.Alignment == nil {
 		return nil, false
 	}
@@ -114,15 +114,15 @@ func (o *ParagraphStyle) HasAlignment() bool {
 	return false
 }
 
-// SetAlignment gets a reference to the given int32 and assigns it to the Alignment field.
-func (o *ParagraphStyle) SetAlignment(v int32) {
+// SetAlignment gets a reference to the given string and assigns it to the Alignment field.
+func (o *ParagraphStyle) SetAlignment(v string) {
 	o.Alignment = &v
 }
 
 // GetLineSpacing returns the LineSpacing field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetLineSpacing() DoubleValue {
+func (o *ParagraphStyle) GetLineSpacing() GoogleProtobufDoubleValue {
 	if o == nil || o.LineSpacing == nil {
-		var ret DoubleValue
+		var ret GoogleProtobufDoubleValue
 		return ret
 	}
 	return *o.LineSpacing
@@ -130,7 +130,7 @@ func (o *ParagraphStyle) GetLineSpacing() DoubleValue {
 
 // GetLineSpacingOk returns a tuple with the LineSpacing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetLineSpacingOk() (*DoubleValue, bool) {
+func (o *ParagraphStyle) GetLineSpacingOk() (*GoogleProtobufDoubleValue, bool) {
 	if o == nil || o.LineSpacing == nil {
 		return nil, false
 	}
@@ -146,15 +146,15 @@ func (o *ParagraphStyle) HasLineSpacing() bool {
 	return false
 }
 
-// SetLineSpacing gets a reference to the given DoubleValue and assigns it to the LineSpacing field.
-func (o *ParagraphStyle) SetLineSpacing(v DoubleValue) {
+// SetLineSpacing gets a reference to the given GoogleProtobufDoubleValue and assigns it to the LineSpacing field.
+func (o *ParagraphStyle) SetLineSpacing(v GoogleProtobufDoubleValue) {
 	o.LineSpacing = &v
 }
 
 // GetTextDirection returns the TextDirection field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetTextDirection() int32 {
+func (o *ParagraphStyle) GetTextDirection() string {
 	if o == nil || o.TextDirection == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.TextDirection
@@ -162,7 +162,7 @@ func (o *ParagraphStyle) GetTextDirection() int32 {
 
 // GetTextDirectionOk returns a tuple with the TextDirection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetTextDirectionOk() (*int32, bool) {
+func (o *ParagraphStyle) GetTextDirectionOk() (*string, bool) {
 	if o == nil || o.TextDirection == nil {
 		return nil, false
 	}
@@ -178,15 +178,15 @@ func (o *ParagraphStyle) HasTextDirection() bool {
 	return false
 }
 
-// SetTextDirection gets a reference to the given int32 and assigns it to the TextDirection field.
-func (o *ParagraphStyle) SetTextDirection(v int32) {
+// SetTextDirection gets a reference to the given string and assigns it to the TextDirection field.
+func (o *ParagraphStyle) SetTextDirection(v string) {
 	o.TextDirection = &v
 }
 
 // GetSpaceAbove returns the SpaceAbove field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetSpaceAbove() DoubleValue {
+func (o *ParagraphStyle) GetSpaceAbove() GoogleProtobufDoubleValue {
 	if o == nil || o.SpaceAbove == nil {
-		var ret DoubleValue
+		var ret GoogleProtobufDoubleValue
 		return ret
 	}
 	return *o.SpaceAbove
@@ -194,7 +194,7 @@ func (o *ParagraphStyle) GetSpaceAbove() DoubleValue {
 
 // GetSpaceAboveOk returns a tuple with the SpaceAbove field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetSpaceAboveOk() (*DoubleValue, bool) {
+func (o *ParagraphStyle) GetSpaceAboveOk() (*GoogleProtobufDoubleValue, bool) {
 	if o == nil || o.SpaceAbove == nil {
 		return nil, false
 	}
@@ -210,15 +210,15 @@ func (o *ParagraphStyle) HasSpaceAbove() bool {
 	return false
 }
 
-// SetSpaceAbove gets a reference to the given DoubleValue and assigns it to the SpaceAbove field.
-func (o *ParagraphStyle) SetSpaceAbove(v DoubleValue) {
+// SetSpaceAbove gets a reference to the given GoogleProtobufDoubleValue and assigns it to the SpaceAbove field.
+func (o *ParagraphStyle) SetSpaceAbove(v GoogleProtobufDoubleValue) {
 	o.SpaceAbove = &v
 }
 
 // GetSpaceBelow returns the SpaceBelow field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetSpaceBelow() DoubleValue {
+func (o *ParagraphStyle) GetSpaceBelow() GoogleProtobufDoubleValue {
 	if o == nil || o.SpaceBelow == nil {
-		var ret DoubleValue
+		var ret GoogleProtobufDoubleValue
 		return ret
 	}
 	return *o.SpaceBelow
@@ -226,7 +226,7 @@ func (o *ParagraphStyle) GetSpaceBelow() DoubleValue {
 
 // GetSpaceBelowOk returns a tuple with the SpaceBelow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetSpaceBelowOk() (*DoubleValue, bool) {
+func (o *ParagraphStyle) GetSpaceBelowOk() (*GoogleProtobufDoubleValue, bool) {
 	if o == nil || o.SpaceBelow == nil {
 		return nil, false
 	}
@@ -242,8 +242,8 @@ func (o *ParagraphStyle) HasSpaceBelow() bool {
 	return false
 }
 
-// SetSpaceBelow gets a reference to the given DoubleValue and assigns it to the SpaceBelow field.
-func (o *ParagraphStyle) SetSpaceBelow(v DoubleValue) {
+// SetSpaceBelow gets a reference to the given GoogleProtobufDoubleValue and assigns it to the SpaceBelow field.
+func (o *ParagraphStyle) SetSpaceBelow(v GoogleProtobufDoubleValue) {
 	o.SpaceBelow = &v
 }
 
@@ -408,9 +408,9 @@ func (o *ParagraphStyle) SetBorderRight(v ParagraphBorder) {
 }
 
 // GetIndentFirstLine returns the IndentFirstLine field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetIndentFirstLine() DoubleValue {
+func (o *ParagraphStyle) GetIndentFirstLine() GoogleProtobufDoubleValue {
 	if o == nil || o.IndentFirstLine == nil {
-		var ret DoubleValue
+		var ret GoogleProtobufDoubleValue
 		return ret
 	}
 	return *o.IndentFirstLine
@@ -418,7 +418,7 @@ func (o *ParagraphStyle) GetIndentFirstLine() DoubleValue {
 
 // GetIndentFirstLineOk returns a tuple with the IndentFirstLine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetIndentFirstLineOk() (*DoubleValue, bool) {
+func (o *ParagraphStyle) GetIndentFirstLineOk() (*GoogleProtobufDoubleValue, bool) {
 	if o == nil || o.IndentFirstLine == nil {
 		return nil, false
 	}
@@ -434,15 +434,15 @@ func (o *ParagraphStyle) HasIndentFirstLine() bool {
 	return false
 }
 
-// SetIndentFirstLine gets a reference to the given DoubleValue and assigns it to the IndentFirstLine field.
-func (o *ParagraphStyle) SetIndentFirstLine(v DoubleValue) {
+// SetIndentFirstLine gets a reference to the given GoogleProtobufDoubleValue and assigns it to the IndentFirstLine field.
+func (o *ParagraphStyle) SetIndentFirstLine(v GoogleProtobufDoubleValue) {
 	o.IndentFirstLine = &v
 }
 
 // GetIndentStart returns the IndentStart field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetIndentStart() DoubleValue {
+func (o *ParagraphStyle) GetIndentStart() GoogleProtobufDoubleValue {
 	if o == nil || o.IndentStart == nil {
-		var ret DoubleValue
+		var ret GoogleProtobufDoubleValue
 		return ret
 	}
 	return *o.IndentStart
@@ -450,7 +450,7 @@ func (o *ParagraphStyle) GetIndentStart() DoubleValue {
 
 // GetIndentStartOk returns a tuple with the IndentStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetIndentStartOk() (*DoubleValue, bool) {
+func (o *ParagraphStyle) GetIndentStartOk() (*GoogleProtobufDoubleValue, bool) {
 	if o == nil || o.IndentStart == nil {
 		return nil, false
 	}
@@ -466,15 +466,15 @@ func (o *ParagraphStyle) HasIndentStart() bool {
 	return false
 }
 
-// SetIndentStart gets a reference to the given DoubleValue and assigns it to the IndentStart field.
-func (o *ParagraphStyle) SetIndentStart(v DoubleValue) {
+// SetIndentStart gets a reference to the given GoogleProtobufDoubleValue and assigns it to the IndentStart field.
+func (o *ParagraphStyle) SetIndentStart(v GoogleProtobufDoubleValue) {
 	o.IndentStart = &v
 }
 
 // GetIndentEnd returns the IndentEnd field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetIndentEnd() DoubleValue {
+func (o *ParagraphStyle) GetIndentEnd() GoogleProtobufDoubleValue {
 	if o == nil || o.IndentEnd == nil {
-		var ret DoubleValue
+		var ret GoogleProtobufDoubleValue
 		return ret
 	}
 	return *o.IndentEnd
@@ -482,7 +482,7 @@ func (o *ParagraphStyle) GetIndentEnd() DoubleValue {
 
 // GetIndentEndOk returns a tuple with the IndentEnd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetIndentEndOk() (*DoubleValue, bool) {
+func (o *ParagraphStyle) GetIndentEndOk() (*GoogleProtobufDoubleValue, bool) {
 	if o == nil || o.IndentEnd == nil {
 		return nil, false
 	}
@@ -498,8 +498,8 @@ func (o *ParagraphStyle) HasIndentEnd() bool {
 	return false
 }
 
-// SetIndentEnd gets a reference to the given DoubleValue and assigns it to the IndentEnd field.
-func (o *ParagraphStyle) SetIndentEnd(v DoubleValue) {
+// SetIndentEnd gets a reference to the given GoogleProtobufDoubleValue and assigns it to the IndentEnd field.
+func (o *ParagraphStyle) SetIndentEnd(v GoogleProtobufDoubleValue) {
 	o.IndentEnd = &v
 }
 
@@ -536,9 +536,9 @@ func (o *ParagraphStyle) SetTabStops(v []TabStop) {
 }
 
 // GetKeepLinesTogether returns the KeepLinesTogether field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetKeepLinesTogether() BoolValue {
+func (o *ParagraphStyle) GetKeepLinesTogether() GoogleProtobufBoolValue {
 	if o == nil || o.KeepLinesTogether == nil {
-		var ret BoolValue
+		var ret GoogleProtobufBoolValue
 		return ret
 	}
 	return *o.KeepLinesTogether
@@ -546,7 +546,7 @@ func (o *ParagraphStyle) GetKeepLinesTogether() BoolValue {
 
 // GetKeepLinesTogetherOk returns a tuple with the KeepLinesTogether field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetKeepLinesTogetherOk() (*BoolValue, bool) {
+func (o *ParagraphStyle) GetKeepLinesTogetherOk() (*GoogleProtobufBoolValue, bool) {
 	if o == nil || o.KeepLinesTogether == nil {
 		return nil, false
 	}
@@ -562,15 +562,15 @@ func (o *ParagraphStyle) HasKeepLinesTogether() bool {
 	return false
 }
 
-// SetKeepLinesTogether gets a reference to the given BoolValue and assigns it to the KeepLinesTogether field.
-func (o *ParagraphStyle) SetKeepLinesTogether(v BoolValue) {
+// SetKeepLinesTogether gets a reference to the given GoogleProtobufBoolValue and assigns it to the KeepLinesTogether field.
+func (o *ParagraphStyle) SetKeepLinesTogether(v GoogleProtobufBoolValue) {
 	o.KeepLinesTogether = &v
 }
 
 // GetKeepWithNext returns the KeepWithNext field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetKeepWithNext() BoolValue {
+func (o *ParagraphStyle) GetKeepWithNext() GoogleProtobufBoolValue {
 	if o == nil || o.KeepWithNext == nil {
-		var ret BoolValue
+		var ret GoogleProtobufBoolValue
 		return ret
 	}
 	return *o.KeepWithNext
@@ -578,7 +578,7 @@ func (o *ParagraphStyle) GetKeepWithNext() BoolValue {
 
 // GetKeepWithNextOk returns a tuple with the KeepWithNext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetKeepWithNextOk() (*BoolValue, bool) {
+func (o *ParagraphStyle) GetKeepWithNextOk() (*GoogleProtobufBoolValue, bool) {
 	if o == nil || o.KeepWithNext == nil {
 		return nil, false
 	}
@@ -594,15 +594,15 @@ func (o *ParagraphStyle) HasKeepWithNext() bool {
 	return false
 }
 
-// SetKeepWithNext gets a reference to the given BoolValue and assigns it to the KeepWithNext field.
-func (o *ParagraphStyle) SetKeepWithNext(v BoolValue) {
+// SetKeepWithNext gets a reference to the given GoogleProtobufBoolValue and assigns it to the KeepWithNext field.
+func (o *ParagraphStyle) SetKeepWithNext(v GoogleProtobufBoolValue) {
 	o.KeepWithNext = &v
 }
 
 // GetAvoidWidowAndOrphan returns the AvoidWidowAndOrphan field value if set, zero value otherwise.
-func (o *ParagraphStyle) GetAvoidWidowAndOrphan() BoolValue {
+func (o *ParagraphStyle) GetAvoidWidowAndOrphan() GoogleProtobufBoolValue {
 	if o == nil || o.AvoidWidowAndOrphan == nil {
-		var ret BoolValue
+		var ret GoogleProtobufBoolValue
 		return ret
 	}
 	return *o.AvoidWidowAndOrphan
@@ -610,7 +610,7 @@ func (o *ParagraphStyle) GetAvoidWidowAndOrphan() BoolValue {
 
 // GetAvoidWidowAndOrphanOk returns a tuple with the AvoidWidowAndOrphan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ParagraphStyle) GetAvoidWidowAndOrphanOk() (*BoolValue, bool) {
+func (o *ParagraphStyle) GetAvoidWidowAndOrphanOk() (*GoogleProtobufBoolValue, bool) {
 	if o == nil || o.AvoidWidowAndOrphan == nil {
 		return nil, false
 	}
@@ -626,8 +626,8 @@ func (o *ParagraphStyle) HasAvoidWidowAndOrphan() bool {
 	return false
 }
 
-// SetAvoidWidowAndOrphan gets a reference to the given BoolValue and assigns it to the AvoidWidowAndOrphan field.
-func (o *ParagraphStyle) SetAvoidWidowAndOrphan(v BoolValue) {
+// SetAvoidWidowAndOrphan gets a reference to the given GoogleProtobufBoolValue and assigns it to the AvoidWidowAndOrphan field.
+func (o *ParagraphStyle) SetAvoidWidowAndOrphan(v GoogleProtobufBoolValue) {
 	o.AvoidWidowAndOrphan = &v
 }
 

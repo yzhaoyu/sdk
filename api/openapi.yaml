@@ -15,6 +15,7 @@ servers:
 - url: https://docs.qq.com
 tags:
 - name: DocAPI
+- name: DriveAPI
 - name: OAuthAPI
 - name: ResourceAPI
 - name: SmartsheetAPI
@@ -25,28 +26,28 @@ paths:
       parameters:
       - explode: true
         in: query
-        name: clientId
+        name: client_id
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: clientSecret
+        name: client_secret
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: redirectUri
+        name: redirect_uri
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: grantType
+        name: grant_type
         required: false
         schema:
           type: string
@@ -65,12 +66,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/OAuthAPIResponse1'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       tags:
       - OAuthAPI
   /oauth/v2/userinfo:
@@ -79,28 +74,28 @@ paths:
       parameters:
       - explode: true
         in: query
-        name: clientId
+        name: client_id
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: clientSecret
+        name: client_secret
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: grantType
+        name: grant_type
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: refreshToken
+        name: refresh_token
         required: false
         schema:
           type: string
@@ -112,12 +107,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/OAuthAPIResponse3'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       tags:
       - OAuthAPI
   /openapi/doc/v3/{fileID}:
@@ -164,12 +153,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocAPIResponse2'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       security:
       - OAuth2AuthCode:
         - scope.doc.readonly
@@ -224,17 +207,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocAPIResponse1'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       security:
       - OAuth2AuthCode:
         - scope.doc.editable
       tags:
       - DocAPI
+  /openapi/drive/v2/files:
+    post:
+      description: 新建文档
+      operationId: DriveAPI_CreateFile
+      parameters:
+      - description: 访问令牌，用于标识用户和接口鉴权
+        explode: false
+        in: header
+        name: Access-Token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 应用 ID，用于标识应用和接口鉴权
+        explode: false
+        in: header
+        name: Client-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 开放平台用户 ID，用于标识用户和接口鉴权
+        explode: false
+        in: header
+        name: Open-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFileReq'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DriveAPIResponse1'
+          description: OK
+      security:
+      - OAuth2AuthCode:
+        - scope.file.creatable
+      tags:
+      - DriveAPI
   /openapi/resources/v2/images:
     post:
       description: Three required req headers
@@ -266,7 +290,7 @@ paths:
         style: simple
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: string
         required: true
@@ -277,12 +301,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourcesAPIResponse1'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       security:
       - OAuth2AuthCode:
         - scope.file.creatable
@@ -331,12 +349,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/SmartsheetAPIResponse2'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       security:
       - OAuth2AuthCode:
         - scope.smartsheet.readonly
@@ -390,12 +402,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/SmartsheetAPIResponse1'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       security:
       - OAuth2AuthCode:
         - scope.smartsheet.editable
@@ -457,12 +463,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/SmartsheetAPIResponse3'
           description: OK
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-          description: Default error response
       security:
       - OAuth2AuthCode:
         - "scope.smartsheet.editable,scope.smartsheet.readonly"
@@ -470,377 +470,6 @@ paths:
       - SmartsheetAPI
 components:
   schemas:
-    AddField:
-      example:
-        propertyImage: "{}"
-        propertyProgress:
-          decimalPlaces: 1
-        propertyCreatedUser: "{}"
-        propertyEmail: "{}"
-        propertyPhoneNumber: "{}"
-        propertyUrl:
-          type: 1
-        propertyDateTime:
-          format: format
-          autoFill: true
-        propertySelect:
-          options:
-          - style: 1
-            id: id
-            text: text
-          - style: 1
-            id: id
-            text: text
-          isQuickAdd: true
-          isMultiple: true
-        propertyAttachment: "{}"
-        propertyModifiedUser: "{}"
-        propertyUser: "{}"
-        propertyText: "{}"
-        propertyCreatedTime:
-          format: format
-        propertyModifiedTime:
-          format: format
-        fieldTitle: fieldTitle
-        fieldType: 9
-        propertySingleSelect:
-          options:
-          - style: 1
-            id: id
-            text: text
-          - style: 1
-            id: id
-            text: text
-          isQuickAdd: true
-          isMultiple: true
-        propertyCheckbox:
-          checked: true
-        propertyNumber:
-          decimalPlaces: 7
-          useSeparate: true
-      properties:
-        fieldTitle:
-          type: string
-        fieldType:
-          format: enum
-          type: integer
-        propertyText:
-          properties: {}
-          type: object
-        propertyNumber:
-          $ref: '#/components/schemas/NumberFieldProperty'
-        propertyCheckbox:
-          $ref: '#/components/schemas/CheckboxFieldProperty'
-        propertyDateTime:
-          $ref: '#/components/schemas/DateTimeFieldProperty'
-        propertyImage:
-          properties: {}
-          type: object
-        propertyAttachment:
-          properties: {}
-          type: object
-        propertyUser:
-          properties: {}
-          type: object
-        propertyUrl:
-          $ref: '#/components/schemas/UrlFieldProperty'
-        propertySelect:
-          $ref: '#/components/schemas/SelectFieldProperty'
-        propertyCreatedUser:
-          properties: {}
-          type: object
-        propertyModifiedUser:
-          properties: {}
-          type: object
-        propertyCreatedTime:
-          $ref: '#/components/schemas/CreatedTimeFieldProperty'
-        propertyModifiedTime:
-          $ref: '#/components/schemas/ModifiedTimeFieldProperty'
-        propertyProgress:
-          $ref: '#/components/schemas/ProgressFieldProperty'
-        propertyPhoneNumber:
-          properties: {}
-          type: object
-        propertyEmail:
-          properties: {}
-          type: object
-        propertySingleSelect:
-          $ref: '#/components/schemas/SingleSelectFieldProperty'
-      type: object
-    AddFieldsRequest:
-      description: 新增字段请求
-      example:
-        fields:
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle: fieldTitle
-          fieldType: 9
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle: fieldTitle
-          fieldType: 9
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
-      properties:
-        fields:
-          items:
-            $ref: '#/components/schemas/AddField'
-          type: array
-      type: object
-    AddFieldsResponse:
-      description: 新增字段回包
-      example:
-        fields:
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle:
-            value: value
-          fieldType: 4
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          fieldID: fieldID
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle:
-            value: value
-          fieldType: 4
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          fieldID: fieldID
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
-      properties:
-        fields:
-          items:
-            $ref: '#/components/schemas/FieldResource'
-          type: array
-      type: object
-    AddRecord:
-      example:
-        values:
-          key: null
-      properties:
-        values:
-          additionalProperties:
-            $ref: '#/components/schemas/GoogleProtobufValue'
-          type: object
-      type: object
-    AddRecordsRequest:
-      description: 在指定表格和子表中创建一到多条新记录请求
-      example:
-        records:
-        - values:
-            key: null
-        - values:
-            key: null
-      properties:
-        records:
-          items:
-            $ref: '#/components/schemas/AddRecord'
-          type: array
-      type: object
-    AddRecordsResponse:
-      description: 在指定表格和子表中创建一到多条新记录回包
-      example:
-        records:
-        - recordID: recordID
-          values:
-            key: null
-        - recordID: recordID
-          values:
-            key: null
-      properties:
-        records:
-          items:
-            $ref: '#/components/schemas/CommonRecord'
-          type: array
-      type: object
-    AddViewRequest:
-      description: 新建视图请求，创建一个视图
-      example:
-        viewType: 7
-        viewTitle: viewTitle
-      properties:
-        viewTitle:
-          type: string
-        viewType:
-          format: enum
-          type: integer
-      type: object
-    AddViewResponse:
-      description: 新建视图回包
-      example:
-        view:
-          viewID: viewID
-          viewType: 5
-          viewTitle: viewTitle
-      properties:
-        view:
-          $ref: '#/components/schemas/ViewResource'
-      type: object
-    AttachmentFieldProperty:
-      properties: {}
-      type: object
     BatchUpdateDocDataReq:
       description: BatchUpdateDocDataReq 批量更新 Doc 文档请求参数
       example:
@@ -858,7 +487,7 @@ components:
             text: text
           insertImage:
             imageID: imageID
-            addonSource: 2
+            addonSource: UnknownAddonSourceType
             extraData: extraData
             width: 5
             location:
@@ -869,79 +498,79 @@ components:
           insertTable:
             location:
               index: 1
-            rows: 7
-            cols: 9
+            rows: 2
+            cols: 7
           insertPageBreak:
             location:
               index: 1
           insertNumbering:
-            paragraphIndex: 3
+            paragraphIndex: 9
             pStyle:
               indentFirstLine:
-                value: 7.386281948385884
+                value: 3.616076749251911
               shading:
                 backgroundColor: backgroundColor
               indentStart:
-                value: 7.386281948385884
+                value: 3.616076749251911
               lineSpacing:
-                value: 7.386281948385884
+                value: 3.616076749251911
               borderTop:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
-              textDirection: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
+              textDirection: CONTENT_DIRECTION_UNSPECIFIED
               indentEnd:
-                value: 7.386281948385884
+                value: 3.616076749251911
               borderLeft:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               spaceAbove:
-                value: 7.386281948385884
+                value: 3.616076749251911
               keepWithNext:
                 value: true
               borderRight:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               borderBetween:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               keepLinesTogether:
                 value: true
               tabStops:
               - offset:
-                  value: 7.386281948385884
-                alignment: 6
+                  value: 3.616076749251911
+                alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
               - offset:
-                  value: 7.386281948385884
-                alignment: 6
-              alignment: 4
+                  value: 3.616076749251911
+                alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
+              alignment: ALIGNMENT_UNSPECIFIED
               borderBottom:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               avoidWidowAndOrphan:
                 value: true
-              namedStyleType: 2
+              namedStyleType: NAMED_STYLE_TYPE_UNSPECIFIED
               spaceBelow:
-                value: 7.386281948385884
+                value: 3.616076749251911
             range:
               startIndex: 0
               length: 6
@@ -955,14 +584,14 @@ components:
             displayText: displayText
             lockAspectRatio: true
             extraData: extraData
-            width: 7
-            addonType: 4
+            width: 4
+            addonType: UnknownAddonType
             location:
               index: 1
             originalURL: originalURL
             anchorID: anchorID
             addonID: addonID
-            height: 1
+            height: 7
         - insertText:
             location:
               index: 1
@@ -976,7 +605,7 @@ components:
             text: text
           insertImage:
             imageID: imageID
-            addonSource: 2
+            addonSource: UnknownAddonSourceType
             extraData: extraData
             width: 5
             location:
@@ -987,79 +616,79 @@ components:
           insertTable:
             location:
               index: 1
-            rows: 7
-            cols: 9
+            rows: 2
+            cols: 7
           insertPageBreak:
             location:
               index: 1
           insertNumbering:
-            paragraphIndex: 3
+            paragraphIndex: 9
             pStyle:
               indentFirstLine:
-                value: 7.386281948385884
+                value: 3.616076749251911
               shading:
                 backgroundColor: backgroundColor
               indentStart:
-                value: 7.386281948385884
+                value: 3.616076749251911
               lineSpacing:
-                value: 7.386281948385884
+                value: 3.616076749251911
               borderTop:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
-              textDirection: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
+              textDirection: CONTENT_DIRECTION_UNSPECIFIED
               indentEnd:
-                value: 7.386281948385884
+                value: 3.616076749251911
               borderLeft:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               spaceAbove:
-                value: 7.386281948385884
+                value: 3.616076749251911
               keepWithNext:
                 value: true
               borderRight:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               borderBetween:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               keepLinesTogether:
                 value: true
               tabStops:
               - offset:
-                  value: 7.386281948385884
-                alignment: 6
+                  value: 3.616076749251911
+                alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
               - offset:
-                  value: 7.386281948385884
-                alignment: 6
-              alignment: 4
+                  value: 3.616076749251911
+                alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
+              alignment: ALIGNMENT_UNSPECIFIED
               borderBottom:
                 padding:
-                  value: 1
+                  value: 2
                 color: color
                 width:
-                  value: 1
-                borderStyle: 1
+                  value: 2
+                borderStyle: DASH_STYLE_UNSPECIFIED
               avoidWidowAndOrphan:
                 value: true
-              namedStyleType: 2
+              namedStyleType: NAMED_STYLE_TYPE_UNSPECIFIED
               spaceBelow:
-                value: 7.386281948385884
+                value: 3.616076749251911
             range:
               startIndex: 0
               length: 6
@@ -1073,14 +702,14 @@ components:
             displayText: displayText
             lockAspectRatio: true
             extraData: extraData
-            width: 7
-            addonType: 4
+            width: 4
+            addonType: UnknownAddonType
             location:
               index: 1
             originalURL: originalURL
             anchorID: anchorID
             addonID: addonID
-            height: 1
+            height: 7
         fileID: fileID
       properties:
         fileID:
@@ -1097,55 +726,25 @@ components:
       description: BatchUpdateDocDataRsp 批量更新 Doc 文档响应
       properties: {}
       type: object
-    BoolValue:
-      description: Wrapper message for `bool`. The JSON representation for `BoolValue`
-        is JSON `true` and `false`.
+    CreateFileReq:
+      description: '************************************ DriveAPI Definition *****************************************'
       example:
-        value: true
+        title: title
+        type: type
+        templateID: templateID
+        folderID: folderID
       properties:
-        value:
-          description: The bool value.
-          type: boolean
-      type: object
-    CheckboxFieldProperty:
-      example:
-        checked: true
-      properties:
-        checked:
-          type: boolean
-      type: object
-    CommonRecord:
-      example:
-        recordID: recordID
-        values:
-          key: null
-      properties:
-        recordID:
+        title:
           type: string
-        values:
-          additionalProperties:
-            $ref: '#/components/schemas/GoogleProtobufValue'
-          type: object
-      type: object
-    CreatedTimeFieldProperty:
-      example:
-        format: format
-      properties:
-        format:
+        type:
           type: string
-      type: object
-    CreatedUserFieldProperty:
-      properties: {}
-      type: object
-    DateTimeFieldProperty:
-      example:
-        format: format
-        autoFill: true
-      properties:
-        format:
+        templateID:
           type: string
-        autoFill:
-          type: boolean
+        folderID:
+          type: string
+      required:
+      - title
+      - type
       type: object
     DeleteContentRequest:
       example:
@@ -1156,59 +755,7 @@ components:
         range:
           $ref: '#/components/schemas/Range'
       type: object
-    DeleteFieldsRequest:
-      description: 删除字段请求
-      example:
-        fieldIDs:
-        - fieldIDs
-        - fieldIDs
-      properties:
-        fieldIDs:
-          items:
-            type: string
-          type: array
-      type: object
-    DeleteFieldsResponse:
-      description: 删除字段回包
-      properties: {}
-      type: object
-    DeleteRecordsRequest:
-      description: 删除指定表格和子表中的一到多条记录请求
-      example:
-        recordIDs:
-        - recordIDs
-        - recordIDs
-      properties:
-        recordIDs:
-          items:
-            type: string
-          type: array
-      type: object
-    DeleteRecordsResponse:
-      description: 删除指定表格和子表中的一到多条记录回包
-      properties: {}
-      type: object
-    DeleteViewsRequest:
-      description: 删除指定表格指定子表中的指定视图请求
-      example:
-        viewIDs:
-        - viewIDs
-        - viewIDs
-      properties:
-        viewIDs:
-          items:
-            type: string
-          type: array
-      type: object
-    DeleteViewsResponse:
-      description: 删除指定表格指定子表中的指定视图回包
-      properties: {}
-      type: object
     DocAPIResponse1:
-      example:
-        ret: 0
-        msg: msg
-        data: "{}"
       properties:
         ret:
           format: int32
@@ -1219,22 +766,11 @@ components:
           description: BatchUpdateDocDataRsp 批量更新 Doc 文档响应
           properties: {}
           type: object
+      required:
+      - msg
+      - ret
       type: object
     DocAPIResponse2:
-      example:
-        ret: 0
-        msg: msg
-        data:
-          document:
-            children:
-            - null
-            - null
-            property:
-              key: null
-            end: 1
-            text: text
-            type: type
-            begin: 6
       properties:
         ret:
           format: int32
@@ -1243,17 +779,22 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/GetDocFullTextRsp'
+      required:
+      - msg
+      - ret
       type: object
-    DoubleValue:
-      description: Wrapper message for `double`. The JSON representation for `DoubleValue`
-        is JSON number.
-      example:
-        value: 7.386281948385884
+    DriveAPIResponse1:
       properties:
-        value:
-          description: The double value.
-          format: double
-          type: number
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/FileInfo'
+      required:
+      - msg
+      - ret
       type: object
     EditSubSheetRequest:
       description: EditSheetRequest 编辑子表请求，创建、删除 Smartsheet 子表
@@ -1261,7 +802,7 @@ components:
         addSheet:
           properties:
             sheetID: sheetID
-            index: 6
+            index: 0
             title: title
         deleteSheet:
           sheetID: sheetID
@@ -1278,13 +819,6 @@ components:
       type: object
     EditSubSheetResponse:
       description: EditSheetResponse 编辑子表响应，创建、删除 Smartsheet 子表
-      example:
-        addSheet:
-          properties:
-            sheetID: sheetID
-            index: 6
-            title: title
-        deleteSheet: "{}"
       properties:
         addSheet:
           $ref: '#/components/schemas/SmartsheetAddSheetRsp'
@@ -1292,353 +826,51 @@ components:
           properties: {}
           type: object
       type: object
-    EmailFieldProperty:
-      properties: {}
-      type: object
-    FieldResource:
-      example:
-        propertyImage: "{}"
-        propertyProgress:
-          decimalPlaces: 1
-        propertyCreatedUser: "{}"
-        propertyEmail: "{}"
-        propertyPhoneNumber: "{}"
-        propertyUrl:
-          type: 1
-        propertyDateTime:
-          format: format
-          autoFill: true
-        propertySelect:
-          options:
-          - style: 1
-            id: id
-            text: text
-          - style: 1
-            id: id
-            text: text
-          isQuickAdd: true
-          isMultiple: true
-        propertyAttachment: "{}"
-        propertyModifiedUser: "{}"
-        propertyUser: "{}"
-        propertyText: "{}"
-        propertyCreatedTime:
-          format: format
-        propertyModifiedTime:
-          format: format
-        fieldTitle:
-          value: value
-        fieldType: 4
-        propertySingleSelect:
-          options:
-          - style: 1
-            id: id
-            text: text
-          - style: 1
-            id: id
-            text: text
-          isQuickAdd: true
-          isMultiple: true
-        propertyCheckbox:
-          checked: true
-        fieldID: fieldID
-        propertyNumber:
-          decimalPlaces: 7
-          useSeparate: true
+    FileInfo:
       properties:
-        fieldID:
+        id:
           type: string
-        fieldTitle:
-          $ref: '#/components/schemas/StringValue'
-        fieldType:
-          format: enum
+        title:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        status:
+          type: string
+        isCreator:
+          type: boolean
+        createTime:
+          format: uint32
           type: integer
-        propertyText:
-          properties: {}
-          type: object
-        propertyNumber:
-          $ref: '#/components/schemas/NumberFieldProperty'
-        propertyCheckbox:
-          $ref: '#/components/schemas/CheckboxFieldProperty'
-        propertyDateTime:
-          $ref: '#/components/schemas/DateTimeFieldProperty'
-        propertyImage:
-          properties: {}
-          type: object
-        propertyAttachment:
-          properties: {}
-          type: object
-        propertyUser:
-          properties: {}
-          type: object
-        propertyUrl:
-          $ref: '#/components/schemas/UrlFieldProperty'
-        propertySelect:
-          $ref: '#/components/schemas/SelectFieldProperty'
-        propertyCreatedUser:
-          properties: {}
-          type: object
-        propertyModifiedUser:
-          properties: {}
-          type: object
-        propertyCreatedTime:
-          $ref: '#/components/schemas/CreatedTimeFieldProperty'
-        propertyModifiedTime:
-          $ref: '#/components/schemas/ModifiedTimeFieldProperty'
-        propertyProgress:
-          $ref: '#/components/schemas/ProgressFieldProperty'
-        propertyPhoneNumber:
-          properties: {}
-          type: object
-        propertyEmail:
-          properties: {}
-          type: object
-        propertySingleSelect:
-          $ref: '#/components/schemas/SingleSelectFieldProperty'
+        creatorName:
+          type: string
+        isOwner:
+          type: boolean
+        ownerName:
+          type: string
+        lastModifyTime:
+          format: uint32
+          type: integer
+        lastModifyName:
+          type: string
+        relativeFiles:
+          items:
+            $ref: '#/components/schemas/RelativeFiles'
+          type: array
+        formCollectingStatus:
+          type: string
+        formCollectingEndTime:
+          format: int64
+          type: integer
       type: object
     GetDocFullTextRsp:
-      example:
-        document:
-          children:
-          - null
-          - null
-          property:
-            key: null
-          end: 1
-          text: text
-          type: type
-          begin: 6
       properties:
         document:
           $ref: '#/components/schemas/Node'
       type: object
-    GetFieldsRequest:
-      description: 获取指定表格和子表中的所有字段请求
-      example:
-        viewID: viewID
-        fieldTitles:
-        - fieldTitles
-        - fieldTitles
-        offset: 5
-        limit: 2
-        fieldIDs:
-        - fieldIDs
-        - fieldIDs
-      properties:
-        viewID:
-          type: string
-        fieldIDs:
-          items:
-            type: string
-          type: array
-        fieldTitles:
-          items:
-            type: string
-          type: array
-        offset:
-          format: uint32
-          type: integer
-        limit:
-          format: uint32
-          type: integer
-      type: object
-    GetFieldsResponse:
-      description: 获取指定表格和子表中的所有字段回包
-      example:
-        next: 2
-        total: 3
-        hasMore: true
-        fields:
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle:
-            value: value
-          fieldType: 4
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          fieldID: fieldID
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle:
-            value: value
-          fieldType: 4
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          fieldID: fieldID
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
-      properties:
-        total:
-          format: uint32
-          type: integer
-        hasMore:
-          type: boolean
-        next:
-          format: uint32
-          type: integer
-        fields:
-          items:
-            $ref: '#/components/schemas/FieldResource'
-          type: array
-      type: object
-    GetRecordsRequest:
-      description: 获取指定表格和子表下指定视图中的所有记录、指定返回记录里要包含的字段、获取指定筛选条件和指定数量的记录三个接口合一
-      example:
-        viewID: viewID
-        fieldTitles:
-        - fieldTitles
-        - fieldTitles
-        offset: 1
-        limit: 5
-        sort:
-        - "1": "1"
-          "2": true
-        - "1": "1"
-          "2": true
-        recordIDs:
-        - recordIDs
-        - recordIDs
-      properties:
-        viewID:
-          type: string
-        recordIDs:
-          items:
-            type: string
-          type: array
-        fieldTitles:
-          items:
-            type: string
-          type: array
-        sort:
-          items:
-            $ref: '#/components/schemas/SortInfo'
-          type: array
-        offset:
-          format: uint32
-          type: integer
-        limit:
-          format: uint32
-          type: integer
-      type: object
-    GetRecordsResponse:
-      description: 获取指定表格和子表下指定视图中的所有记录回包
-      example:
-        next: 2
-        total: 5
-        records:
-        - recordID: recordID
-          createTime: 7
-          values:
-            key: null
-          updateTime: 9
-        - recordID: recordID
-          createTime: 7
-          values:
-            key: null
-          updateTime: 9
-        hasMore: true
-      properties:
-        total:
-          format: uint32
-          type: integer
-        hasMore:
-          type: boolean
-        next:
-          format: uint32
-          type: integer
-        records:
-          items:
-            $ref: '#/components/schemas/RecordResource'
-          type: array
-      type: object
     GetSubSheetResponse:
       description: GetSubSheetResponse 查询 Smartsheet 子表信息响应
-      example:
-        getSheet:
-        - sheetID: sheetID
-          isVisible: true
-          title: title
-        - sheetID: sheetID
-          isVisible: true
-          title: title
       properties:
         getSheet:
           items:
@@ -1646,24 +878,17 @@ components:
           type: array
       type: object
     GetTokenRsp:
-      example:
-        expiresIn: 6
-        scope: scope
-        accessToken: accessToken
-        tokenType: tokenType
-        userId: userId
-        refreshToken: refreshToken
       properties:
-        accessToken:
+        access_token:
           type: string
-        tokenType:
+        token_type:
           type: string
-        expiresIn:
+        expires_in:
           format: int64
           type: integer
-        refreshToken:
+        refresh_token:
           type: string
-        userId:
+        user_id:
           type: string
         scope:
           type: string
@@ -1679,72 +904,10 @@ components:
         source:
           type: string
       type: object
-    GetViewsRequest:
-      description: 获取所有视图请求
-      example:
-        viewIDs:
-        - viewIDs
-        - viewIDs
-        offset: 0
-        limit: 6
-      properties:
-        viewIDs:
-          items:
-            type: string
-          type: array
-        offset:
-          format: uint32
-          type: integer
-        limit:
-          format: uint32
-          type: integer
-      type: object
-    GetViewsResponse:
-      description: 获取指定表格指定子表中的所有视图回包
-      example:
-        next: 1
-        total: 6
-        hasMore: true
-        views:
-        - viewID: viewID
-          viewType: 5
-          viewTitle: viewTitle
-        - viewID: viewID
-          viewType: 5
-          viewTitle: viewTitle
-      properties:
-        total:
-          format: uint32
-          type: integer
-        hasMore:
-          type: boolean
-        next:
-          format: uint32
-          type: integer
-        views:
-          items:
-            $ref: '#/components/schemas/ViewResource'
-          type: array
-      type: object
-    GoogleProtobufAny:
-      additionalProperties: true
-      description: Contains an arbitrary serialized message along with a @type that
-        describes the type of the serialized message.
-      properties:
-        '@type':
-          description: The type of the serialized message.
-          type: string
-      type: object
-    GoogleProtobufValue:
-      description: "Represents a dynamically typed value which can be either null,\
-        \ a number, a string, a boolean, a recursive struct value, or a list of values."
-    ImageFieldProperty:
-      properties: {}
-      type: object
     InsertImageRequest:
       example:
         imageID: imageID
-        addonSource: 2
+        addonSource: UnknownAddonSourceType
         extraData: extraData
         width: 5
         location:
@@ -1768,8 +931,14 @@ components:
           type: integer
         addonSource:
           description: 业务来源
+          enum:
+          - UnknownAddonSourceType
+          - NONE
+          - LATEX
+          - SIGN
+          - SIGNBAR
           format: enum
-          type: integer
+          type: string
         addonID:
           description: 插件ID
           type: string
@@ -1785,73 +954,73 @@ components:
       type: object
     InsertNumberingRequest:
       example:
-        paragraphIndex: 3
+        paragraphIndex: 9
         pStyle:
           indentFirstLine:
-            value: 7.386281948385884
+            value: 3.616076749251911
           shading:
             backgroundColor: backgroundColor
           indentStart:
-            value: 7.386281948385884
+            value: 3.616076749251911
           lineSpacing:
-            value: 7.386281948385884
+            value: 3.616076749251911
           borderTop:
             padding:
-              value: 1
+              value: 2
             color: color
             width:
-              value: 1
-            borderStyle: 1
-          textDirection: 1
+              value: 2
+            borderStyle: DASH_STYLE_UNSPECIFIED
+          textDirection: CONTENT_DIRECTION_UNSPECIFIED
           indentEnd:
-            value: 7.386281948385884
+            value: 3.616076749251911
           borderLeft:
             padding:
-              value: 1
+              value: 2
             color: color
             width:
-              value: 1
-            borderStyle: 1
+              value: 2
+            borderStyle: DASH_STYLE_UNSPECIFIED
           spaceAbove:
-            value: 7.386281948385884
+            value: 3.616076749251911
           keepWithNext:
             value: true
           borderRight:
             padding:
-              value: 1
+              value: 2
             color: color
             width:
-              value: 1
-            borderStyle: 1
+              value: 2
+            borderStyle: DASH_STYLE_UNSPECIFIED
           borderBetween:
             padding:
-              value: 1
+              value: 2
             color: color
             width:
-              value: 1
-            borderStyle: 1
+              value: 2
+            borderStyle: DASH_STYLE_UNSPECIFIED
           keepLinesTogether:
             value: true
           tabStops:
           - offset:
-              value: 7.386281948385884
-            alignment: 6
+              value: 3.616076749251911
+            alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
           - offset:
-              value: 7.386281948385884
-            alignment: 6
-          alignment: 4
+              value: 3.616076749251911
+            alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
+          alignment: ALIGNMENT_UNSPECIFIED
           borderBottom:
             padding:
-              value: 1
+              value: 2
             color: color
             width:
-              value: 1
-            borderStyle: 1
+              value: 2
+            borderStyle: DASH_STYLE_UNSPECIFIED
           avoidWidowAndOrphan:
             value: true
-          namedStyleType: 2
+          namedStyleType: NAMED_STYLE_TYPE_UNSPECIFIED
           spaceBelow:
-            value: 7.386281948385884
+            value: 3.616076749251911
         range:
           startIndex: 0
           length: 6
@@ -1879,8 +1048,8 @@ components:
       example:
         location:
           index: 1
-        rows: 7
-        cols: 9
+        rows: 2
+        cols: 7
       properties:
         location:
           $ref: '#/components/schemas/Location'
@@ -1911,14 +1080,14 @@ components:
         displayText: displayText
         lockAspectRatio: true
         extraData: extraData
-        width: 7
-        addonType: 4
+        width: 4
+        addonType: UnknownAddonType
         location:
           index: 1
         originalURL: originalURL
         anchorID: anchorID
         addonID: addonID
-        height: 1
+        height: 7
       properties:
         location:
           $ref: '#/components/schemas/Location'
@@ -1946,8 +1115,20 @@ components:
           description: 插件展示的URL
           type: string
         addonType:
+          enum:
+          - UnknownAddonType
+          - TencentVideo
+          - BiliBili
+          - ProcessOn
+          - EverNote
+          - Canva
+          - Modao
+          - Moke
+          - QQMusic
+          - YuntuCAD
+          - ThirdApp
           format: enum
-          type: integer
+          type: string
         extraData:
           description: 插件扩展字段
           type: string
@@ -1972,27 +1153,7 @@ components:
       required:
       - index
       type: object
-    ModifiedTimeFieldProperty:
-      example:
-        format: format
-      properties:
-        format:
-          type: string
-      type: object
-    ModifiedUserFieldProperty:
-      properties: {}
-      type: object
     Node:
-      example:
-        children:
-        - null
-        - null
-        property:
-          key: null
-        end: 1
-        text: text
-        type: type
-        begin: 6
       properties:
         begin:
           format: uint32
@@ -2010,31 +1171,10 @@ components:
           type: string
         property:
           additionalProperties:
-            $ref: '#/components/schemas/GoogleProtobufValue'
+            $ref: '#/components/schemas/google.protobuf.Value'
           type: object
       type: object
-    NumberFieldProperty:
-      example:
-        decimalPlaces: 7
-        useSeparate: true
-      properties:
-        decimalPlaces:
-          format: int32
-          type: integer
-        useSeparate:
-          type: boolean
-      type: object
     OAuthAPIResponse1:
-      example:
-        ret: 0
-        msg: msg
-        data:
-          expiresIn: 6
-          scope: scope
-          accessToken: accessToken
-          tokenType: tokenType
-          userId: userId
-          refreshToken: refreshToken
       properties:
         ret:
           format: int32
@@ -2043,6 +1183,9 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/GetTokenRsp'
+      required:
+      - msg
+      - ret
       type: object
     OAuthAPIResponse2:
       properties:
@@ -2053,17 +1196,11 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/GetUserInfoRsp'
+      required:
+      - msg
+      - ret
       type: object
     OAuthAPIResponse3:
-      example:
-        ret: 0
-        msg: msg
-        data:
-          expiresIn: 6
-          scope: scope
-          accessToken: accessToken
-          tokenType: tokenType
-          userId: userId
       properties:
         ret:
           format: int32
@@ -2072,123 +1209,144 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/RefreshTokenRsp'
-      type: object
-    Option:
-      example:
-        style: 1
-        id: id
-        text: text
-      properties:
-        id:
-          type: string
-        text:
-          type: string
-        style:
-          format: int32
-          type: integer
+      required:
+      - msg
+      - ret
       type: object
     ParagraphBorder:
       example:
         padding:
-          value: 1
+          value: 2
         color: color
         width:
-          value: 1
-        borderStyle: 1
+          value: 2
+        borderStyle: DASH_STYLE_UNSPECIFIED
       properties:
         color:
           type: string
         width:
-          $ref: '#/components/schemas/UInt32Value'
+          $ref: '#/components/schemas/google.protobuf.UInt32Value'
         padding:
-          $ref: '#/components/schemas/UInt32Value'
+          $ref: '#/components/schemas/google.protobuf.UInt32Value'
         borderStyle:
+          enum:
+          - DASH_STYLE_UNSPECIFIED
+          - SINGLE
+          - THICK
+          - DOUBLE
+          - DOTTED
+          - DASHED
+          - DOTDASH
+          - DOTDOTDASH
           format: enum
-          type: integer
+          type: string
       type: object
     ParagraphStyle:
       example:
         indentFirstLine:
-          value: 7.386281948385884
+          value: 3.616076749251911
         shading:
           backgroundColor: backgroundColor
         indentStart:
-          value: 7.386281948385884
+          value: 3.616076749251911
         lineSpacing:
-          value: 7.386281948385884
+          value: 3.616076749251911
         borderTop:
           padding:
-            value: 1
+            value: 2
           color: color
           width:
-            value: 1
-          borderStyle: 1
-        textDirection: 1
+            value: 2
+          borderStyle: DASH_STYLE_UNSPECIFIED
+        textDirection: CONTENT_DIRECTION_UNSPECIFIED
         indentEnd:
-          value: 7.386281948385884
+          value: 3.616076749251911
         borderLeft:
           padding:
-            value: 1
+            value: 2
           color: color
           width:
-            value: 1
-          borderStyle: 1
+            value: 2
+          borderStyle: DASH_STYLE_UNSPECIFIED
         spaceAbove:
-          value: 7.386281948385884
+          value: 3.616076749251911
         keepWithNext:
           value: true
         borderRight:
           padding:
-            value: 1
+            value: 2
           color: color
           width:
-            value: 1
-          borderStyle: 1
+            value: 2
+          borderStyle: DASH_STYLE_UNSPECIFIED
         borderBetween:
           padding:
-            value: 1
+            value: 2
           color: color
           width:
-            value: 1
-          borderStyle: 1
+            value: 2
+          borderStyle: DASH_STYLE_UNSPECIFIED
         keepLinesTogether:
           value: true
         tabStops:
         - offset:
-            value: 7.386281948385884
-          alignment: 6
+            value: 3.616076749251911
+          alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
         - offset:
-            value: 7.386281948385884
-          alignment: 6
-        alignment: 4
+            value: 3.616076749251911
+          alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
+        alignment: ALIGNMENT_UNSPECIFIED
         borderBottom:
           padding:
-            value: 1
+            value: 2
           color: color
           width:
-            value: 1
-          borderStyle: 1
+            value: 2
+          borderStyle: DASH_STYLE_UNSPECIFIED
         avoidWidowAndOrphan:
           value: true
-        namedStyleType: 2
+        namedStyleType: NAMED_STYLE_TYPE_UNSPECIFIED
         spaceBelow:
-          value: 7.386281948385884
+          value: 3.616076749251911
       properties:
         namedStyleType:
+          enum:
+          - NAMED_STYLE_TYPE_UNSPECIFIED
+          - NORMAL_TEXT
+          - TITLE
+          - SUBTITLE
+          - HEADING_1
+          - HEADING_2
+          - HEADING_3
+          - HEADING_4
+          - HEADING_5
+          - HEADING_6
           format: enum
-          type: integer
+          type: string
         alignment:
+          enum:
+          - ALIGNMENT_UNSPECIFIED
+          - ALIGNMENT_TOP
+          - ALIGNMENT_CENTER
+          - ALIGNMENT_BASELINE
+          - ALIGNMENT_BOTTOM
+          - ALIGNMENT_AUTO
           format: enum
-          type: integer
+          type: string
         lineSpacing:
-          $ref: '#/components/schemas/DoubleValue'
+          $ref: '#/components/schemas/google.protobuf.DoubleValue'
         textDirection:
+          enum:
+          - CONTENT_DIRECTION_UNSPECIFIED
+          - LEFT_TO_RIGHT
+          - RIGHT_TO_LEFT
+          - TOP_TO_BOTTOM
           format: enum
-          type: integer
+          type: string
         spaceAbove:
-          $ref: '#/components/schemas/DoubleValue'
+          $ref: '#/components/schemas/google.protobuf.DoubleValue'
         spaceBelow:
-          $ref: '#/components/schemas/DoubleValue'
+          $ref: '#/components/schemas/google.protobuf.DoubleValue'
         borderBetween:
           $ref: '#/components/schemas/ParagraphBorder'
         borderTop:
@@ -2200,34 +1358,23 @@ components:
         borderRight:
           $ref: '#/components/schemas/ParagraphBorder'
         indentFirstLine:
-          $ref: '#/components/schemas/DoubleValue'
+          $ref: '#/components/schemas/google.protobuf.DoubleValue'
         indentStart:
-          $ref: '#/components/schemas/DoubleValue'
+          $ref: '#/components/schemas/google.protobuf.DoubleValue'
         indentEnd:
-          $ref: '#/components/schemas/DoubleValue'
+          $ref: '#/components/schemas/google.protobuf.DoubleValue'
         tabStops:
           items:
             $ref: '#/components/schemas/TabStop'
           type: array
         keepLinesTogether:
-          $ref: '#/components/schemas/BoolValue'
+          $ref: '#/components/schemas/google.protobuf.BoolValue'
         keepWithNext:
-          $ref: '#/components/schemas/BoolValue'
+          $ref: '#/components/schemas/google.protobuf.BoolValue'
         avoidWidowAndOrphan:
-          $ref: '#/components/schemas/BoolValue'
+          $ref: '#/components/schemas/google.protobuf.BoolValue'
         shading:
           $ref: '#/components/schemas/Shading'
-      type: object
-    PhoneNumberFieldProperty:
-      properties: {}
-      type: object
-    ProgressFieldProperty:
-      example:
-        decimalPlaces: 1
-      properties:
-        decimalPlaces:
-          format: int32
-          type: integer
       type: object
     Range:
       example:
@@ -2244,45 +1391,27 @@ components:
       - length
       - startIndex
       type: object
-    RecordResource:
-      example:
-        recordID: recordID
-        createTime: 7
-        values:
-          key: null
-        updateTime: 9
-      properties:
-        recordID:
-          type: string
-        createTime:
-          format: int64
-          type: integer
-        updateTime:
-          format: int64
-          type: integer
-        values:
-          additionalProperties:
-            $ref: '#/components/schemas/GoogleProtobufValue'
-          type: object
-      type: object
     RefreshTokenRsp:
-      example:
-        expiresIn: 6
-        scope: scope
-        accessToken: accessToken
-        tokenType: tokenType
-        userId: userId
       properties:
-        accessToken:
+        access_token:
           type: string
-        tokenType:
+        token_type:
           type: string
-        expiresIn:
+        expires_in:
           format: int64
           type: integer
-        userId:
+        user_id:
           type: string
         scope:
+          type: string
+      type: object
+    RelativeFiles:
+      properties:
+        fileID:
+          type: string
+        tabID:
+          type: string
+        fileURL:
           type: string
       type: object
     ReplaceTextRequest:
@@ -2316,7 +1445,7 @@ components:
           text: text
         insertImage:
           imageID: imageID
-          addonSource: 2
+          addonSource: UnknownAddonSourceType
           extraData: extraData
           width: 5
           location:
@@ -2327,79 +1456,79 @@ components:
         insertTable:
           location:
             index: 1
-          rows: 7
-          cols: 9
+          rows: 2
+          cols: 7
         insertPageBreak:
           location:
             index: 1
         insertNumbering:
-          paragraphIndex: 3
+          paragraphIndex: 9
           pStyle:
             indentFirstLine:
-              value: 7.386281948385884
+              value: 3.616076749251911
             shading:
               backgroundColor: backgroundColor
             indentStart:
-              value: 7.386281948385884
+              value: 3.616076749251911
             lineSpacing:
-              value: 7.386281948385884
+              value: 3.616076749251911
             borderTop:
               padding:
-                value: 1
+                value: 2
               color: color
               width:
-                value: 1
-              borderStyle: 1
-            textDirection: 1
+                value: 2
+              borderStyle: DASH_STYLE_UNSPECIFIED
+            textDirection: CONTENT_DIRECTION_UNSPECIFIED
             indentEnd:
-              value: 7.386281948385884
+              value: 3.616076749251911
             borderLeft:
               padding:
-                value: 1
+                value: 2
               color: color
               width:
-                value: 1
-              borderStyle: 1
+                value: 2
+              borderStyle: DASH_STYLE_UNSPECIFIED
             spaceAbove:
-              value: 7.386281948385884
+              value: 3.616076749251911
             keepWithNext:
               value: true
             borderRight:
               padding:
-                value: 1
+                value: 2
               color: color
               width:
-                value: 1
-              borderStyle: 1
+                value: 2
+              borderStyle: DASH_STYLE_UNSPECIFIED
             borderBetween:
               padding:
-                value: 1
+                value: 2
               color: color
               width:
-                value: 1
-              borderStyle: 1
+                value: 2
+              borderStyle: DASH_STYLE_UNSPECIFIED
             keepLinesTogether:
               value: true
             tabStops:
             - offset:
-                value: 7.386281948385884
-              alignment: 6
+                value: 3.616076749251911
+              alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
             - offset:
-                value: 7.386281948385884
-              alignment: 6
-            alignment: 4
+                value: 3.616076749251911
+              alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
+            alignment: ALIGNMENT_UNSPECIFIED
             borderBottom:
               padding:
-                value: 1
+                value: 2
               color: color
               width:
-                value: 1
-              borderStyle: 1
+                value: 2
+              borderStyle: DASH_STYLE_UNSPECIFIED
             avoidWidowAndOrphan:
               value: true
-            namedStyleType: 2
+            namedStyleType: NAMED_STYLE_TYPE_UNSPECIFIED
             spaceBelow:
-              value: 7.386281948385884
+              value: 3.616076749251911
           range:
             startIndex: 0
             length: 6
@@ -2413,14 +1542,14 @@ components:
           displayText: displayText
           lockAspectRatio: true
           extraData: extraData
-          width: 7
-          addonType: 4
+          width: 4
+          addonType: UnknownAddonType
           location:
             index: 1
           originalURL: originalURL
           anchorID: anchorID
           addonID: addonID
-          height: 1
+          height: 7
       properties:
         replaceText:
           $ref: '#/components/schemas/ReplaceTextRequest'
@@ -2440,11 +1569,6 @@ components:
           $ref: '#/components/schemas/InsertWebBlockRequest'
       type: object
     ResourcesAPIResponse1:
-      example:
-        ret: 0
-        msg: msg
-        data:
-          imageID: imageID
       properties:
         ret:
           format: int32
@@ -2453,27 +1577,9 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/UploadImageRsp'
-      type: object
-    SelectFieldProperty:
-      example:
-        options:
-        - style: 1
-          id: id
-          text: text
-        - style: 1
-          id: id
-          text: text
-        isQuickAdd: true
-        isMultiple: true
-      properties:
-        isMultiple:
-          type: boolean
-        isQuickAdd:
-          type: boolean
-        options:
-          items:
-            $ref: '#/components/schemas/Option'
-          type: array
+      required:
+      - msg
+      - ret
       type: object
     Shading:
       example:
@@ -2483,10 +1589,6 @@ components:
           type: string
       type: object
     SheetData:
-      example:
-        sheetID: sheetID
-        isVisible: true
-        title: title
       properties:
         sheetID:
           type: string
@@ -2498,7 +1600,7 @@ components:
     SheetProperties:
       example:
         sheetID: sheetID
-        index: 6
+        index: 0
         title: title
       properties:
         sheetID:
@@ -2509,38 +1611,7 @@ components:
           format: int32
           type: integer
       type: object
-    SingleSelectFieldProperty:
-      example:
-        options:
-        - style: 1
-          id: id
-          text: text
-        - style: 1
-          id: id
-          text: text
-        isQuickAdd: true
-        isMultiple: true
-      properties:
-        isMultiple:
-          type: boolean
-        isQuickAdd:
-          type: boolean
-        options:
-          items:
-            $ref: '#/components/schemas/Option'
-          type: array
-      type: object
     SmartsheetAPIResponse1:
-      example:
-        ret: 0
-        msg: msg
-        data:
-          addSheet:
-            properties:
-              sheetID: sheetID
-              index: 6
-              title: title
-          deleteSheet: "{}"
       properties:
         ret:
           format: int32
@@ -2549,19 +1620,11 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/EditSubSheetResponse'
+      required:
+      - msg
+      - ret
       type: object
     SmartsheetAPIResponse2:
-      example:
-        ret: 0
-        msg: msg
-        data:
-          getSheet:
-          - sheetID: sheetID
-            isVisible: true
-            title: title
-          - sheetID: sheetID
-            isVisible: true
-            title: title
       properties:
         ret:
           format: int32
@@ -2570,359 +1633,11 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/GetSubSheetResponse'
+      required:
+      - msg
+      - ret
       type: object
     SmartsheetAPIResponse3:
-      example:
-        ret: 0
-        msg: msg
-        data:
-          getFields:
-            next: 2
-            total: 3
-            hasMore: true
-            fields:
-            - propertyImage: "{}"
-              propertyProgress:
-                decimalPlaces: 1
-              propertyCreatedUser: "{}"
-              propertyEmail: "{}"
-              propertyPhoneNumber: "{}"
-              propertyUrl:
-                type: 1
-              propertyDateTime:
-                format: format
-                autoFill: true
-              propertySelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyAttachment: "{}"
-              propertyModifiedUser: "{}"
-              propertyUser: "{}"
-              propertyText: "{}"
-              propertyCreatedTime:
-                format: format
-              propertyModifiedTime:
-                format: format
-              fieldTitle:
-                value: value
-              fieldType: 4
-              propertySingleSelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyCheckbox:
-                checked: true
-              fieldID: fieldID
-              propertyNumber:
-                decimalPlaces: 7
-                useSeparate: true
-            - propertyImage: "{}"
-              propertyProgress:
-                decimalPlaces: 1
-              propertyCreatedUser: "{}"
-              propertyEmail: "{}"
-              propertyPhoneNumber: "{}"
-              propertyUrl:
-                type: 1
-              propertyDateTime:
-                format: format
-                autoFill: true
-              propertySelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyAttachment: "{}"
-              propertyModifiedUser: "{}"
-              propertyUser: "{}"
-              propertyText: "{}"
-              propertyCreatedTime:
-                format: format
-              propertyModifiedTime:
-                format: format
-              fieldTitle:
-                value: value
-              fieldType: 4
-              propertySingleSelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyCheckbox:
-                checked: true
-              fieldID: fieldID
-              propertyNumber:
-                decimalPlaces: 7
-                useSeparate: true
-          getViews:
-            next: 1
-            total: 6
-            hasMore: true
-            views:
-            - viewID: viewID
-              viewType: 5
-              viewTitle: viewTitle
-            - viewID: viewID
-              viewType: 5
-              viewTitle: viewTitle
-          addRecords:
-            records:
-            - recordID: recordID
-              values:
-                key: null
-            - recordID: recordID
-              values:
-                key: null
-          updateRecords:
-            records:
-            - recordID: recordID
-              values:
-                key: null
-            - recordID: recordID
-              values:
-                key: null
-          deleteRecords: "{}"
-          deleteFields: "{}"
-          addFields:
-            fields:
-            - propertyImage: "{}"
-              propertyProgress:
-                decimalPlaces: 1
-              propertyCreatedUser: "{}"
-              propertyEmail: "{}"
-              propertyPhoneNumber: "{}"
-              propertyUrl:
-                type: 1
-              propertyDateTime:
-                format: format
-                autoFill: true
-              propertySelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyAttachment: "{}"
-              propertyModifiedUser: "{}"
-              propertyUser: "{}"
-              propertyText: "{}"
-              propertyCreatedTime:
-                format: format
-              propertyModifiedTime:
-                format: format
-              fieldTitle:
-                value: value
-              fieldType: 4
-              propertySingleSelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyCheckbox:
-                checked: true
-              fieldID: fieldID
-              propertyNumber:
-                decimalPlaces: 7
-                useSeparate: true
-            - propertyImage: "{}"
-              propertyProgress:
-                decimalPlaces: 1
-              propertyCreatedUser: "{}"
-              propertyEmail: "{}"
-              propertyPhoneNumber: "{}"
-              propertyUrl:
-                type: 1
-              propertyDateTime:
-                format: format
-                autoFill: true
-              propertySelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyAttachment: "{}"
-              propertyModifiedUser: "{}"
-              propertyUser: "{}"
-              propertyText: "{}"
-              propertyCreatedTime:
-                format: format
-              propertyModifiedTime:
-                format: format
-              fieldTitle:
-                value: value
-              fieldType: 4
-              propertySingleSelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyCheckbox:
-                checked: true
-              fieldID: fieldID
-              propertyNumber:
-                decimalPlaces: 7
-                useSeparate: true
-          updateFields:
-            fields:
-            - propertyImage: "{}"
-              propertyProgress:
-                decimalPlaces: 1
-              propertyCreatedUser: "{}"
-              propertyEmail: "{}"
-              propertyPhoneNumber: "{}"
-              propertyUrl:
-                type: 1
-              propertyDateTime:
-                format: format
-                autoFill: true
-              propertySelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyAttachment: "{}"
-              propertyModifiedUser: "{}"
-              propertyUser: "{}"
-              propertyText: "{}"
-              propertyCreatedTime:
-                format: format
-              propertyModifiedTime:
-                format: format
-              fieldTitle:
-                value: value
-              fieldType: 4
-              propertySingleSelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyCheckbox:
-                checked: true
-              fieldID: fieldID
-              propertyNumber:
-                decimalPlaces: 7
-                useSeparate: true
-            - propertyImage: "{}"
-              propertyProgress:
-                decimalPlaces: 1
-              propertyCreatedUser: "{}"
-              propertyEmail: "{}"
-              propertyPhoneNumber: "{}"
-              propertyUrl:
-                type: 1
-              propertyDateTime:
-                format: format
-                autoFill: true
-              propertySelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyAttachment: "{}"
-              propertyModifiedUser: "{}"
-              propertyUser: "{}"
-              propertyText: "{}"
-              propertyCreatedTime:
-                format: format
-              propertyModifiedTime:
-                format: format
-              fieldTitle:
-                value: value
-              fieldType: 4
-              propertySingleSelect:
-                options:
-                - style: 1
-                  id: id
-                  text: text
-                - style: 1
-                  id: id
-                  text: text
-                isQuickAdd: true
-                isMultiple: true
-              propertyCheckbox:
-                checked: true
-              fieldID: fieldID
-              propertyNumber:
-                decimalPlaces: 7
-                useSeparate: true
-          getRecords:
-            next: 2
-            total: 5
-            records:
-            - recordID: recordID
-              createTime: 7
-              values:
-                key: null
-              updateTime: 9
-            - recordID: recordID
-              createTime: 7
-              values:
-                key: null
-              updateTime: 9
-            hasMore: true
-          addView:
-            view:
-              viewID: viewID
-              viewType: 5
-              viewTitle: viewTitle
-          deleteViews: "{}"
       properties:
         ret:
           format: int32
@@ -2931,23 +1646,21 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/SmartsheetResourceResponse'
+      required:
+      - msg
+      - ret
       type: object
     SmartsheetAddSheetReq:
       example:
         properties:
           sheetID: sheetID
-          index: 6
+          index: 0
           title: title
       properties:
         properties:
           $ref: '#/components/schemas/SheetProperties'
       type: object
     SmartsheetAddSheetRsp:
-      example:
-        properties:
-          sheetID: sheetID
-          index: 6
-          title: title
       properties:
         properties:
           $ref: '#/components/schemas/SheetProperties'
@@ -2991,21 +1704,21 @@ components:
           fields:
           - propertyImage: "{}"
             propertyProgress:
-              decimalPlaces: 1
+              decimalPlaces: 3
             propertyCreatedUser: "{}"
             propertyEmail: "{}"
             propertyPhoneNumber: "{}"
             propertyUrl:
-              type: 1
+              type: LINK_TYPE_UNKNOWN
             propertyDateTime:
               format: format
               autoFill: true
             propertySelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3019,13 +1732,13 @@ components:
             propertyModifiedTime:
               format: format
             fieldTitle: fieldTitle
-            fieldType: 9
+            fieldType: FIELD_TYPE_UNKNOWN
             propertySingleSelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3037,21 +1750,21 @@ components:
               useSeparate: true
           - propertyImage: "{}"
             propertyProgress:
-              decimalPlaces: 1
+              decimalPlaces: 3
             propertyCreatedUser: "{}"
             propertyEmail: "{}"
             propertyPhoneNumber: "{}"
             propertyUrl:
-              type: 1
+              type: LINK_TYPE_UNKNOWN
             propertyDateTime:
               format: format
               autoFill: true
             propertySelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3065,13 +1778,13 @@ components:
             propertyModifiedTime:
               format: format
             fieldTitle: fieldTitle
-            fieldType: 9
+            fieldType: FIELD_TYPE_UNKNOWN
             propertySingleSelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3085,21 +1798,21 @@ components:
           fields:
           - propertyImage: "{}"
             propertyProgress:
-              decimalPlaces: 1
+              decimalPlaces: 3
             propertyCreatedUser: "{}"
             propertyEmail: "{}"
             propertyPhoneNumber: "{}"
             propertyUrl:
-              type: 1
+              type: LINK_TYPE_UNKNOWN
             propertyDateTime:
               format: format
               autoFill: true
             propertySelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3114,13 +1827,13 @@ components:
               format: format
             fieldTitle:
               value: value
-            fieldType: 4
+            fieldType: FIELD_TYPE_UNKNOWN
             propertySingleSelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3133,21 +1846,21 @@ components:
               useSeparate: true
           - propertyImage: "{}"
             propertyProgress:
-              decimalPlaces: 1
+              decimalPlaces: 3
             propertyCreatedUser: "{}"
             propertyEmail: "{}"
             propertyPhoneNumber: "{}"
             propertyUrl:
-              type: 1
+              type: LINK_TYPE_UNKNOWN
             propertyDateTime:
               format: format
               autoFill: true
             propertySelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3162,13 +1875,13 @@ components:
               format: format
             fieldTitle:
               value: value
-            fieldType: 4
+            fieldType: FIELD_TYPE_UNKNOWN
             propertySingleSelect:
               options:
-              - style: 1
+              - style: 9
                 id: id
                 text: text
-              - style: 1
+              - style: 9
                 id: id
                 text: text
               isQuickAdd: true
@@ -3180,7 +1893,7 @@ components:
               decimalPlaces: 7
               useSeparate: true
         addView:
-          viewType: 7
+          viewType: VIEW_UNKNOWN
           viewTitle: viewTitle
         getFields:
           viewID: viewID
@@ -3206,10 +1919,10 @@ components:
           offset: 1
           limit: 5
           sort:
-          - "1": "1"
-            "2": true
-          - "1": "1"
-            "2": true
+          - fieldTitle: fieldTitle
+            desc: true
+          - fieldTitle: fieldTitle
+            desc: true
           recordIDs:
           - recordIDs
           - recordIDs
@@ -3225,502 +1938,873 @@ components:
         sheetID:
           type: string
         getViews:
-          $ref: '#/components/schemas/GetViewsRequest'
+          $ref: '#/components/schemas/smartsheetentity.GetViewsRequest'
         getRecords:
-          $ref: '#/components/schemas/GetRecordsRequest'
+          $ref: '#/components/schemas/smartsheetentity.GetRecordsRequest'
         getFields:
-          $ref: '#/components/schemas/GetFieldsRequest'
+          $ref: '#/components/schemas/smartsheetentity.GetFieldsRequest'
         addView:
-          $ref: '#/components/schemas/AddViewRequest'
+          $ref: '#/components/schemas/smartsheetentity.AddViewRequest'
         deleteViews:
-          $ref: '#/components/schemas/DeleteViewsRequest'
+          $ref: '#/components/schemas/smartsheetentity.DeleteViewsRequest'
         addRecords:
-          $ref: '#/components/schemas/AddRecordsRequest'
+          $ref: '#/components/schemas/smartsheetentity.AddRecordsRequest'
         updateRecords:
-          $ref: '#/components/schemas/UpdateRecordsRequest'
+          $ref: '#/components/schemas/smartsheetentity.UpdateRecordsRequest'
         deleteRecords:
-          $ref: '#/components/schemas/DeleteRecordsRequest'
+          $ref: '#/components/schemas/smartsheetentity.DeleteRecordsRequest'
         addFields:
-          $ref: '#/components/schemas/AddFieldsRequest'
+          $ref: '#/components/schemas/smartsheetentity.AddFieldsRequest'
         updateFields:
-          $ref: '#/components/schemas/UpdateFieldsRequest'
+          $ref: '#/components/schemas/smartsheetentity.UpdateFieldsRequest'
         deleteFields:
-          $ref: '#/components/schemas/DeleteFieldsRequest'
+          $ref: '#/components/schemas/smartsheetentity.DeleteFieldsRequest'
       required:
       - fileID
       - sheetID
       type: object
     SmartsheetResourceResponse:
       description: SmartsheetResourceResponse 处理 Smartsheet 视图、记录、字段资源的响应参数
-      example:
-        getFields:
-          next: 2
-          total: 3
-          hasMore: true
-          fields:
-          - propertyImage: "{}"
-            propertyProgress:
-              decimalPlaces: 1
-            propertyCreatedUser: "{}"
-            propertyEmail: "{}"
-            propertyPhoneNumber: "{}"
-            propertyUrl:
-              type: 1
-            propertyDateTime:
-              format: format
-              autoFill: true
-            propertySelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyAttachment: "{}"
-            propertyModifiedUser: "{}"
-            propertyUser: "{}"
-            propertyText: "{}"
-            propertyCreatedTime:
-              format: format
-            propertyModifiedTime:
-              format: format
-            fieldTitle:
-              value: value
-            fieldType: 4
-            propertySingleSelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyCheckbox:
-              checked: true
-            fieldID: fieldID
-            propertyNumber:
-              decimalPlaces: 7
-              useSeparate: true
-          - propertyImage: "{}"
-            propertyProgress:
-              decimalPlaces: 1
-            propertyCreatedUser: "{}"
-            propertyEmail: "{}"
-            propertyPhoneNumber: "{}"
-            propertyUrl:
-              type: 1
-            propertyDateTime:
-              format: format
-              autoFill: true
-            propertySelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyAttachment: "{}"
-            propertyModifiedUser: "{}"
-            propertyUser: "{}"
-            propertyText: "{}"
-            propertyCreatedTime:
-              format: format
-            propertyModifiedTime:
-              format: format
-            fieldTitle:
-              value: value
-            fieldType: 4
-            propertySingleSelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyCheckbox:
-              checked: true
-            fieldID: fieldID
-            propertyNumber:
-              decimalPlaces: 7
-              useSeparate: true
-        getViews:
-          next: 1
-          total: 6
-          hasMore: true
-          views:
-          - viewID: viewID
-            viewType: 5
-            viewTitle: viewTitle
-          - viewID: viewID
-            viewType: 5
-            viewTitle: viewTitle
-        addRecords:
-          records:
-          - recordID: recordID
-            values:
-              key: null
-          - recordID: recordID
-            values:
-              key: null
-        updateRecords:
-          records:
-          - recordID: recordID
-            values:
-              key: null
-          - recordID: recordID
-            values:
-              key: null
-        deleteRecords: "{}"
-        deleteFields: "{}"
-        addFields:
-          fields:
-          - propertyImage: "{}"
-            propertyProgress:
-              decimalPlaces: 1
-            propertyCreatedUser: "{}"
-            propertyEmail: "{}"
-            propertyPhoneNumber: "{}"
-            propertyUrl:
-              type: 1
-            propertyDateTime:
-              format: format
-              autoFill: true
-            propertySelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyAttachment: "{}"
-            propertyModifiedUser: "{}"
-            propertyUser: "{}"
-            propertyText: "{}"
-            propertyCreatedTime:
-              format: format
-            propertyModifiedTime:
-              format: format
-            fieldTitle:
-              value: value
-            fieldType: 4
-            propertySingleSelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyCheckbox:
-              checked: true
-            fieldID: fieldID
-            propertyNumber:
-              decimalPlaces: 7
-              useSeparate: true
-          - propertyImage: "{}"
-            propertyProgress:
-              decimalPlaces: 1
-            propertyCreatedUser: "{}"
-            propertyEmail: "{}"
-            propertyPhoneNumber: "{}"
-            propertyUrl:
-              type: 1
-            propertyDateTime:
-              format: format
-              autoFill: true
-            propertySelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyAttachment: "{}"
-            propertyModifiedUser: "{}"
-            propertyUser: "{}"
-            propertyText: "{}"
-            propertyCreatedTime:
-              format: format
-            propertyModifiedTime:
-              format: format
-            fieldTitle:
-              value: value
-            fieldType: 4
-            propertySingleSelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyCheckbox:
-              checked: true
-            fieldID: fieldID
-            propertyNumber:
-              decimalPlaces: 7
-              useSeparate: true
-        updateFields:
-          fields:
-          - propertyImage: "{}"
-            propertyProgress:
-              decimalPlaces: 1
-            propertyCreatedUser: "{}"
-            propertyEmail: "{}"
-            propertyPhoneNumber: "{}"
-            propertyUrl:
-              type: 1
-            propertyDateTime:
-              format: format
-              autoFill: true
-            propertySelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyAttachment: "{}"
-            propertyModifiedUser: "{}"
-            propertyUser: "{}"
-            propertyText: "{}"
-            propertyCreatedTime:
-              format: format
-            propertyModifiedTime:
-              format: format
-            fieldTitle:
-              value: value
-            fieldType: 4
-            propertySingleSelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyCheckbox:
-              checked: true
-            fieldID: fieldID
-            propertyNumber:
-              decimalPlaces: 7
-              useSeparate: true
-          - propertyImage: "{}"
-            propertyProgress:
-              decimalPlaces: 1
-            propertyCreatedUser: "{}"
-            propertyEmail: "{}"
-            propertyPhoneNumber: "{}"
-            propertyUrl:
-              type: 1
-            propertyDateTime:
-              format: format
-              autoFill: true
-            propertySelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyAttachment: "{}"
-            propertyModifiedUser: "{}"
-            propertyUser: "{}"
-            propertyText: "{}"
-            propertyCreatedTime:
-              format: format
-            propertyModifiedTime:
-              format: format
-            fieldTitle:
-              value: value
-            fieldType: 4
-            propertySingleSelect:
-              options:
-              - style: 1
-                id: id
-                text: text
-              - style: 1
-                id: id
-                text: text
-              isQuickAdd: true
-              isMultiple: true
-            propertyCheckbox:
-              checked: true
-            fieldID: fieldID
-            propertyNumber:
-              decimalPlaces: 7
-              useSeparate: true
-        getRecords:
-          next: 2
-          total: 5
-          records:
-          - recordID: recordID
-            createTime: 7
-            values:
-              key: null
-            updateTime: 9
-          - recordID: recordID
-            createTime: 7
-            values:
-              key: null
-            updateTime: 9
-          hasMore: true
-        addView:
-          view:
-            viewID: viewID
-            viewType: 5
-            viewTitle: viewTitle
-        deleteViews: "{}"
       properties:
         getViews:
-          $ref: '#/components/schemas/GetViewsResponse'
+          $ref: '#/components/schemas/smartsheetentity.GetViewsResponse'
         getRecords:
-          $ref: '#/components/schemas/GetRecordsResponse'
+          $ref: '#/components/schemas/smartsheetentity.GetRecordsResponse'
         getFields:
-          $ref: '#/components/schemas/GetFieldsResponse'
+          $ref: '#/components/schemas/smartsheetentity.GetFieldsResponse'
         addView:
-          $ref: '#/components/schemas/AddViewResponse'
+          $ref: '#/components/schemas/smartsheetentity.AddViewResponse'
         deleteViews:
           description: 删除指定表格指定子表中的指定视图回包
           properties: {}
           type: object
         addRecords:
-          $ref: '#/components/schemas/AddRecordsResponse'
+          $ref: '#/components/schemas/smartsheetentity.AddRecordsResponse'
         updateRecords:
-          $ref: '#/components/schemas/UpdateRecordsResponse'
+          $ref: '#/components/schemas/smartsheetentity.UpdateRecordsResponse'
         deleteRecords:
           description: 删除指定表格和子表中的一到多条记录回包
           properties: {}
           type: object
         addFields:
-          $ref: '#/components/schemas/AddFieldsResponse'
+          $ref: '#/components/schemas/smartsheetentity.AddFieldsResponse'
         updateFields:
-          $ref: '#/components/schemas/UpdateFieldsResponse'
+          $ref: '#/components/schemas/smartsheetentity.UpdateFieldsResponse'
         deleteFields:
           description: 删除字段回包
           properties: {}
           type: object
       type: object
-    SortInfo:
-      example:
-        "1": "1"
-        "2": true
-      properties:
-        "1":
-          type: string
-        "2":
-          type: boolean
-      type: object
-    Status:
-      description: "The `Status` type defines a logical error model that is suitable\
-        \ for different programming environments, including REST APIs and RPC APIs.\
-        \ It is used by [gRPC](https://github.com/grpc). Each `Status` message contains\
-        \ three pieces of data: error code, error message, and error details. You\
-        \ can find out more about this error model and how to work with it in the\
-        \ [API Design Guide](https://cloud.google.com/apis/design/errors)."
-      properties:
-        code:
-          description: "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]."
-          format: int32
-          type: integer
-        message:
-          description: "A developer-facing error message, which should be in English.\
-            \ Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details]\
-            \ field, or localized by the client."
-          type: string
-        details:
-          description: A list of messages that carry the error details.  There is
-            a common set of message types for APIs to use.
-          items:
-            $ref: '#/components/schemas/GoogleProtobufAny'
-          type: array
-      type: object
-    StringValue:
-      description: Wrapper message for `string`. The JSON representation for `StringValue`
-        is JSON string.
-      example:
-        value: value
-      properties:
-        value:
-          description: The string value.
-          type: string
-      type: object
     TabStop:
       example:
         offset:
-          value: 7.386281948385884
-        alignment: 6
+          value: 3.616076749251911
+        alignment: TAB_STOP_ALIGNMENT_UNSPECIFIED
       properties:
         offset:
-          $ref: '#/components/schemas/DoubleValue'
+          $ref: '#/components/schemas/google.protobuf.DoubleValue'
         alignment:
+          enum:
+          - TAB_STOP_ALIGNMENT_UNSPECIFIED
+          - TAB_STOP_START
+          - TAB_STOP_CENTER
+          - TAB_STOP_END
           format: enum
-          type: integer
+          type: string
       type: object
-    TextFieldProperty:
+    UploadImageRsp:
+      properties:
+        imageID:
+          type: string
+      type: object
+    smartsheet.AttachmentFieldProperty:
       properties: {}
       type: object
-    UInt32Value:
-      description: Wrapper message for `uint32`. The JSON representation for `UInt32Value`
-        is JSON number.
+    smartsheet.CheckboxFieldProperty:
       example:
-        value: 1
+        checked: true
       properties:
-        value:
-          description: The uint32 value.
+        checked:
+          type: boolean
+      type: object
+    smartsheet.CreatedTimeFieldProperty:
+      example:
+        format: format
+      properties:
+        format:
+          type: string
+      type: object
+    smartsheet.CreatedUserFieldProperty:
+      properties: {}
+      type: object
+    smartsheet.DateTimeFieldProperty:
+      example:
+        format: format
+        autoFill: true
+      properties:
+        format:
+          type: string
+        autoFill:
+          type: boolean
+      type: object
+    smartsheet.EmailFieldProperty:
+      properties: {}
+      type: object
+    smartsheet.ImageFieldProperty:
+      properties: {}
+      type: object
+    smartsheet.ModifiedTimeFieldProperty:
+      example:
+        format: format
+      properties:
+        format:
+          type: string
+      type: object
+    smartsheet.ModifiedUserFieldProperty:
+      properties: {}
+      type: object
+    smartsheet.NumberFieldProperty:
+      example:
+        decimalPlaces: 7
+        useSeparate: true
+      properties:
+        decimalPlaces:
+          format: int32
+          type: integer
+        useSeparate:
+          type: boolean
+      type: object
+    smartsheet.Option:
+      example:
+        style: 9
+        id: id
+        text: text
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        style:
+          format: int32
+          type: integer
+      type: object
+    smartsheet.PhoneNumberFieldProperty:
+      properties: {}
+      type: object
+    smartsheet.ProgressFieldProperty:
+      example:
+        decimalPlaces: 3
+      properties:
+        decimalPlaces:
+          format: int32
+          type: integer
+      type: object
+    smartsheet.SelectFieldProperty:
+      example:
+        options:
+        - style: 9
+          id: id
+          text: text
+        - style: 9
+          id: id
+          text: text
+        isQuickAdd: true
+        isMultiple: true
+      properties:
+        isMultiple:
+          type: boolean
+        isQuickAdd:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/smartsheet.Option'
+          type: array
+      type: object
+    smartsheet.SingleSelectFieldProperty:
+      example:
+        options:
+        - style: 9
+          id: id
+          text: text
+        - style: 9
+          id: id
+          text: text
+        isQuickAdd: true
+        isMultiple: true
+      properties:
+        isMultiple:
+          type: boolean
+        isQuickAdd:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/smartsheet.Option'
+          type: array
+      type: object
+    smartsheet.TextFieldProperty:
+      properties: {}
+      type: object
+    smartsheet.UrlFieldProperty:
+      example:
+        type: LINK_TYPE_UNKNOWN
+      properties:
+        type:
+          enum:
+          - LINK_TYPE_UNKNOWN
+          - LINK_TYPE_PURE_TEXT
+          - LINK_TYPE_ICON_TEXT
+          format: enum
+          type: string
+      type: object
+    smartsheet.UserFieldProperty:
+      properties: {}
+      type: object
+    smartsheetentity.AddField:
+      example:
+        propertyImage: "{}"
+        propertyProgress:
+          decimalPlaces: 3
+        propertyCreatedUser: "{}"
+        propertyEmail: "{}"
+        propertyPhoneNumber: "{}"
+        propertyUrl:
+          type: LINK_TYPE_UNKNOWN
+        propertyDateTime:
+          format: format
+          autoFill: true
+        propertySelect:
+          options:
+          - style: 9
+            id: id
+            text: text
+          - style: 9
+            id: id
+            text: text
+          isQuickAdd: true
+          isMultiple: true
+        propertyAttachment: "{}"
+        propertyModifiedUser: "{}"
+        propertyUser: "{}"
+        propertyText: "{}"
+        propertyCreatedTime:
+          format: format
+        propertyModifiedTime:
+          format: format
+        fieldTitle: fieldTitle
+        fieldType: FIELD_TYPE_UNKNOWN
+        propertySingleSelect:
+          options:
+          - style: 9
+            id: id
+            text: text
+          - style: 9
+            id: id
+            text: text
+          isQuickAdd: true
+          isMultiple: true
+        propertyCheckbox:
+          checked: true
+        propertyNumber:
+          decimalPlaces: 7
+          useSeparate: true
+      properties:
+        fieldTitle:
+          type: string
+        fieldType:
+          enum:
+          - FIELD_TYPE_UNKNOWN
+          - FIELD_TYPE_TEXT
+          - FIELD_TYPE_NUMBER
+          - FIELD_TYPE_CHECKBOX
+          - FIELD_TYPE_DATE_TIME
+          - FIELD_TYPE_IMAGE
+          - FIELD_TYPE_ATTACHMENT
+          - FIELD_TYPE_USER
+          - FIELD_TYPE_URL
+          - FIELD_TYPE_SELECT
+          - FIELD_TYPE_CREATED_USER
+          - FIELD_TYPE_MODIFIED_USER
+          - FIELD_TYPE_CREATED_TIME
+          - FIELD_TYPE_MODIFIED_TIME
+          - FIELD_TYPE_PROGRESS
+          - FIELD_TYPE_PHONE_NUMBER
+          - FIELD_TYPE_EMAIL
+          - FIELD_TYPE_SINGLE_SELECT
+          format: enum
+          type: string
+        propertyText:
+          properties: {}
+          type: object
+        propertyNumber:
+          $ref: '#/components/schemas/smartsheet.NumberFieldProperty'
+        propertyCheckbox:
+          $ref: '#/components/schemas/smartsheet.CheckboxFieldProperty'
+        propertyDateTime:
+          $ref: '#/components/schemas/smartsheet.DateTimeFieldProperty'
+        propertyImage:
+          properties: {}
+          type: object
+        propertyAttachment:
+          properties: {}
+          type: object
+        propertyUser:
+          properties: {}
+          type: object
+        propertyUrl:
+          $ref: '#/components/schemas/smartsheet.UrlFieldProperty'
+        propertySelect:
+          $ref: '#/components/schemas/smartsheet.SelectFieldProperty'
+        propertyCreatedUser:
+          properties: {}
+          type: object
+        propertyModifiedUser:
+          properties: {}
+          type: object
+        propertyCreatedTime:
+          $ref: '#/components/schemas/smartsheet.CreatedTimeFieldProperty'
+        propertyModifiedTime:
+          $ref: '#/components/schemas/smartsheet.ModifiedTimeFieldProperty'
+        propertyProgress:
+          $ref: '#/components/schemas/smartsheet.ProgressFieldProperty'
+        propertyPhoneNumber:
+          properties: {}
+          type: object
+        propertyEmail:
+          properties: {}
+          type: object
+        propertySingleSelect:
+          $ref: '#/components/schemas/smartsheet.SingleSelectFieldProperty'
+      type: object
+    smartsheetentity.AddFieldsRequest:
+      description: 新增字段请求
+      example:
+        fields:
+        - propertyImage: "{}"
+          propertyProgress:
+            decimalPlaces: 3
+          propertyCreatedUser: "{}"
+          propertyEmail: "{}"
+          propertyPhoneNumber: "{}"
+          propertyUrl:
+            type: LINK_TYPE_UNKNOWN
+          propertyDateTime:
+            format: format
+            autoFill: true
+          propertySelect:
+            options:
+            - style: 9
+              id: id
+              text: text
+            - style: 9
+              id: id
+              text: text
+            isQuickAdd: true
+            isMultiple: true
+          propertyAttachment: "{}"
+          propertyModifiedUser: "{}"
+          propertyUser: "{}"
+          propertyText: "{}"
+          propertyCreatedTime:
+            format: format
+          propertyModifiedTime:
+            format: format
+          fieldTitle: fieldTitle
+          fieldType: FIELD_TYPE_UNKNOWN
+          propertySingleSelect:
+            options:
+            - style: 9
+              id: id
+              text: text
+            - style: 9
+              id: id
+              text: text
+            isQuickAdd: true
+            isMultiple: true
+          propertyCheckbox:
+            checked: true
+          propertyNumber:
+            decimalPlaces: 7
+            useSeparate: true
+        - propertyImage: "{}"
+          propertyProgress:
+            decimalPlaces: 3
+          propertyCreatedUser: "{}"
+          propertyEmail: "{}"
+          propertyPhoneNumber: "{}"
+          propertyUrl:
+            type: LINK_TYPE_UNKNOWN
+          propertyDateTime:
+            format: format
+            autoFill: true
+          propertySelect:
+            options:
+            - style: 9
+              id: id
+              text: text
+            - style: 9
+              id: id
+              text: text
+            isQuickAdd: true
+            isMultiple: true
+          propertyAttachment: "{}"
+          propertyModifiedUser: "{}"
+          propertyUser: "{}"
+          propertyText: "{}"
+          propertyCreatedTime:
+            format: format
+          propertyModifiedTime:
+            format: format
+          fieldTitle: fieldTitle
+          fieldType: FIELD_TYPE_UNKNOWN
+          propertySingleSelect:
+            options:
+            - style: 9
+              id: id
+              text: text
+            - style: 9
+              id: id
+              text: text
+            isQuickAdd: true
+            isMultiple: true
+          propertyCheckbox:
+            checked: true
+          propertyNumber:
+            decimalPlaces: 7
+            useSeparate: true
+      properties:
+        fields:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.AddField'
+          type: array
+      type: object
+    smartsheetentity.AddFieldsResponse:
+      description: 新增字段回包
+      properties:
+        fields:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.Field'
+          type: array
+      type: object
+    smartsheetentity.AddRecord:
+      example:
+        values:
+          key: null
+      properties:
+        values:
+          additionalProperties:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          type: object
+      type: object
+    smartsheetentity.AddRecordsRequest:
+      description: 在指定表格和子表中创建一到多条新记录请求
+      example:
+        records:
+        - values:
+            key: null
+        - values:
+            key: null
+      properties:
+        records:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.AddRecord'
+          type: array
+      type: object
+    smartsheetentity.AddRecordsResponse:
+      description: 在指定表格和子表中创建一到多条新记录回包
+      properties:
+        records:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.CommonRecord'
+          type: array
+      type: object
+    smartsheetentity.AddViewRequest:
+      description: 新建视图请求，创建一个视图
+      example:
+        viewType: VIEW_UNKNOWN
+        viewTitle: viewTitle
+      properties:
+        viewTitle:
+          type: string
+        viewType:
+          enum:
+          - VIEW_UNKNOWN
+          - VIEW_TYPE_GRID
+          - VIEW_TYPE_KANBAN
+          - VIEW_TYPE_GALLERY
+          - VIEW_TYPE_GANTT
+          format: enum
+          type: string
+      type: object
+    smartsheetentity.AddViewResponse:
+      description: 新建视图回包
+      properties:
+        view:
+          $ref: '#/components/schemas/smartsheetentity.View'
+      type: object
+    smartsheetentity.CommonRecord:
+      example:
+        recordID: recordID
+        values:
+          key: null
+      properties:
+        recordID:
+          type: string
+        values:
+          additionalProperties:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          type: object
+      type: object
+    smartsheetentity.DeleteFieldsRequest:
+      description: 删除字段请求
+      example:
+        fieldIDs:
+        - fieldIDs
+        - fieldIDs
+      properties:
+        fieldIDs:
+          items:
+            type: string
+          type: array
+      type: object
+    smartsheetentity.DeleteFieldsResponse:
+      description: 删除字段回包
+      properties: {}
+      type: object
+    smartsheetentity.DeleteRecordsRequest:
+      description: 删除指定表格和子表中的一到多条记录请求
+      example:
+        recordIDs:
+        - recordIDs
+        - recordIDs
+      properties:
+        recordIDs:
+          items:
+            type: string
+          type: array
+      type: object
+    smartsheetentity.DeleteRecordsResponse:
+      description: 删除指定表格和子表中的一到多条记录回包
+      properties: {}
+      type: object
+    smartsheetentity.DeleteViewsRequest:
+      description: 删除指定表格指定子表中的指定视图请求
+      example:
+        viewIDs:
+        - viewIDs
+        - viewIDs
+      properties:
+        viewIDs:
+          items:
+            type: string
+          type: array
+      type: object
+    smartsheetentity.DeleteViewsResponse:
+      description: 删除指定表格指定子表中的指定视图回包
+      properties: {}
+      type: object
+    smartsheetentity.Field:
+      example:
+        propertyImage: "{}"
+        propertyProgress:
+          decimalPlaces: 3
+        propertyCreatedUser: "{}"
+        propertyEmail: "{}"
+        propertyPhoneNumber: "{}"
+        propertyUrl:
+          type: LINK_TYPE_UNKNOWN
+        propertyDateTime:
+          format: format
+          autoFill: true
+        propertySelect:
+          options:
+          - style: 9
+            id: id
+            text: text
+          - style: 9
+            id: id
+            text: text
+          isQuickAdd: true
+          isMultiple: true
+        propertyAttachment: "{}"
+        propertyModifiedUser: "{}"
+        propertyUser: "{}"
+        propertyText: "{}"
+        propertyCreatedTime:
+          format: format
+        propertyModifiedTime:
+          format: format
+        fieldTitle:
+          value: value
+        fieldType: FIELD_TYPE_UNKNOWN
+        propertySingleSelect:
+          options:
+          - style: 9
+            id: id
+            text: text
+          - style: 9
+            id: id
+            text: text
+          isQuickAdd: true
+          isMultiple: true
+        propertyCheckbox:
+          checked: true
+        fieldID: fieldID
+        propertyNumber:
+          decimalPlaces: 7
+          useSeparate: true
+      properties:
+        fieldID:
+          type: string
+        fieldTitle:
+          $ref: '#/components/schemas/google.protobuf.StringValue'
+        fieldType:
+          enum:
+          - FIELD_TYPE_UNKNOWN
+          - FIELD_TYPE_TEXT
+          - FIELD_TYPE_NUMBER
+          - FIELD_TYPE_CHECKBOX
+          - FIELD_TYPE_DATE_TIME
+          - FIELD_TYPE_IMAGE
+          - FIELD_TYPE_ATTACHMENT
+          - FIELD_TYPE_USER
+          - FIELD_TYPE_URL
+          - FIELD_TYPE_SELECT
+          - FIELD_TYPE_CREATED_USER
+          - FIELD_TYPE_MODIFIED_USER
+          - FIELD_TYPE_CREATED_TIME
+          - FIELD_TYPE_MODIFIED_TIME
+          - FIELD_TYPE_PROGRESS
+          - FIELD_TYPE_PHONE_NUMBER
+          - FIELD_TYPE_EMAIL
+          - FIELD_TYPE_SINGLE_SELECT
+          format: enum
+          type: string
+        propertyText:
+          properties: {}
+          type: object
+        propertyNumber:
+          $ref: '#/components/schemas/smartsheet.NumberFieldProperty'
+        propertyCheckbox:
+          $ref: '#/components/schemas/smartsheet.CheckboxFieldProperty'
+        propertyDateTime:
+          $ref: '#/components/schemas/smartsheet.DateTimeFieldProperty'
+        propertyImage:
+          properties: {}
+          type: object
+        propertyAttachment:
+          properties: {}
+          type: object
+        propertyUser:
+          properties: {}
+          type: object
+        propertyUrl:
+          $ref: '#/components/schemas/smartsheet.UrlFieldProperty'
+        propertySelect:
+          $ref: '#/components/schemas/smartsheet.SelectFieldProperty'
+        propertyCreatedUser:
+          properties: {}
+          type: object
+        propertyModifiedUser:
+          properties: {}
+          type: object
+        propertyCreatedTime:
+          $ref: '#/components/schemas/smartsheet.CreatedTimeFieldProperty'
+        propertyModifiedTime:
+          $ref: '#/components/schemas/smartsheet.ModifiedTimeFieldProperty'
+        propertyProgress:
+          $ref: '#/components/schemas/smartsheet.ProgressFieldProperty'
+        propertyPhoneNumber:
+          properties: {}
+          type: object
+        propertyEmail:
+          properties: {}
+          type: object
+        propertySingleSelect:
+          $ref: '#/components/schemas/smartsheet.SingleSelectFieldProperty'
+      type: object
+    smartsheetentity.GetFieldsRequest:
+      description: 获取指定表格和子表中的所有字段请求
+      example:
+        viewID: viewID
+        fieldTitles:
+        - fieldTitles
+        - fieldTitles
+        offset: 5
+        limit: 2
+        fieldIDs:
+        - fieldIDs
+        - fieldIDs
+      properties:
+        viewID:
+          type: string
+        fieldIDs:
+          items:
+            type: string
+          type: array
+        fieldTitles:
+          items:
+            type: string
+          type: array
+        offset:
+          format: uint32
+          type: integer
+        limit:
           format: uint32
           type: integer
       type: object
-    UpdateFieldsRequest:
+    smartsheetentity.GetFieldsResponse:
+      description: 获取指定表格和子表中的所有字段回包
+      properties:
+        total:
+          format: uint32
+          type: integer
+        hasMore:
+          type: boolean
+        next:
+          format: uint32
+          type: integer
+        fields:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.Field'
+          type: array
+      type: object
+    smartsheetentity.GetRecordsRequest:
+      description: 获取指定表格和子表下指定视图中的所有记录、指定返回记录里要包含的字段、获取指定筛选条件和指定数量的记录三个接口合一
+      example:
+        viewID: viewID
+        fieldTitles:
+        - fieldTitles
+        - fieldTitles
+        offset: 1
+        limit: 5
+        sort:
+        - fieldTitle: fieldTitle
+          desc: true
+        - fieldTitle: fieldTitle
+          desc: true
+        recordIDs:
+        - recordIDs
+        - recordIDs
+      properties:
+        viewID:
+          type: string
+        recordIDs:
+          items:
+            type: string
+          type: array
+        fieldTitles:
+          items:
+            type: string
+          type: array
+        sort:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.Sort'
+          type: array
+        offset:
+          format: uint32
+          type: integer
+        limit:
+          format: uint32
+          type: integer
+      type: object
+    smartsheetentity.GetRecordsResponse:
+      description: 获取指定表格和子表下指定视图中的所有记录回包
+      properties:
+        total:
+          format: uint32
+          type: integer
+        hasMore:
+          type: boolean
+        next:
+          format: uint32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.Record'
+          type: array
+      type: object
+    smartsheetentity.GetViewsRequest:
+      description: 获取所有视图请求
+      example:
+        viewIDs:
+        - viewIDs
+        - viewIDs
+        offset: 0
+        limit: 6
+      properties:
+        viewIDs:
+          items:
+            type: string
+          type: array
+        offset:
+          format: uint32
+          type: integer
+        limit:
+          format: uint32
+          type: integer
+      type: object
+    smartsheetentity.GetViewsResponse:
+      description: 获取指定表格指定子表中的所有视图回包
+      properties:
+        total:
+          format: uint32
+          type: integer
+        hasMore:
+          type: boolean
+        next:
+          format: uint32
+          type: integer
+        views:
+          items:
+            $ref: '#/components/schemas/smartsheetentity.View'
+          type: array
+      type: object
+    smartsheetentity.Record:
+      properties:
+        recordID:
+          type: string
+        createTime:
+          format: int64
+          type: integer
+        updateTime:
+          format: int64
+          type: integer
+        values:
+          additionalProperties:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          type: object
+      type: object
+    smartsheetentity.Sort:
+      example:
+        fieldTitle: fieldTitle
+        desc: true
+      properties:
+        fieldTitle:
+          type: string
+        desc:
+          type: boolean
+      type: object
+    smartsheetentity.UpdateFieldsRequest:
       description: 更新字段请求
       example:
         fields:
         - propertyImage: "{}"
           propertyProgress:
-            decimalPlaces: 1
+            decimalPlaces: 3
           propertyCreatedUser: "{}"
           propertyEmail: "{}"
           propertyPhoneNumber: "{}"
           propertyUrl:
-            type: 1
+            type: LINK_TYPE_UNKNOWN
           propertyDateTime:
             format: format
             autoFill: true
           propertySelect:
             options:
-            - style: 1
+            - style: 9
               id: id
               text: text
-            - style: 1
+            - style: 9
               id: id
               text: text
             isQuickAdd: true
@@ -3735,13 +2819,13 @@ components:
             format: format
           fieldTitle:
             value: value
-          fieldType: 4
+          fieldType: FIELD_TYPE_UNKNOWN
           propertySingleSelect:
             options:
-            - style: 1
+            - style: 9
               id: id
               text: text
-            - style: 1
+            - style: 9
               id: id
               text: text
             isQuickAdd: true
@@ -3754,21 +2838,21 @@ components:
             useSeparate: true
         - propertyImage: "{}"
           propertyProgress:
-            decimalPlaces: 1
+            decimalPlaces: 3
           propertyCreatedUser: "{}"
           propertyEmail: "{}"
           propertyPhoneNumber: "{}"
           propertyUrl:
-            type: 1
+            type: LINK_TYPE_UNKNOWN
           propertyDateTime:
             format: format
             autoFill: true
           propertySelect:
             options:
-            - style: 1
+            - style: 9
               id: id
               text: text
-            - style: 1
+            - style: 9
               id: id
               text: text
             isQuickAdd: true
@@ -3783,13 +2867,13 @@ components:
             format: format
           fieldTitle:
             value: value
-          fieldType: 4
+          fieldType: FIELD_TYPE_UNKNOWN
           propertySingleSelect:
             options:
-            - style: 1
+            - style: 9
               id: id
               text: text
-            - style: 1
+            - style: 9
               id: id
               text: text
             isQuickAdd: true
@@ -3803,116 +2887,18 @@ components:
       properties:
         fields:
           items:
-            $ref: '#/components/schemas/FieldResource'
+            $ref: '#/components/schemas/smartsheetentity.Field'
           type: array
       type: object
-    UpdateFieldsResponse:
+    smartsheetentity.UpdateFieldsResponse:
       description: 更新字段回包
-      example:
-        fields:
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle:
-            value: value
-          fieldType: 4
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          fieldID: fieldID
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
-        - propertyImage: "{}"
-          propertyProgress:
-            decimalPlaces: 1
-          propertyCreatedUser: "{}"
-          propertyEmail: "{}"
-          propertyPhoneNumber: "{}"
-          propertyUrl:
-            type: 1
-          propertyDateTime:
-            format: format
-            autoFill: true
-          propertySelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyAttachment: "{}"
-          propertyModifiedUser: "{}"
-          propertyUser: "{}"
-          propertyText: "{}"
-          propertyCreatedTime:
-            format: format
-          propertyModifiedTime:
-            format: format
-          fieldTitle:
-            value: value
-          fieldType: 4
-          propertySingleSelect:
-            options:
-            - style: 1
-              id: id
-              text: text
-            - style: 1
-              id: id
-              text: text
-            isQuickAdd: true
-            isMultiple: true
-          propertyCheckbox:
-            checked: true
-          fieldID: fieldID
-          propertyNumber:
-            decimalPlaces: 7
-            useSeparate: true
       properties:
         fields:
           items:
-            $ref: '#/components/schemas/FieldResource'
+            $ref: '#/components/schemas/smartsheetentity.Field'
           type: array
       type: object
-    UpdateRecordsRequest:
+    smartsheetentity.UpdateRecordsRequest:
       description: 更新指定表格和子表中的一到多条记录请求
       example:
         records:
@@ -3925,58 +2911,78 @@ components:
       properties:
         records:
           items:
-            $ref: '#/components/schemas/CommonRecord'
+            $ref: '#/components/schemas/smartsheetentity.CommonRecord'
           type: array
       type: object
-    UpdateRecordsResponse:
+    smartsheetentity.UpdateRecordsResponse:
       description: 更新指定表格和子表中的一到多条记录回包
-      example:
-        records:
-        - recordID: recordID
-          values:
-            key: null
-        - recordID: recordID
-          values:
-            key: null
       properties:
         records:
           items:
-            $ref: '#/components/schemas/CommonRecord'
+            $ref: '#/components/schemas/smartsheetentity.CommonRecord'
           type: array
       type: object
-    UploadImageRsp:
-      description: UploadImageRsp 上传图片接口响应参数
-      example:
-        imageID: imageID
-      properties:
-        imageID:
-          type: string
-      type: object
-    UrlFieldProperty:
-      example:
-        type: 1
-      properties:
-        type:
-          format: enum
-          type: integer
-      type: object
-    UserFieldProperty:
-      properties: {}
-      type: object
-    ViewResource:
-      example:
-        viewID: viewID
-        viewType: 5
-        viewTitle: viewTitle
+    smartsheetentity.View:
       properties:
         viewID:
           type: string
         viewTitle:
           type: string
         viewType:
+          enum:
+          - VIEW_UNKNOWN
+          - VIEW_TYPE_GRID
+          - VIEW_TYPE_KANBAN
+          - VIEW_TYPE_GALLERY
+          - VIEW_TYPE_GANTT
           format: enum
+          type: string
+      type: object
+    google.protobuf.BoolValue:
+      description: Wrapper message for `bool`. The JSON representation for `BoolValue`
+        is JSON `true` and `false`.
+      example:
+        value: true
+      properties:
+        value:
+          description: The bool value.
+          type: boolean
+      type: object
+    google.protobuf.DoubleValue:
+      description: Wrapper message for `double`. The JSON representation for `DoubleValue`
+        is JSON number.
+      example:
+        value: 3.616076749251911
+      properties:
+        value:
+          description: The double value.
+          format: double
+          type: number
+      type: object
+    google.protobuf.StringValue:
+      description: Wrapper message for `string`. The JSON representation for `StringValue`
+        is JSON string.
+      example:
+        value: value
+      properties:
+        value:
+          description: The string value.
+          type: string
+      type: object
+    google.protobuf.UInt32Value:
+      description: Wrapper message for `uint32`. The JSON representation for `UInt32Value`
+        is JSON number.
+      example:
+        value: 2
+      properties:
+        value:
+          description: The uint32 value.
+          format: uint32
           type: integer
       type: object
+    google.protobuf.Value:
+      description: "Represents a dynamically typed value which can be either null,\
+        \ a number, a string, a boolean, a recursive struct value, or a list of values."
   securitySchemes:
     OAuth2AuthCode:
       description: "更多内容请查阅[腾讯文档开放平台开发文档](https://docs.qq.com/open/wiki)"

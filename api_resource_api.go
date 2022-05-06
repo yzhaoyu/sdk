@@ -29,6 +29,7 @@ type ApiResourceAPIUploadImageRequest struct {
 	accessToken *string
 	clientId *string
 	openId *string
+	body *string
 }
 
 // 访问令牌，用于标识用户和接口鉴权
@@ -46,6 +47,11 @@ func (r ApiResourceAPIUploadImageRequest) ClientId(clientId string) ApiResourceA
 // 开放平台用户 ID，用于标识用户和接口鉴权
 func (r ApiResourceAPIUploadImageRequest) OpenId(openId string) ApiResourceAPIUploadImageRequest {
 	r.openId = &openId
+	return r
+}
+
+func (r ApiResourceAPIUploadImageRequest) Body(body string) ApiResourceAPIUploadImageRequest {
+	r.body = &body
 	return r
 }
 
@@ -97,9 +103,12 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	if r.openId == nil {
 		return localVarReturnValue, nil, reportError("openId is required and must be specified")
 	}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/x-www-form-urlencoded"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -108,7 +117,7 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -118,6 +127,8 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 	localVarHeaderParams["Access-Token"] = parameterToString(*r.accessToken, "")
 	localVarHeaderParams["Client-Id"] = parameterToString(*r.clientId, "")
 	localVarHeaderParams["Open-Id"] = parameterToString(*r.openId, "")
+	// body params
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -140,13 +151,6 @@ func (a *ResourceAPIApiService) ResourceAPIUploadImageExecute(r ApiResourceAPIUp
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

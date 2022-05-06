@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Offset** | Pointer to [**DoubleValue**](DoubleValue.md) |  | [optional] 
-**Alignment** | Pointer to **int32** |  | [optional] 
+**Offset** | Pointer to [**GoogleProtobufDoubleValue**](GoogleProtobufDoubleValue.md) |  | [optional] 
+**Alignment** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOffset
 
-`func (o *TabStop) GetOffset() DoubleValue`
+`func (o *TabStop) GetOffset() GoogleProtobufDoubleValue`
 
 GetOffset returns the Offset field if non-nil, zero value otherwise.
 
 ### GetOffsetOk
 
-`func (o *TabStop) GetOffsetOk() (*DoubleValue, bool)`
+`func (o *TabStop) GetOffsetOk() (*GoogleProtobufDoubleValue, bool)`
 
 GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOffset
 
-`func (o *TabStop) SetOffset(v DoubleValue)`
+`func (o *TabStop) SetOffset(v GoogleProtobufDoubleValue)`
 
 SetOffset sets Offset field to given value.
 
@@ -53,20 +53,20 @@ HasOffset returns a boolean if a field has been set.
 
 ### GetAlignment
 
-`func (o *TabStop) GetAlignment() int32`
+`func (o *TabStop) GetAlignment() string`
 
 GetAlignment returns the Alignment field if non-nil, zero value otherwise.
 
 ### GetAlignmentOk
 
-`func (o *TabStop) GetAlignmentOk() (*int32, bool)`
+`func (o *TabStop) GetAlignmentOk() (*string, bool)`
 
 GetAlignmentOk returns a tuple with the Alignment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAlignment
 
-`func (o *TabStop) SetAlignment(v int32)`
+`func (o *TabStop) SetAlignment(v string)`
 
 SetAlignment sets Alignment field to given value.
 
