@@ -9,6 +9,7 @@ info:
   license:
     name: Apache License
     url: https://git.woa.com/tencentdocs/sdk/blob/master/LICENSE
+  termsOfService: terms_of_service
   title: Tencent Docs SDK
   version: 0.0.1
 servers:
@@ -247,7 +248,7 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CreateFileReq'
+              $ref: '#/components/schemas/driveapi.CreateFileReq'
         description: DriveAPI Content-Type
         required: true
       responses:
@@ -255,7 +256,7 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/DriveAPIResponse1'
+                $ref: '#/components/schemas/driveapi.DriveAPIResponse1'
           description: OK
       security:
       - OAuth2AuthCode:
@@ -476,6 +477,81 @@ paths:
       - SmartsheetAPI
 components:
   schemas:
+    driveapi.CreateFileReq:
+      description: CreateFileReq 创建文档请求参数
+      properties:
+        title:
+          type: string
+        type:
+          type: string
+        templateID:
+          type: string
+        folderID:
+          type: string
+      required:
+      - title
+      - type
+      type: object
+    driveapi.DriveAPIResponse1:
+      properties:
+        ret:
+          format: int32
+          type: integer
+        msg:
+          type: string
+        data:
+          $ref: '#/components/schemas/driveapi.FileInfo'
+      required:
+      - msg
+      - ret
+      type: object
+    driveapi.FileInfo:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        status:
+          type: string
+        isCreator:
+          type: boolean
+        createTime:
+          format: uint32
+          type: integer
+        creatorName:
+          type: string
+        isOwner:
+          type: boolean
+        ownerName:
+          type: string
+        lastModifyTime:
+          format: uint32
+          type: integer
+        lastModifyName:
+          type: string
+        relativeFiles:
+          items:
+            $ref: '#/components/schemas/driveapi.RelativeFiles'
+          type: array
+        formCollectingStatus:
+          type: string
+        formCollectingEndTime:
+          format: int64
+          type: integer
+      type: object
+    driveapi.RelativeFiles:
+      properties:
+        fileID:
+          type: string
+        tabID:
+          type: string
+        fileURL:
+          type: string
+      type: object
     BatchUpdateDocDataReq:
       description: BatchUpdateDocDataReq 批量更新 Doc 文档请求参数
       example:
@@ -732,21 +808,6 @@ components:
       description: BatchUpdateDocDataRsp 批量更新 Doc 文档响应
       properties: {}
       type: object
-    CreateFileReq:
-      description: CreateFileReq 创建文档请求参数
-      properties:
-        title:
-          type: string
-        type:
-          type: string
-        templateID:
-          type: string
-        folderID:
-          type: string
-      required:
-      - title
-      - type
-      type: object
     DeleteContentRequest:
       example:
         range:
@@ -784,19 +845,6 @@ components:
       - msg
       - ret
       type: object
-    DriveAPIResponse1:
-      properties:
-        ret:
-          format: int32
-          type: integer
-        msg:
-          type: string
-        data:
-          $ref: '#/components/schemas/FileInfo'
-      required:
-      - msg
-      - ret
-      type: object
     EditSubSheetRequest:
       description: EditSheetRequest 编辑子表请求，创建、删除 Smartsheet 子表
       example:
@@ -826,44 +874,6 @@ components:
         deleteSheet:
           properties: {}
           type: object
-      type: object
-    FileInfo:
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        type:
-          type: string
-        url:
-          type: string
-        status:
-          type: string
-        isCreator:
-          type: boolean
-        createTime:
-          format: uint32
-          type: integer
-        creatorName:
-          type: string
-        isOwner:
-          type: boolean
-        ownerName:
-          type: string
-        lastModifyTime:
-          format: uint32
-          type: integer
-        lastModifyName:
-          type: string
-        relativeFiles:
-          items:
-            $ref: '#/components/schemas/RelativeFiles'
-          type: array
-        formCollectingStatus:
-          type: string
-        formCollectingEndTime:
-          format: int64
-          type: integer
       type: object
     GetDocFullTextRsp:
       properties:
@@ -1404,15 +1414,6 @@ components:
         user_id:
           type: string
         scope:
-          type: string
-      type: object
-    RelativeFiles:
-      properties:
-        fileID:
-          type: string
-        tabID:
-          type: string
-        fileURL:
           type: string
       type: object
     ReplaceTextRequest:
@@ -1970,7 +1971,7 @@ components:
         getViews:
           $ref: '#/components/schemas/smartsheet.GetViewsResponse'
         getRecords:
-          $ref: '#/components/schemas/smartsheet.GetRecordsResponse'
+          $ref: '#/components/schemas/smartsheet.GetRecordsRsp'
         getFields:
           $ref: '#/components/schemas/smartsheet.GetFieldsResponse'
         addView:
@@ -2717,8 +2718,8 @@ components:
           format: uint32
           type: integer
       type: object
-    smartsheet.GetRecordsResponse:
-      description: 获取指定表格和子表下指定视图中的所有记录回包
+    smartsheet.GetRecordsRsp:
+      description: 对外的查询记录回包
       properties:
         total:
           format: uint32

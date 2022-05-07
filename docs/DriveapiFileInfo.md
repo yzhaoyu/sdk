@@ -1,4 +1,4 @@
-# FileInfo
+# DriveapiFileInfo
 
 ## Properties
 
@@ -16,401 +16,401 @@ Name | Type | Description | Notes
 **OwnerName** | Pointer to **string** |  | [optional] 
 **LastModifyTime** | Pointer to **int32** |  | [optional] 
 **LastModifyName** | Pointer to **string** |  | [optional] 
-**RelativeFiles** | Pointer to [**[]RelativeFiles**](RelativeFiles.md) |  | [optional] 
+**RelativeFiles** | Pointer to [**[]DriveapiRelativeFiles**](DriveapiRelativeFiles.md) |  | [optional] 
 **FormCollectingStatus** | Pointer to **string** |  | [optional] 
 **FormCollectingEndTime** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
-### NewFileInfo
+### NewDriveapiFileInfo
 
-`func NewFileInfo() *FileInfo`
+`func NewDriveapiFileInfo() *DriveapiFileInfo`
 
-NewFileInfo instantiates a new FileInfo object
+NewDriveapiFileInfo instantiates a new DriveapiFileInfo object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewFileInfoWithDefaults
+### NewDriveapiFileInfoWithDefaults
 
-`func NewFileInfoWithDefaults() *FileInfo`
+`func NewDriveapiFileInfoWithDefaults() *DriveapiFileInfo`
 
-NewFileInfoWithDefaults instantiates a new FileInfo object
+NewDriveapiFileInfoWithDefaults instantiates a new DriveapiFileInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *FileInfo) GetId() string`
+`func (o *DriveapiFileInfo) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *FileInfo) GetIdOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *FileInfo) SetId(v string)`
+`func (o *DriveapiFileInfo) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *FileInfo) HasId() bool`
+`func (o *DriveapiFileInfo) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetTitle
 
-`func (o *FileInfo) GetTitle() string`
+`func (o *DriveapiFileInfo) GetTitle() string`
 
 GetTitle returns the Title field if non-nil, zero value otherwise.
 
 ### GetTitleOk
 
-`func (o *FileInfo) GetTitleOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetTitleOk() (*string, bool)`
 
 GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTitle
 
-`func (o *FileInfo) SetTitle(v string)`
+`func (o *DriveapiFileInfo) SetTitle(v string)`
 
 SetTitle sets Title field to given value.
 
 ### HasTitle
 
-`func (o *FileInfo) HasTitle() bool`
+`func (o *DriveapiFileInfo) HasTitle() bool`
 
 HasTitle returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *FileInfo) GetType() string`
+`func (o *DriveapiFileInfo) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *FileInfo) GetTypeOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *FileInfo) SetType(v string)`
+`func (o *DriveapiFileInfo) SetType(v string)`
 
 SetType sets Type field to given value.
 
 ### HasType
 
-`func (o *FileInfo) HasType() bool`
+`func (o *DriveapiFileInfo) HasType() bool`
 
 HasType returns a boolean if a field has been set.
 
 ### GetUrl
 
-`func (o *FileInfo) GetUrl() string`
+`func (o *DriveapiFileInfo) GetUrl() string`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *FileInfo) GetUrlOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetUrlOk() (*string, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *FileInfo) SetUrl(v string)`
+`func (o *DriveapiFileInfo) SetUrl(v string)`
 
 SetUrl sets Url field to given value.
 
 ### HasUrl
 
-`func (o *FileInfo) HasUrl() bool`
+`func (o *DriveapiFileInfo) HasUrl() bool`
 
 HasUrl returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *FileInfo) GetStatus() string`
+`func (o *DriveapiFileInfo) GetStatus() string`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *FileInfo) GetStatusOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetStatusOk() (*string, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *FileInfo) SetStatus(v string)`
+`func (o *DriveapiFileInfo) SetStatus(v string)`
 
 SetStatus sets Status field to given value.
 
 ### HasStatus
 
-`func (o *FileInfo) HasStatus() bool`
+`func (o *DriveapiFileInfo) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
 
 ### GetIsCreator
 
-`func (o *FileInfo) GetIsCreator() bool`
+`func (o *DriveapiFileInfo) GetIsCreator() bool`
 
 GetIsCreator returns the IsCreator field if non-nil, zero value otherwise.
 
 ### GetIsCreatorOk
 
-`func (o *FileInfo) GetIsCreatorOk() (*bool, bool)`
+`func (o *DriveapiFileInfo) GetIsCreatorOk() (*bool, bool)`
 
 GetIsCreatorOk returns a tuple with the IsCreator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsCreator
 
-`func (o *FileInfo) SetIsCreator(v bool)`
+`func (o *DriveapiFileInfo) SetIsCreator(v bool)`
 
 SetIsCreator sets IsCreator field to given value.
 
 ### HasIsCreator
 
-`func (o *FileInfo) HasIsCreator() bool`
+`func (o *DriveapiFileInfo) HasIsCreator() bool`
 
 HasIsCreator returns a boolean if a field has been set.
 
 ### GetCreateTime
 
-`func (o *FileInfo) GetCreateTime() int32`
+`func (o *DriveapiFileInfo) GetCreateTime() int32`
 
 GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
 
 ### GetCreateTimeOk
 
-`func (o *FileInfo) GetCreateTimeOk() (*int32, bool)`
+`func (o *DriveapiFileInfo) GetCreateTimeOk() (*int32, bool)`
 
 GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreateTime
 
-`func (o *FileInfo) SetCreateTime(v int32)`
+`func (o *DriveapiFileInfo) SetCreateTime(v int32)`
 
 SetCreateTime sets CreateTime field to given value.
 
 ### HasCreateTime
 
-`func (o *FileInfo) HasCreateTime() bool`
+`func (o *DriveapiFileInfo) HasCreateTime() bool`
 
 HasCreateTime returns a boolean if a field has been set.
 
 ### GetCreatorName
 
-`func (o *FileInfo) GetCreatorName() string`
+`func (o *DriveapiFileInfo) GetCreatorName() string`
 
 GetCreatorName returns the CreatorName field if non-nil, zero value otherwise.
 
 ### GetCreatorNameOk
 
-`func (o *FileInfo) GetCreatorNameOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetCreatorNameOk() (*string, bool)`
 
 GetCreatorNameOk returns a tuple with the CreatorName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatorName
 
-`func (o *FileInfo) SetCreatorName(v string)`
+`func (o *DriveapiFileInfo) SetCreatorName(v string)`
 
 SetCreatorName sets CreatorName field to given value.
 
 ### HasCreatorName
 
-`func (o *FileInfo) HasCreatorName() bool`
+`func (o *DriveapiFileInfo) HasCreatorName() bool`
 
 HasCreatorName returns a boolean if a field has been set.
 
 ### GetIsOwner
 
-`func (o *FileInfo) GetIsOwner() bool`
+`func (o *DriveapiFileInfo) GetIsOwner() bool`
 
 GetIsOwner returns the IsOwner field if non-nil, zero value otherwise.
 
 ### GetIsOwnerOk
 
-`func (o *FileInfo) GetIsOwnerOk() (*bool, bool)`
+`func (o *DriveapiFileInfo) GetIsOwnerOk() (*bool, bool)`
 
 GetIsOwnerOk returns a tuple with the IsOwner field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsOwner
 
-`func (o *FileInfo) SetIsOwner(v bool)`
+`func (o *DriveapiFileInfo) SetIsOwner(v bool)`
 
 SetIsOwner sets IsOwner field to given value.
 
 ### HasIsOwner
 
-`func (o *FileInfo) HasIsOwner() bool`
+`func (o *DriveapiFileInfo) HasIsOwner() bool`
 
 HasIsOwner returns a boolean if a field has been set.
 
 ### GetOwnerName
 
-`func (o *FileInfo) GetOwnerName() string`
+`func (o *DriveapiFileInfo) GetOwnerName() string`
 
 GetOwnerName returns the OwnerName field if non-nil, zero value otherwise.
 
 ### GetOwnerNameOk
 
-`func (o *FileInfo) GetOwnerNameOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetOwnerNameOk() (*string, bool)`
 
 GetOwnerNameOk returns a tuple with the OwnerName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOwnerName
 
-`func (o *FileInfo) SetOwnerName(v string)`
+`func (o *DriveapiFileInfo) SetOwnerName(v string)`
 
 SetOwnerName sets OwnerName field to given value.
 
 ### HasOwnerName
 
-`func (o *FileInfo) HasOwnerName() bool`
+`func (o *DriveapiFileInfo) HasOwnerName() bool`
 
 HasOwnerName returns a boolean if a field has been set.
 
 ### GetLastModifyTime
 
-`func (o *FileInfo) GetLastModifyTime() int32`
+`func (o *DriveapiFileInfo) GetLastModifyTime() int32`
 
 GetLastModifyTime returns the LastModifyTime field if non-nil, zero value otherwise.
 
 ### GetLastModifyTimeOk
 
-`func (o *FileInfo) GetLastModifyTimeOk() (*int32, bool)`
+`func (o *DriveapiFileInfo) GetLastModifyTimeOk() (*int32, bool)`
 
 GetLastModifyTimeOk returns a tuple with the LastModifyTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastModifyTime
 
-`func (o *FileInfo) SetLastModifyTime(v int32)`
+`func (o *DriveapiFileInfo) SetLastModifyTime(v int32)`
 
 SetLastModifyTime sets LastModifyTime field to given value.
 
 ### HasLastModifyTime
 
-`func (o *FileInfo) HasLastModifyTime() bool`
+`func (o *DriveapiFileInfo) HasLastModifyTime() bool`
 
 HasLastModifyTime returns a boolean if a field has been set.
 
 ### GetLastModifyName
 
-`func (o *FileInfo) GetLastModifyName() string`
+`func (o *DriveapiFileInfo) GetLastModifyName() string`
 
 GetLastModifyName returns the LastModifyName field if non-nil, zero value otherwise.
 
 ### GetLastModifyNameOk
 
-`func (o *FileInfo) GetLastModifyNameOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetLastModifyNameOk() (*string, bool)`
 
 GetLastModifyNameOk returns a tuple with the LastModifyName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastModifyName
 
-`func (o *FileInfo) SetLastModifyName(v string)`
+`func (o *DriveapiFileInfo) SetLastModifyName(v string)`
 
 SetLastModifyName sets LastModifyName field to given value.
 
 ### HasLastModifyName
 
-`func (o *FileInfo) HasLastModifyName() bool`
+`func (o *DriveapiFileInfo) HasLastModifyName() bool`
 
 HasLastModifyName returns a boolean if a field has been set.
 
 ### GetRelativeFiles
 
-`func (o *FileInfo) GetRelativeFiles() []RelativeFiles`
+`func (o *DriveapiFileInfo) GetRelativeFiles() []DriveapiRelativeFiles`
 
 GetRelativeFiles returns the RelativeFiles field if non-nil, zero value otherwise.
 
 ### GetRelativeFilesOk
 
-`func (o *FileInfo) GetRelativeFilesOk() (*[]RelativeFiles, bool)`
+`func (o *DriveapiFileInfo) GetRelativeFilesOk() (*[]DriveapiRelativeFiles, bool)`
 
 GetRelativeFilesOk returns a tuple with the RelativeFiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelativeFiles
 
-`func (o *FileInfo) SetRelativeFiles(v []RelativeFiles)`
+`func (o *DriveapiFileInfo) SetRelativeFiles(v []DriveapiRelativeFiles)`
 
 SetRelativeFiles sets RelativeFiles field to given value.
 
 ### HasRelativeFiles
 
-`func (o *FileInfo) HasRelativeFiles() bool`
+`func (o *DriveapiFileInfo) HasRelativeFiles() bool`
 
 HasRelativeFiles returns a boolean if a field has been set.
 
 ### GetFormCollectingStatus
 
-`func (o *FileInfo) GetFormCollectingStatus() string`
+`func (o *DriveapiFileInfo) GetFormCollectingStatus() string`
 
 GetFormCollectingStatus returns the FormCollectingStatus field if non-nil, zero value otherwise.
 
 ### GetFormCollectingStatusOk
 
-`func (o *FileInfo) GetFormCollectingStatusOk() (*string, bool)`
+`func (o *DriveapiFileInfo) GetFormCollectingStatusOk() (*string, bool)`
 
 GetFormCollectingStatusOk returns a tuple with the FormCollectingStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFormCollectingStatus
 
-`func (o *FileInfo) SetFormCollectingStatus(v string)`
+`func (o *DriveapiFileInfo) SetFormCollectingStatus(v string)`
 
 SetFormCollectingStatus sets FormCollectingStatus field to given value.
 
 ### HasFormCollectingStatus
 
-`func (o *FileInfo) HasFormCollectingStatus() bool`
+`func (o *DriveapiFileInfo) HasFormCollectingStatus() bool`
 
 HasFormCollectingStatus returns a boolean if a field has been set.
 
 ### GetFormCollectingEndTime
 
-`func (o *FileInfo) GetFormCollectingEndTime() int64`
+`func (o *DriveapiFileInfo) GetFormCollectingEndTime() int64`
 
 GetFormCollectingEndTime returns the FormCollectingEndTime field if non-nil, zero value otherwise.
 
 ### GetFormCollectingEndTimeOk
 
-`func (o *FileInfo) GetFormCollectingEndTimeOk() (*int64, bool)`
+`func (o *DriveapiFileInfo) GetFormCollectingEndTimeOk() (*int64, bool)`
 
 GetFormCollectingEndTimeOk returns a tuple with the FormCollectingEndTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFormCollectingEndTime
 
-`func (o *FileInfo) SetFormCollectingEndTime(v int64)`
+`func (o *DriveapiFileInfo) SetFormCollectingEndTime(v int64)`
 
 SetFormCollectingEndTime sets FormCollectingEndTime field to given value.
 
 ### HasFormCollectingEndTime
 
-`func (o *FileInfo) HasFormCollectingEndTime() bool`
+`func (o *DriveapiFileInfo) HasFormCollectingEndTime() bool`
 
 HasFormCollectingEndTime returns a boolean if a field has been set.
 

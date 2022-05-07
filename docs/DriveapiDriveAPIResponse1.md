@@ -1,4 +1,4 @@
-# DriveAPIResponse1
+# DriveapiDriveAPIResponse1
 
 ## Properties
 
@@ -6,89 +6,89 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Ret** | **int32** |  | 
 **Msg** | **string** |  | 
-**Data** | Pointer to [**FileInfo**](FileInfo.md) |  | [optional] 
+**Data** | Pointer to [**DriveapiFileInfo**](DriveapiFileInfo.md) |  | [optional] 
 
 ## Methods
 
-### NewDriveAPIResponse1
+### NewDriveapiDriveAPIResponse1
 
-`func NewDriveAPIResponse1(ret int32, msg string, ) *DriveAPIResponse1`
+`func NewDriveapiDriveAPIResponse1(ret int32, msg string, ) *DriveapiDriveAPIResponse1`
 
-NewDriveAPIResponse1 instantiates a new DriveAPIResponse1 object
+NewDriveapiDriveAPIResponse1 instantiates a new DriveapiDriveAPIResponse1 object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewDriveAPIResponse1WithDefaults
+### NewDriveapiDriveAPIResponse1WithDefaults
 
-`func NewDriveAPIResponse1WithDefaults() *DriveAPIResponse1`
+`func NewDriveapiDriveAPIResponse1WithDefaults() *DriveapiDriveAPIResponse1`
 
-NewDriveAPIResponse1WithDefaults instantiates a new DriveAPIResponse1 object
+NewDriveapiDriveAPIResponse1WithDefaults instantiates a new DriveapiDriveAPIResponse1 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetRet
 
-`func (o *DriveAPIResponse1) GetRet() int32`
+`func (o *DriveapiDriveAPIResponse1) GetRet() int32`
 
 GetRet returns the Ret field if non-nil, zero value otherwise.
 
 ### GetRetOk
 
-`func (o *DriveAPIResponse1) GetRetOk() (*int32, bool)`
+`func (o *DriveapiDriveAPIResponse1) GetRetOk() (*int32, bool)`
 
 GetRetOk returns a tuple with the Ret field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRet
 
-`func (o *DriveAPIResponse1) SetRet(v int32)`
+`func (o *DriveapiDriveAPIResponse1) SetRet(v int32)`
 
 SetRet sets Ret field to given value.
 
 
 ### GetMsg
 
-`func (o *DriveAPIResponse1) GetMsg() string`
+`func (o *DriveapiDriveAPIResponse1) GetMsg() string`
 
 GetMsg returns the Msg field if non-nil, zero value otherwise.
 
 ### GetMsgOk
 
-`func (o *DriveAPIResponse1) GetMsgOk() (*string, bool)`
+`func (o *DriveapiDriveAPIResponse1) GetMsgOk() (*string, bool)`
 
 GetMsgOk returns a tuple with the Msg field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMsg
 
-`func (o *DriveAPIResponse1) SetMsg(v string)`
+`func (o *DriveapiDriveAPIResponse1) SetMsg(v string)`
 
 SetMsg sets Msg field to given value.
 
 
 ### GetData
 
-`func (o *DriveAPIResponse1) GetData() FileInfo`
+`func (o *DriveapiDriveAPIResponse1) GetData() DriveapiFileInfo`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *DriveAPIResponse1) GetDataOk() (*FileInfo, bool)`
+`func (o *DriveapiDriveAPIResponse1) GetDataOk() (*DriveapiFileInfo, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *DriveAPIResponse1) SetData(v FileInfo)`
+`func (o *DriveapiDriveAPIResponse1) SetData(v DriveapiFileInfo)`
 
 SetData sets Data field to given value.
 
 ### HasData
 
-`func (o *DriveAPIResponse1) HasData() bool`
+`func (o *DriveapiDriveAPIResponse1) HasData() bool`
 
 HasData returns a boolean if a field has been set.
 

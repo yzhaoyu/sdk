@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## DriveAPICreateFile
 
-> DriveAPIResponse1 DriveAPICreateFile(ctx).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Title(title).Type_(type_).TemplateID(templateID).FolderID(folderID).Execute()
+> DriveapiDriveAPIResponse1 DriveAPICreateFile(ctx).AccessToken(accessToken).ClientId(clientId).OpenId(openId).Title(title).Type_(type_).TemplateID(templateID).FolderID(folderID).Execute()
 
 
 
@@ -44,7 +44,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DriveAPIApi.DriveAPICreateFile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DriveAPICreateFile`: DriveAPIResponse1
+    // response from `DriveAPICreateFile`: DriveapiDriveAPIResponse1
     fmt.Fprintf(os.Stdout, "Response from `DriveAPIApi.DriveAPICreateFile`: %v\n", resp)
 }
 ```
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DriveAPIResponse1**](DriveAPIResponse1.md)
+[**DriveapiDriveAPIResponse1**](DriveapiDriveAPIResponse1.md)
 
 ### Authorization
 

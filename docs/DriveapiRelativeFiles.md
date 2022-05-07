@@ -1,4 +1,4 @@
-# RelativeFiles
+# DriveapiRelativeFiles
 
 ## Properties
 
@@ -10,95 +10,95 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewRelativeFiles
+### NewDriveapiRelativeFiles
 
-`func NewRelativeFiles() *RelativeFiles`
+`func NewDriveapiRelativeFiles() *DriveapiRelativeFiles`
 
-NewRelativeFiles instantiates a new RelativeFiles object
+NewDriveapiRelativeFiles instantiates a new DriveapiRelativeFiles object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRelativeFilesWithDefaults
+### NewDriveapiRelativeFilesWithDefaults
 
-`func NewRelativeFilesWithDefaults() *RelativeFiles`
+`func NewDriveapiRelativeFilesWithDefaults() *DriveapiRelativeFiles`
 
-NewRelativeFilesWithDefaults instantiates a new RelativeFiles object
+NewDriveapiRelativeFilesWithDefaults instantiates a new DriveapiRelativeFiles object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetFileID
 
-`func (o *RelativeFiles) GetFileID() string`
+`func (o *DriveapiRelativeFiles) GetFileID() string`
 
 GetFileID returns the FileID field if non-nil, zero value otherwise.
 
 ### GetFileIDOk
 
-`func (o *RelativeFiles) GetFileIDOk() (*string, bool)`
+`func (o *DriveapiRelativeFiles) GetFileIDOk() (*string, bool)`
 
 GetFileIDOk returns a tuple with the FileID field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileID
 
-`func (o *RelativeFiles) SetFileID(v string)`
+`func (o *DriveapiRelativeFiles) SetFileID(v string)`
 
 SetFileID sets FileID field to given value.
 
 ### HasFileID
 
-`func (o *RelativeFiles) HasFileID() bool`
+`func (o *DriveapiRelativeFiles) HasFileID() bool`
 
 HasFileID returns a boolean if a field has been set.
 
 ### GetTabID
 
-`func (o *RelativeFiles) GetTabID() string`
+`func (o *DriveapiRelativeFiles) GetTabID() string`
 
 GetTabID returns the TabID field if non-nil, zero value otherwise.
 
 ### GetTabIDOk
 
-`func (o *RelativeFiles) GetTabIDOk() (*string, bool)`
+`func (o *DriveapiRelativeFiles) GetTabIDOk() (*string, bool)`
 
 GetTabIDOk returns a tuple with the TabID field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTabID
 
-`func (o *RelativeFiles) SetTabID(v string)`
+`func (o *DriveapiRelativeFiles) SetTabID(v string)`
 
 SetTabID sets TabID field to given value.
 
 ### HasTabID
 
-`func (o *RelativeFiles) HasTabID() bool`
+`func (o *DriveapiRelativeFiles) HasTabID() bool`
 
 HasTabID returns a boolean if a field has been set.
 
 ### GetFileURL
 
-`func (o *RelativeFiles) GetFileURL() string`
+`func (o *DriveapiRelativeFiles) GetFileURL() string`
 
 GetFileURL returns the FileURL field if non-nil, zero value otherwise.
 
 ### GetFileURLOk
 
-`func (o *RelativeFiles) GetFileURLOk() (*string, bool)`
+`func (o *DriveapiRelativeFiles) GetFileURLOk() (*string, bool)`
 
 GetFileURLOk returns a tuple with the FileURL field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileURL
 
-`func (o *RelativeFiles) SetFileURL(v string)`
+`func (o *DriveapiRelativeFiles) SetFileURL(v string)`
 
 SetFileURL sets FileURL field to given value.
 
 ### HasFileURL
 
-`func (o *RelativeFiles) HasFileURL() bool`
+`func (o *DriveapiRelativeFiles) HasFileURL() bool`
 
 HasFileURL returns a boolean if a field has been set.
 

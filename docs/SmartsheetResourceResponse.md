@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GetViews** | Pointer to [**SmartsheetGetViewsResponse**](SmartsheetGetViewsResponse.md) |  | [optional] 
-**GetRecords** | Pointer to [**SmartsheetGetRecordsResponse**](SmartsheetGetRecordsResponse.md) |  | [optional] 
+**GetRecords** | Pointer to [**SmartsheetGetRecordsRsp**](SmartsheetGetRecordsRsp.md) |  | [optional] 
 **GetFields** | Pointer to [**SmartsheetGetFieldsResponse**](SmartsheetGetFieldsResponse.md) |  | [optional] 
 **AddView** | Pointer to [**SmartsheetAddViewResponse**](SmartsheetAddViewResponse.md) |  | [optional] 
 **DeleteViews** | Pointer to **map[string]interface{}** | 删除指定表格指定子表中的指定视图回包 | [optional] 
@@ -62,20 +62,20 @@ HasGetViews returns a boolean if a field has been set.
 
 ### GetGetRecords
 
-`func (o *SmartsheetResourceResponse) GetGetRecords() SmartsheetGetRecordsResponse`
+`func (o *SmartsheetResourceResponse) GetGetRecords() SmartsheetGetRecordsRsp`
 
 GetGetRecords returns the GetRecords field if non-nil, zero value otherwise.
 
 ### GetGetRecordsOk
 
-`func (o *SmartsheetResourceResponse) GetGetRecordsOk() (*SmartsheetGetRecordsResponse, bool)`
+`func (o *SmartsheetResourceResponse) GetGetRecordsOk() (*SmartsheetGetRecordsRsp, bool)`
 
 GetGetRecordsOk returns a tuple with the GetRecords field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGetRecords
 
-`func (o *SmartsheetResourceResponse) SetGetRecords(v SmartsheetGetRecordsResponse)`
+`func (o *SmartsheetResourceResponse) SetGetRecords(v SmartsheetGetRecordsRsp)`
 
 SetGetRecords sets GetRecords field to given value.
 
